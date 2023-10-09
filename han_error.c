@@ -7,7 +7,7 @@
  * Return: repeated char
  */
 
-int char_cmp(const char *command,int x)
+int char_cmp(const char *command, int x)
 {
 	if (*(command - 1) == *command)
 		return (char_cmp(command - 1, x + 1));
@@ -115,7 +115,7 @@ void han_error_print(bash_shell *shell_op, char *command, int x, int bool)
 	switch (command[x])
 	{
 		case ';':
-			output = (bool == 0) ? (command[x + 1] == ';' ? ";;": 
+			output = (bool == 0) ? (command[x + 1] == ';' ? ";;" : 
 					";") : (command[x - 1] == ';' ? ";;" :
 						";");
 			break;

@@ -135,12 +135,12 @@ int execute_fun(bash_shell *shell_op)
  * Return: 1 if permision not given/ error occure, 0 if otherwise
  */
 
-int check_per_cmd(char *direct, bash_shell * shell_op)
+int check_per_cmd(char *direct, bash_shell *shell_op)
 {
 	if (direct == NULL)
 	{
 		error_fun(shell_op, 127);
-		return(1);
+		return (1);
 	}
 
 	if (_strcmp(shell_op->args[0], direct) != 0)

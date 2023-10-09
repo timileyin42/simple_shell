@@ -18,7 +18,7 @@ char *not_print_comment(char *input)
 			if (x == 0)
 			{
 				free(input)
-					return NULL;
+					return (NULL);
 			}
 
 			if (input[x - 1] == ' ' || input[x - 1] == '\t' || 

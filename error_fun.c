@@ -23,7 +23,7 @@ int error_fun(bash_shell *shell_op, int error_output)
 			error = error_not_found(shell_op);
 			break;
 		case 2:
-			if (_strcmp("exit",shell_op->args[0]) == 0)
+			if (_strcmp("exit", shell_op->args[0]) == 0)
 				error = error_exit_shell(shell_op);
 			else if (_strcmp("cd", shell_op->args[0]) == 0)
 				error = error_get_cd(shell_op);

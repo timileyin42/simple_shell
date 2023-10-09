@@ -13,7 +13,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
 	int num, ch, var, x;
 	char **_envar;
 
-	_envar = data-> _environ;
+	_envar = data->_environ;
 	num = 0; /* initializing num outside loop */
 	while (_envar[row])
 	{
@@ -53,7 +53,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
  * @data: The data structure which the function belong to
  * Return: void
  */
- int var_call(v_shell **head, char *in, char md, shell_bash *data)
+int var_call(v_shell **head, char *in, char md, shell_bash *data)
 {
 	int x, l_pid, mode;
 
@@ -69,7 +69,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
 			else if (in[x + 1] == '$')
 				node_va(head, 2, data->pid, l_pid), x++;
 			else if (in[x + 1] == '\n')
-				node_va(head,0, NULL, 0);
+				node_va(head, 0, NULL, 0);
 			else if (in[x + 1] == '\0')
 				node_va(head, 0, NULL, 0);
 			else if (in[x + 1] == '\t')
@@ -149,12 +149,12 @@ char *han_var_rep(char *input, bash_shell *shell_op)
 	char *mood, *input1;
 	int len1, len2;
 
-	mood = itoa_check(shell_op-> mood);
+	mood = itoa_check(shell_op->mood);
 	head = NULL;
 
 	len1 = var_call(&head, input, mood, shell_op);
 
-	if (head = NULL)
+	if (head == NULL)
 	{
 		free(mood);
 		return (input);

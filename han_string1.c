@@ -77,6 +77,7 @@ int str_char(char str[], const char *delim)
 	while (str[x])
 	{
 		unsigned int y = 0;
+
 		while (delim[y])
 		{
 			if (str[x] == delim[y])
@@ -139,5 +140,5 @@ char *_strtok(char str[], const char *delim)
 	}
 	if (check == 0) /* str now equal to delim*/
 		return (NULL);
-	return (tokenize_start)
+	return (tokenize_start);
 }
