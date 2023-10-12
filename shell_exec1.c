@@ -1,4 +1,4 @@
-
+#include "main.h"
 
 /**
  * directory_check - checks ":" if it's present int the working directory.
@@ -24,8 +24,8 @@ int directory_check(char *path, int *x)
 }
 
 /**
- * _which - Functions that locate a command need by the terminal
- * @commad: Command line name
+ * _which - Functions pointer that locate a command need by the terminal
+ * @command: Command line name
  * @_environ: Environmnet variable
  * Return: Location of the command.
  */
@@ -43,7 +43,6 @@ char *_which(char *command, char **_environ)
 		cmd_len = _strlen(cmd);
 		tokenPath = _strtok(pathptr, ":");
 		x = 0;
-
 		for (; tokenPath != NULL; tokenPath = _strtok(NULL, ":"))
 		{
 			if (directory_check(path, &x))
@@ -51,14 +50,12 @@ char *_which(char *command, char **_environ)
 				if (stat(command, &fd) == 0)
 					return (command);
 			}
-
 			dir_len = _strlen(tokenPath);
 			direct = malloc(dir_len + cmd_len + 2);
 			_strcpy(direct, tokenPath);
 			_strcat(direct, "/");
 			_strcat(direct, command);
 			_strcat(dir, "\0");
-
 			if (stat(direct, &fd) == 0)
 			{
 				free(pathptr);
@@ -79,43 +76,32 @@ char *_which(char *command, char **_environ)
 
 /**
  * execute_fun - Functons that check if it's executable
- * shel_op: Apointer to data structure
- * Return: 0 if is not executable, 1, if otherwise
+ * @shell_op: A pointer to the data structure
+ * Return: 0 if is not an executable, other number if otherwise
  */
 
 int execute_fun(bash_shell *shell_op)
 {
-	struct st fd;
-	int x = 0;
+	struct stat fd;
+	int x;
+	char *input;
 
-	char *input = shell_op->args[0];
+	input = shell_op->args[0];
 
 	while (input[x])
 	{
-		if (store[x] == '.')
+		if (input[x] == '.')
 		{
 			if (input[x + 1] == '.')
 				return (0);
 			if (input[x + 1] == '/')
-			{
-				x++;
 				continue;
-			}
 			else
 				break;
 		}
-		else if (input[x] == '/' && x != 0)
-		{
-			if (input[x + 1] == '.')
-			{
-				x++;
-				continue;
-			}
-			x++;
-			break;
-		}
 		else
 			break;
+		x++;
 	}
 	if (x == 0)
 		return (0);
@@ -123,19 +109,18 @@ int execute_fun(bash_shell *shell_op)
 	{
 		return (x);
 	}
-
 	error_fun(shell_op, 127);
 	return (-1);
 }
 
 /**
- * check_per_cmd - Function that check if the user has access
- * @direct: A pointer to the destination directory
- * @shell_op:  A pointer to the structure
- * Return: 1 if permision not given/ error occure, 0 if otherwise
+ * error_command - functions that check if user is allowed to access
+ * @direct: A pointer to the designated directory
+ * @shell_op: A pointer to the type of data struture
+ * Return: 1 if thier is an erro, 0 if not
  */
 
-int check_per_cmd(char *direct, bash_shell *shell_op)
+int error_command(char *direct, bash_shell *shell_op)
 {
 	if (direct == NULL)
 	{
@@ -145,19 +130,19 @@ int check_per_cmd(char *direct, bash_shell *shell_op)
 
 	if (_strcmp(shell_op->args[0], direct) != 0)
 	{
-		if (allow(direct, X_OK) == -1)
+		if (access(direct, X_OK) == -1)
 		{
 			error_fun(shell_op, 126);
 			free(direct);
 			return (1);
 		}
-		free(direct);
+		free(dir);
 	}
 	else
 	{
-		if (allow(shell_op->args[0], X_OK) == -1)
+		if (access(shell_op->args[0], X_OK) == -1)
 		{
-			error_fun(shell_op, 126);
+			erro_fun(shell_op, 126);
 			return (1);
 		}
 	}
@@ -165,19 +150,18 @@ int check_per_cmd(char *direct, bash_shell *shell_op)
 }
 
 /**
- * shell_exec - functions that execute the input on the command lines
- * shell_op: A pointer to the data structure (args and input)
+ * shell_exec - Function that executes the command lines
+ * @shell_op: A pointer to the  data relevant (args and input)
  * Return: 1 on success.
  */
 
 int shell_exec(bash_shell *shell_op)
 {
-	pid_t shell_pid;
-	pid_t wait_pid;
-	int mode;
-	int exec;
+	pid_t is_pid;
+	pid_t w_pid;
+	int mode, exec;
 	char *direct;
-	(void) wait_pid;
+	(void) w_pid;
 
 	exec = execute_fun(shell_op);
 	if (exec == -1)
@@ -185,19 +169,18 @@ int shell_exec(bash_shell *shell_op)
 	if (exec == 0)
 	{
 		direct = _which(shell_op->args[0], shell_op->_environ);
-		if (check_per_cmd(direct, shell_op) == 1)
-			return (1);
+		return (1);
 	}
-	shell_pid = fork();
-	if (shell_pid == 0)
+	is_pid = fork();
+	if (is_pid == 0)
 	{
 		if (exec == 0)
-			direct = _which(shell_op->args[0], shell_op->_environ);
+			direct = _which(is_pid->args[0], shell_op->_environ);
 		else
 			direct = shell_op->args[0];
-		execve(direct + exec, shell_op->args, shell_op->_environ);
+		execve(direct + exec, shell_op->, shell_op->_environ);
 	}
-	else if (shell_pid < 0)
+	else if (is_pid < 0)
 	{
 		perror(shell_op->av[0]);
 		return (1);
@@ -205,8 +188,8 @@ int shell_exec(bash_shell *shell_op)
 	else
 	{
 		do {
-			wait_pid = waitpid(shell_pid, &mode, WUNTRACED);
-		} while (!WIFEXITED(mode) && !WIFSIGNALED(mode));
+			w_pid = waitpid(shell_pid, &mode, WUNTRACED);
+		} while (!WIFEXITED(mode) && !WIFSIGNALED(node));
 	}
 	shell_op->mode = mode / 256;
 	return (1);

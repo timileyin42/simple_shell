@@ -1,10 +1,11 @@
 #include "main.h"
 
 /**
- * env_call _ functions that checks if variables are env var
+ * env_call - functions that checks if variables are env var
  *
  * @head: head of linked list that belong to struct v_shell
- * @in: A pointer to the input string 
+ * @in: A pointer to the input string
+ * @data: A pointer to the type of data struture
  * Return: void
  */
 
@@ -92,7 +93,7 @@ int var_call(v_shell **head, char *in, char md, shell_bash *data)
  * @length: length of the string
  * Return: replaced string
  */
-char *dup_input(v_shell **head, char *input, char *input2, int length)
+char *dup_input(v_shell **head, char *input, char *input1, int length)
 {
 	v_shell *buf;
 	int x = 0, y = 0, k;
@@ -149,7 +150,7 @@ char *han_var_rep(char *input, bash_shell *shell_op)
 	char *mood, *input1;
 	int len1, len2;
 
-	mood = itoa_check(shell_op->mood);
+	mood = han_itoa(shell_op->mood);
 	head = NULL;
 
 	len1 = var_call(&head, input, mood, shell_op);
@@ -169,12 +170,12 @@ char *han_var_rep(char *input, bash_shell *shell_op)
 	len2 = len2 + len1;
 
 	input1 = malloc(sizeof(char) * (len2 + 1));
-	input1 = [len2] = '\0';
+	input1[len2] = '\0';
 
 	input1 = dup_input(&head, input, input1, len2);
 
 	free(input);
 	free(mood);
-	free_v_shell_list(&head);
+	node_va_free(&head);
 	return (input1);
 }

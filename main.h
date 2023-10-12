@@ -53,12 +53,12 @@ typedef struct builtin_f
 } get_builtin;
 
 /**
- * struct vshell_list - single linked list
+ * struct vshell_list - singly linked list
  * @var_size: size of the variable
  * @value: value of the variables in the shell
  * @value_len: length of the variable values
  * @next: next node
- * description: single linked list to handle shell variables
+ * description: singly linked list to handle shell variables
  */
 
 typedef struct vshell_list
@@ -68,5 +68,31 @@ typedef struct vshell_list
 	int value_len;
 	struct vshell_list *next;
 } v_shell;
+
+/**
+ * struct divide_list - singly linked list
+ * @separator: ; | &
+ * next: next node
+ * Description: singly linked list to store string/char separators
+ */
+
+typedef struct divide_list
+{
+	char separator;
+	struct divide_list *next;
+} list_div;
+
+/**
+ * struct buffer_store - singly linked list
+ * @line: A pointer to the command line
+ * @next: next node
+ * Description: singly linked list to store command line args
+ */
+
+typedef struct buffer_store
+{
+	char *buffer;
+	struct buffer_store *next;
+} buf_store;
 
 #endif

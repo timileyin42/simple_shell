@@ -34,7 +34,7 @@ void call_line(char **indexptr, size_t *s, char *buf, size_t b)
  * Return: The number of bytes store
  */
 
-sszie_t get_line(char **indexptr, size_t *s, FILE *user_input)
+ssize_t get_line(char **indexptr, size_t *s, FILE *user_input)
 {
 	int x;
 	char *buf;

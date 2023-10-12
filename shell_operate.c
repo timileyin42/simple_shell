@@ -21,7 +21,7 @@ char *not_print_comment(char *input)
 					return (NULL);
 			}
 
-			if (input[x - 1] == ' ' || input[x - 1] == '\t' || 
+			if (input[x - 1] == ' ' || input[x - 1] == '\t' ||
 					input[x - 1] == ';')
 				check = x;
 		}
