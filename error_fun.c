@@ -9,31 +9,30 @@
 
 int error_fun(bash_shell *shell_op, int error_output)
 {
-	char *error;
+	info_t error_infos[] = {
+		{-1, env_error_fun},
+		{126, error_path_fail},
+		{2, exit_error},
+		{127, no_error_detect},
+		{2, command_error},
+		{0, NULL}
+	};
 
-	switch (error_output)
+	int x;
+
+	for (; info_t[x].error_msg != NULL; x++)
 	{
-		case -1:
-			error = error_env(shell_op);
-			break;
-		case 126:
-			error = error_path_fail(shell_op);
-			break;
-		case 127:
-			error = error_not_found(shell_op);
-			break;
-		case 2:
-			if (_strcmp("exit", shell_op->args[0]) == 0)
-				error = error_exit_shell(shell_op);
-			else if (_strcmp("cd", shell_op->args[0]) == 0)
-				error = error_get_cd(shell_op);
+		if (error_output == error_infos[x].error_value)
+		{
+			char *error = error_infos[x].error_msg(shell_op);
+
+			if (error)
+			{
+				write(2, error, _strlen(error));
+			}
 			break;
 		}
-	if (error)
-	{
-		write(2, error, _strlen(error));
-		free(error);
 	}
 	shell_op->mode = error_output;
-	return (error_output);
+	return (error_ouput);
 }
