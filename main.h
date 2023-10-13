@@ -95,4 +95,9 @@ typedef struct buffer_store
 	struct buffer_store *next;
 } buf_store;
 
+typedef struct help_get {
+	char *name;
+	void (*func) (void);
+} get_t;
+
 #endif
