@@ -12,13 +12,3 @@ void help_unsetenv_fun(void)
 
 	write(1, hep, _strlen(help));
 }
-
-/**
- *help_alias_fun - helper Function that get info from the buitin alias.
- * Return: Always (void)
- */
-
-void help_alias_fun(void)
-{
-	char *help = "alias: alias [-p] [name[=input]...]\n";
-	write(1, help, _strlen(help));
