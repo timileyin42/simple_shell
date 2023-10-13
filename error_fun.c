@@ -17,7 +17,7 @@ int error_fun(bash_shell *shell_op, int error_output)
 			error = error_env(shell_op);
 			break;
 		case 126:
-			error = error_path_126(shell_op);
+			error = error_path_fail(shell_op);
 			break;
 		case 127:
 			error = error_not_found(shell_op);

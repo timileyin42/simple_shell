@@ -100,4 +100,10 @@ typedef struct help_get {
 	void (*func) (void);
 } get_t;
 
+
+typedef struct error_info {
+	int error_value;
+	char *(error_msg)(bash_shell *shell_op);
+} info_t;
+
 #endif
