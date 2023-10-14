@@ -211,4 +211,11 @@ void node_adding(list_div **head_div, buf_store **head_buf, char *input);
 void move_next(list_div **div_it, buf_store **store_it, bash_shell *shell_op);
 char *char_swapping(char *input, int check);
 
+/* shell_exit han function */
+int shell_exit(bash_shell *shell_op);
+
+/* shell operate handler function */
+char *not_print_comment(char *input);
+void shell_terminal(bash_shell *shell_op);
+
 #endif

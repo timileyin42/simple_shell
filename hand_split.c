@@ -48,7 +48,7 @@ char **line_splitting(char *input)
  * @input: Pointer pointing to the the input string
  * Return: 0 to exit, 1 to continue
  */
-int command_splitted(data_shell *shell_op, char *input)
+int command_splitted(bash_shell *shell_op, char *input)
 {
 	list_div *head_div, *div;
 	buf_store *head_store, buf;
@@ -198,4 +198,3 @@ char *char_swapping(char *input, int check)
 	}
 	return (input);
 }
-
