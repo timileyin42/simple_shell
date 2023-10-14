@@ -79,7 +79,7 @@ list_div *add_sep_node_end(list_div **head, char div)
 
 	if (temp == NULL)
 	{
-		*head = hold);
+		*head = hold;
 	}
 	else
 	{
