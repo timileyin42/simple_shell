@@ -5,7 +5,7 @@
  * @shell_op: A pointer to the data struture of (args and code)
  * Return: Always (void)
  */
-void help_fun(bash_shell *shell_op)
+int help_fun(bash_shell *shell_op)
 {
 	get_t help_gets[] = {
 		{"setenv", help_setenv_fun},

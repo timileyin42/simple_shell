@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * _env - Functions that helps prints the environment variables
+ * env_fun - Functions that helps prints the environment variables
  * @shell_op: A pointer to the data relevant structure.
  * Return: 1 on success.
  */
 
-int _env(bash_shell *shell_op)
+int env_fun(bash_shell *shell_op)
 {
 	int x, y;
 

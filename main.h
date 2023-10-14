@@ -97,20 +97,20 @@ typedef struct buffer_store
 
 typedef struct help_get {
 	char *name;
-	void (*func) (void);
+	int (*func) (void);
 } get_t;
 
 
 typedef struct error_info {
 	int error_value;
-	char *(error_msg)(bash_shell *shell_op);
+	char *(*error_msg)(bash_shell *shell_op);
 } info_t;
 
 /* string handler functions */
 char *_strcpy(char *dest, char *src);
 char *_strchr(char *s, char c);
 char *_strcat(char *dest, const char *src);
-int _strlen(const chr *s);
+int _strlen(const char *s);
 int _isdigit(const char *s);
 char *_strdup(const char *s);
 int str_char(char str[], const char *delim);
@@ -153,13 +153,13 @@ void memory_free(bash_shell *shell_op);
 void check_data(bash_shell *shell_op, char **av);
 
 /* env handler function */
-int env(bash_shell *shell_op);
+int env_fun(bash_shell *shell_op);
 int env_call_cmp(const char *env_list, const char *input);
 char *_getenv(const char *name, char **_environ);
 void set_env(char *name, char *data, bash_shell *shell_op);
 char *info_set(char *name, char *data);
-int _setenv(bash_shell *shell_op);
-int _unsetenv(bash_shell *shell_op);
+int setenv_fun(bash_shell *shell_op);
+int unsetenv_fun(bash_shell *shell_op);
 
 /* help handler function */
 void help_exit_fun(void);
@@ -170,7 +170,7 @@ void help_unsetenv_fun(void);
 void help_alias_fun(void);
 void help_cd_fun(void);
 void help_buitin_help(void);
-void help_fun(bash_shell *shell_op);
+int help_fun(bash_shell *shell_op);
 
 /* library_fun handler */
 char *han_itoa(int d);
@@ -184,23 +184,23 @@ list_div *add_sep_node_end(list_div **head, char div);
 void list_div_free(list_div **head);
 
 /* pointer function handler */
-void *_realloc(void *ptr, unsigned int a size, unsigned int val_byte);
+void *_realloc(void *ptr, unsigned int size, unsigned int val_byte);
 void _memcpy(void *newptr, const void *ptr, unsigned int bytes_size);
 char **_reallocptr(char **ptr, unsigned int size, unsigned int value_byte);
 
 /* shell_cd handler function */
-int shell_cd(bash_shell *shell_op);
+int shell_change(bash_shell *shell_op);
 
 /* sign_call handler function */
-void sign_call(int__attribute__((unused)) cut);
+void sign_call(int __attribute__((unused)) cut);
 
 /* variable node function handler */
-v_shell *node_va(va_shell **head, int var_len, char *buffer, int val_len);
+v_shell *node_va(v_shell **head, int var_len, char *buffer, int val_len);
 void node_va_free(v_shell **head);
 
 /* variable handler function */
 void env_call(v_shell **head, char *in, bash_shell *data);
-int var_call(v_shell **head, char *in, char md, shell_bash *data);
+int var_call(v_shell **head, char *in, char md, bash_shell *data);
 char *dup_input(v_shell **head, char *input, char *input1, int length);
 char *han_var_rep(char *input, bash_shell *shell_op);
 

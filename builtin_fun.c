@@ -9,9 +9,12 @@
 int (*builtin_fun(char *command))(bash_shell *)
 {
 	get_builtin builtin[] = {
-		{"env", _env },
-		{"exit", shell_exit }
-		{"cd", shell_cd }
+		{"env", env_fun },
+		{"exit", shell_exit },
+		{"setenv", setenv_fun },
+		{"cd", shell_change },
+		{"unsetenv", unsetenv_fun},
+		{"help", help_fun },
 		{ NULL, NULL }
 	};
 

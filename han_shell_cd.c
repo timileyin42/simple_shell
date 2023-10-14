@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * shell_cd - Functions that helps change the current directory in shell
+ * shell_change - Functions that helps change the current directory in shell
  * @shell_op: A pointer to the data structure
  * Return: 1 on succes
  */
 
-int shell_cd(bash_shell *shell_op)
+int shell_change(bash_shell *shell_op)
 {
 	int cd_home, p_wd, cd_check;
 	char direct;

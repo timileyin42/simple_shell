@@ -58,12 +58,12 @@ char *info_set(char *name, char *data)
 }
 
 /**
- * _setenv - Function that helps compare environment var names with name passed
+ * setenv_fun - Function that helps compare environment var names with name 
  * @shell_op: A pointer to the data relevant struture(env name and data)
  * Return: 1 on success.
  */
 
-int _setenv(bash_shell *shell_op)
+int setenv_fun(bash_shell *shell_op)
 {
 	if (shell_op->args[x] == NULL || shell_op->args[2] == NULL)
 	{
@@ -76,12 +76,12 @@ int _setenv(bash_shell *shell_op)
 }
 
 /**
- * _unsetenv - Functions that helps deletes an environment variable
+ * unsetenv_fun - Functions that helps deletes an environment variable
  * @shell_op: A pointer to the struct of data relevant (env name)
  * Return: 1 on success
  */
 
-int _unsetenv(bash_shell *shell_op)
+int unsetenv_fun(bash_shell *shell_op)
 {
 	int x = 0, y = 0, z;
 	char **is_env, *input, *name;

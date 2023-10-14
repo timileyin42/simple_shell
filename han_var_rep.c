@@ -54,7 +54,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
  * @data: The data structure which the function belong to
  * Return: void
  */
-int var_call(v_shell **head, char *in, char md, shell_bash *data)
+int var_call(v_shell **head, char *in, char md, bash_shell *data)
 {
 	int x, l_pid, mode;
 
