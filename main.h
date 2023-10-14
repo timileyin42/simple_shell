@@ -110,5 +110,9 @@ typedef struct error_info {
 char *_strcpy(char *dest, char *src);
 char *_strchr(char *s, char c);
 char *_strcat(char *dest, const char *src);
-
+int _strlen(const chr *s);
+int _isdigit(const char *s);
+char *_strdup(const char *s);
+int str_char(char str[], const char *delim);
+char *_strtok(char str[], const char *delim);
 #endif
