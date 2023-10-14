@@ -161,4 +161,10 @@ char *info_set(char *name, char *data);
 int _setenv(bash_shell *shell_op);
 int _unsetenv(bash_shell *shell_op);
 
+/* help handler function */
+void help_exit_fun(void);
+void help_gen_fun(void);
+void help_env_fun(void);
+void hel_setenv_fun(void);
+
 #endif
