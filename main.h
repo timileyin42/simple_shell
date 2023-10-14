@@ -106,4 +106,9 @@ typedef struct error_info {
 	char *(error_msg)(bash_shell *shell_op);
 } info_t;
 
+/* string handler functions */
+char *_strcpy(char *dest, char *src);
+char *_strchr(char *s, char c);
+char *_strcat(char *dest, const char *src);
+
 #endif
