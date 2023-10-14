@@ -29,7 +29,7 @@ void check_data(bash_shell *shell_op, char **av)
 {
 	unsigned int x;
 
-	shell_op->av;
+	shell_op->av = av;
 	shell_op->code = NULL;
 	shell_op->args = NULL;
 	shell_op->mode = 0;

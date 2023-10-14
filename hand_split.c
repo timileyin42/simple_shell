@@ -8,7 +8,7 @@
 
 char **line_splitting(char *input)
 {
-	size_t x;
+	size_t x = 0;
 	size_t length;
 	char **token, *token1;
 
@@ -27,10 +27,10 @@ char **line_splitting(char *input)
 		if (x == length)
 		{
 			length = length + TOK_BUFSIZE;
-			token = _realloptr(token, x, sizeof(char *) * length);
+			token = _reallocptr(token, x, sizeof(char *) * length);
 			if (token == NULL)
 			{
-				write(2, ": allocation failed\n", 18)
+				write(2, ": allocation failed\n", 18);
 					exit(98);
 			}
 		}
@@ -51,7 +51,7 @@ char **line_splitting(char *input)
 int command_splitted(bash_shell *shell_op, char *input)
 {
 	list_div *head_div, *div;
-	buf_store *head_store, buf;
+	buf_store *head_store, *buf;
 	int check;
 
 	head_div = NULL;
@@ -64,18 +64,18 @@ int command_splitted(bash_shell *shell_op, char *input)
 
 	for (; buf != NULL; buf = buf->next)
 	{
-		shell_op->input = buf->line;
-		shell_op->args = line_splitting(shell_op->input);
+		shell_op->code = buf->buffer;
+		shell_op->args = line_splitting(shell_op->code);
 		check = han_exec_line(shell_op);
 		free(shell_op->args);
 
 		if (check == 0)
 			break;
 
-		move_next(&div, buf, shell_op);
+		move_next(&div, &buf, shell_op);
 	}
-	free_sep_list(&head_div);
-	free_line_list(&head_store);
+	list_div_free(&head_div);
+	buf_store_free(&head_store);
 
 	if (check == 0)
 		return (0);
@@ -94,7 +94,7 @@ void node_adding(list_div **head_div, buf_store **head_buf, char *input)
 	int x;
 	char *line;
 
-	input = chars_swapping(input, 0);
+	input = char_swapping(input, 0);
 
 	x = 0;
 	while (input[x])
@@ -192,7 +192,7 @@ char *char_swapping(char *input, int check)
 		while (input[x])
 		{
 			input[x] = (input[x] == 16 ? '|' : input[x]);
-			input[x] = (input[x] == 12 ? '&' : input[x])
+			input[x] = (input[x] == 12 ? '&' : input[x]);
 				x++;
 		}
 	}
