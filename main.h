@@ -170,4 +170,6 @@ void help_unsetenv_fun(void);
 void help_alias_fun(void);
 void help_cd_fun(void);
 void help_buitin_help(void);
+void help_fun(bash_shell *shell_op);
+
 #endif
