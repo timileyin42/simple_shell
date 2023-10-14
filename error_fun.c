@@ -20,7 +20,7 @@ int error_fun(bash_shell *shell_op, int error_output)
 
 	int x;
 
-	for (; info_t[x].error_msg != NULL; x++)
+	for (; error_infos[x].error_msg != NULL; x++)
 	{
 		if (error_output == error_infos[x].error_value)
 		{
@@ -34,5 +34,5 @@ int error_fun(bash_shell *shell_op, int error_output)
 		}
 	}
 	shell_op->mode = error_output;
-	return (error_ouput);
+	return (error_output);
 }

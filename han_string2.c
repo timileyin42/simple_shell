@@ -6,7 +6,7 @@
  * Return: Always (0)
  */
 
-void rev_str(char *s)
+void rev_string(char *s)
 {
 	int length = 0, x, y;
 	char *str, temp;

@@ -49,7 +49,7 @@ ssize_t get_line(char **indexptr, size_t *s, FILE *user_input)
 	input = 0;
 
 	buf = malloc(sizeof(char) * BUFSIZE);
-	if (buffer == 0)
+	if (buf == 0)
 		return (-1);
 
 	for (; a != '\n'; input++)
@@ -71,8 +71,8 @@ ssize_t get_line(char **indexptr, size_t *s, FILE *user_input)
 	}
 	buf[input] = '\0';
 	call_line(indexptr, s, buf, input);
-	user_input = input;
+	u_return = input;
 	if (x != 0)
 		input = 0;
-	return (user_input);
+	return (u_return);
 }

@@ -24,13 +24,13 @@ int directory_check(char *path, int *x)
 }
 
 /**
- * _which - Functions pointer that locate a command need by the terminal
+ * checking - Functions pointer that locate a command need by the terminal
  * @command: Command line name
  * @_environ: Environmnet variable
  * Return: Location of the command.
  */
 
-char *_which(char *command, char **_environ)
+char *checking(char *command, char **_environ)
 {
 	char *path, *pathptr, *tokenPath, *direct;
 	int dir_len, cmd_len, x;
@@ -168,14 +168,14 @@ int shell_exec(bash_shell *shell_op)
 		return (1);
 	if (exec == 0)
 	{
-		direct = _which(shell_op->args[0], shell_op->_environ);
+		direct = checking(shell_op->args[0], shell_op->_environ);
 		return (1);
 	}
 	is_pid = fork();
 	if (is_pid == 0)
 	{
 		if (exec == 0)
-			direct = _which(is_pid->args[0], shell_op->_environ);
+			direct = checking(is_pid->args[0], shell_op->_environ);
 		else
 			direct = shell_op->args[0];
 		execve(direct + exec, shell_op->, shell_op->_environ);
