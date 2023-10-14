@@ -119,4 +119,10 @@ void rev_str(char *s);
 int _strcmp(char *s1, char *s2);
 int _strspn(char *s, char *allow);
 
+/* functions handling errors */
+char *cmd_error_get(bash_shell *shell_op, char *msg, char *error, char *size);
+char *no_error_detect(bash_shell *shell_op);
+char *exit_error(bash_shell *shell_op);
+char *command_error(bash_shell *shell_op);
+
 #endif
