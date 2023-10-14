@@ -152,4 +152,9 @@ void cd_prev_dir(bash_shell *shell_op);
 void memory_free(bash_shell *shell_op);
 void check_data(bash_shell *shell_op, char **av);
 
+/* env handler function */
+int env(bash_shell *shell_op);
+int env_call_cmp(const char *env_list, const char *input);
+char *_getenv(const char *name, char **_environ);
+
 #endif
