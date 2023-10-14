@@ -183,4 +183,9 @@ void buf_store_free(buf_store **head);
 list_div *add_sep_node_end(list_div **head, char div);
 void list_div_free(list_div **head);
 
+/* realoc function handler */
+void *_realloc(void *ptr, unsigned int a size, unsigned int val_byte);
+void _memcpy(void *newptr, const void *ptr, unsigned int bytes_size);
+char **_reallocptr(char **ptr, unsigned int size, unsigned int value_byte);
+
 #endif
