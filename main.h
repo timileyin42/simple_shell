@@ -138,4 +138,8 @@ int han_exec_line(bash_shell *shell_op);
 /* builtin function handler */
 int (*builtin_fun(char *command))(bash_shell *);
 
+/* get_line handler functions */
+void call_line(char **indexptr, size_t *s, char *buf, size_t b);
+ssize_t get_line(char **indexptr, size_t *s, FILE *user_input);
+
 #endif
