@@ -8,18 +8,18 @@
 
 int shell_change(bash_shell *shell_op)
 {
-	int cd_home, p_wd, cd_check;
-	char direct;
+	int cd_c, p_wd, cd_check;
+	char *direct;
 
 	direct = shell_op->args[1];
 
 	if (direct != NULL)
 	{
-		cd_home = _strcmp("$HOME", direct);
+		cd_c = _strcmp("$HOME", direct);
 		p_wd = _strcmp("~", direct);
 		cd_check = _strcmp("--", direct);
 	}
-	if (direct == NULL || !cd_home || !p_wd || !cd_check)
+	if (direct == NULL || !cd_c || !p_wd || !cd_check)
 	{
 		cd_home(shell_op);
 		return (1);
