@@ -177,4 +177,10 @@ char *han_itoa(int d);
 int get_len(int i);
 int _atoi(char *c);
 
+/* node function handler */
+buf_store *add_line_node_end(buf_store **head, char *buffer);
+void buf_store_free(buf_store **head);
+list_div *add_sep_node_end(list_div **head, char div);
+void list_div_free(list_div **head);
+
 #endif
