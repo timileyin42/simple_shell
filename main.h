@@ -115,4 +115,8 @@ int _isdigit(const char *s);
 char *_strdup(const char *s);
 int str_char(char str[], const char *delim);
 char *_strtok(char str[], const char *delim);
+void rev_str(char *s);
+int _strcmp(char *s1, char *s2);
+int _strspn(char *s, char *allow);
+
 #endif
