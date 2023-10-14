@@ -156,5 +156,9 @@ void check_data(bash_shell *shell_op, char **av);
 int env(bash_shell *shell_op);
 int env_call_cmp(const char *env_list, const char *input);
 char *_getenv(const char *name, char **_environ);
+void set_env(char *name, char *data, bash_shell *shell_op);
+char *info_set(char *name, char *data);
+int _setenv(bash_shell *shell_op);
+int _unsetenv(bash_shell *shell_op);
 
 #endif
