@@ -124,5 +124,7 @@ char *cmd_error_get(bash_shell *shell_op, char *msg, char *error, char *size);
 char *no_error_detect(bash_shell *shell_op);
 char *exit_error(bash_shell *shell_op);
 char *command_error(bash_shell *shell_op);
+char *env_error_fun(bash_shell *shell_op);
+char *error_path_fail(bash_shell *shell_op);
 
 #endif
