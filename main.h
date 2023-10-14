@@ -165,6 +165,9 @@ int _unsetenv(bash_shell *shell_op);
 void help_exit_fun(void);
 void help_gen_fun(void);
 void help_env_fun(void);
-void hel_setenv_fun(void);
-
+void help_setenv_fun(void);
+void help_unsetenv_fun(void);
+void help_alias_fun(void);
+void help_cd_fun(void);
+void help_buitin_help(void);
 #endif
