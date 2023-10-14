@@ -8,7 +8,7 @@
 void help_unsetenv_fun(void)
 {
 	char *help = "unsetenv: unsetenv (const char *nam    e)\n\t"
-		"Remove all pin point from the environment\n;
+		"Remove all pin point from the environment\n";
 
-	write(1, hep, _strlen(help));
+	write(1, help, _strlen(help));
 }

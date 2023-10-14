@@ -32,7 +32,7 @@ void help_gen_fun(void)
 	write(1, help, _strlen(help));
 	help = "[dire]\next: exit [C]\n env: env [option] [name=input] [cmd ";
 	write(1, help, _strlen(help));
-	hellp = "unsetenv [variable]\n";
+	help = "unsetenv [variable]\n";
 	write(1, help, _strlen(help));
 	help = " alias: alias [name=['string']]\n cd: cd [cdir|[dir] ";
 	write(1, help, _strlen(help));
@@ -61,9 +61,11 @@ void help_env_fun(void)
 
 void help_setenv_fun(void)
 {
-	char *help = "setenv: setenv (const char *name, const char *input, int
-		" replace)\n\t"
-		"Add a new name to the environment\n";
+	char *help = "setenv: setenv (const char *name, const char *input,";
 
+	write(1, help, _strlen(help));
+	help = "int replace)\n\t";
+	write(1, help, _strlen(help));
+	help = "Add a new define to the environment\n";
 	write(1, help, _strlen(help));
 }

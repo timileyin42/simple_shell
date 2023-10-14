@@ -174,7 +174,7 @@ int help_fun(bash_shell *shell_op);
 
 /* library_fun handler */
 char *han_itoa(int d);
-int get_len(int i);
+int han_len(int i);
 int _atoi(char *c);
 
 /* node function handler */

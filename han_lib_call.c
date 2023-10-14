@@ -38,15 +38,15 @@ char *han_itoa(int d)
 }
 
 /**
- * get_len - Function that helps get the length of a number.
+ * han_len - Function that helps get the length of a number.
  * @i: buffer holding the number to count.
  * Return: Length of a number
  */
 
-int get_len(int i)
+int han_len(int i)
 {
 	int length = 1;
-	unsigned int dec;
+	unsigned int dec = i;
 
 	if (i < 0)
 	{
