@@ -142,4 +142,10 @@ int (*builtin_fun(char *command))(bash_shell *);
 void call_line(char **indexptr, size_t *s, char *buf, size_t b);
 ssize_t get_line(char **indexptr, size_t *s, FILE *user_input);
 
+/* function that handle cd */
+void cd_parent(bash_shell *shell_op);
+void cd_input(bash_shell *shell_op);
+void cd_home(bash_shell *shell_Op);
+void cd_prev_dir(bash_shell *shell_op);
+
 #endif
