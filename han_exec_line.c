@@ -8,12 +8,12 @@
 
 int han_exec_line(bash_shell *shell_op)
 {
-	int (*builtin)(bash_shell);
+	int (*builtin)(bash_shell *shell_op);
 
 	if (shell_op->args[0] == NULL)
 		return (1);
 
-	builtin = han_builtin(shell_op->args[0]);
+	builtin = builtin_fun(shell_op->args[0]);
 	if (builtin != NULL)
 		return (builtin(shell_op));
 	return (shell_exec(shell_op));
