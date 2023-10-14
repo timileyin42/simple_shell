@@ -204,4 +204,11 @@ int var_call(v_shell **head, char *in, char md, shell_bash *data);
 char *dup_input(v_shell **head, char *input, char *input1, int length);
 char *han_var_rep(char *input, bash_shell *shell_op);
 
+/* split handler function */
+char **line_splitiing(char *input);
+int command_splitted(bash_shell *shell_op, char *input);
+void node_adding(list_div **head_div, buf_store **head_buf, char *input);
+void move_next(list_div **div_it, buf_store **store_it, bash_shell *shell_op);
+char *char_swapping(char *input, int check);
+
 #endif
