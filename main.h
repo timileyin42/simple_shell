@@ -172,4 +172,9 @@ void help_cd_fun(void);
 void help_buitin_help(void);
 void help_fun(bash_shell *shell_op);
 
+/* library_fun handler */
+char *han_itoa(int d);
+int get_len(int i);
+int _atoi(char *c);
+
 #endif
