@@ -21,7 +21,7 @@ void set_env(char *name, char *data, bash_shell *shell_op)
 		if (_strcmp(env_data, name) == 0)
 		{
 			free(shell_op->_environ[x]);
-			shell_op_environ[x] = info_set(env_data, data);
+			shell_op->_environ[x] = info_set(env_data, data);
 			free(env_input);
 			return;
 		}
@@ -30,7 +30,7 @@ void set_env(char *name, char *data, bash_shell *shell_op)
 	}
 	shell_op->_environ = _realloc(shell_op->_environ, x, sizeof(char *) *
 			(x + 2));
-	shell_op->_environ[x] = info_dup(name, data);
+	shell_op->_environ[x] = info_set(name, data);
 	shell_op->_environ[x + 1] = NULL;
 }
 
@@ -46,7 +46,7 @@ char *info_set(char *name, char *data)
 	int input, value, length;
 	char *new;
 
-	lnput = _strlen(name);
+	input = _strlen(name);
 	value = _strlen(data);
 	length = input + value + 2;
 	new = malloc(sizeof(char) * (length));
@@ -65,7 +65,7 @@ char *info_set(char *name, char *data)
 
 int setenv_fun(bash_shell *shell_op)
 {
-	if (shell_op->args[x] == NULL || shell_op->args[2] == NULL)
+	if (shell_op->args[1] == NULL || shell_op->args[2] == NULL)
 	{
 		error_fun(shell_op, -1);
 		return (1);
@@ -108,7 +108,7 @@ int unsetenv_fun(bash_shell *shell_op)
 		return (1);
 	}
 	is_env = malloc(sizeof(char *) * (x));
-	for (x = j = 0; shell_op->_environ[x]; x++)
+	for (x = y = 0; shell_op->_environ[x]; x++)
 	{
 		if (x != z)
 		{

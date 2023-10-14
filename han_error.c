@@ -29,7 +29,7 @@ int error_finder(char *command, int x, char end)
 	int count;
 
 	count = 0;
-	if (*input == '\0')
+	if (*command == '\0')
 		return (0);
 
 	if (*command == ' ' || *command == 't')
@@ -74,13 +74,13 @@ int error_finder(char *command, int x, char end)
  * Return: 1 for error encounter, 0 if oterwise.
  */
 
-int set_char(char *command, int x)
+int set_char(char *command, int *x)
 {
 	*x = 0;
 
 	while (command[*x])
 	{
-		if (command[*x] == ' ' || input[*x] == '\t')
+		if (command[*x] == ' ' || command[*x] == '\t')
 		{
 			(*x)++;
 			continue;
@@ -111,7 +111,7 @@ void han_error_print(bash_shell *shell_op, char *cmd, int x, int check)
 {
 	char *output = "";
 	char *error;
-	char *loop = han_itoa(shell_op->loop);
+	char *loop = han_itoa(shell_op->count);
 	int len;
 
 	if (cmd[x] == ';')
@@ -122,21 +122,21 @@ void han_error_print(bash_shell *shell_op, char *cmd, int x, int check)
 	else if (cmd[x] == '&')
 		output = cmd[x + 1] == '&' ? "&&" : "&";
 
-	len = _strlen(shell_op->av[0]) + _strlen(count) + _strlen(msg) + _str
-		len(": command error: \"\" unexpected\n") + 2;
+	len = _strlen(shell_op->av[0]) + _strlen(loop) + _strlen(output) +
+		_strlen(": command error: \"\" unexpected\n") + 2;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(count);
+		free(loop);
 		return;
 	}
 	_strcpy(error, shell_op->av[0]);
 	_strcat(error, ": ");
-	_strcat(error, count);
+	_strcat(error, loop);
 	_strcat(error, ": command error: \"");
 	_strcat(error, output);
 	_strcat(error, "\" unexpected\n");
-	write(2, error, length);
+	write(2, error, len);
 	free(error);
-	free(count);
+	free(loop);
 }

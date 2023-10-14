@@ -8,12 +8,11 @@
 
 int env_fun(bash_shell *shell_op)
 {
-	int x, y;
+	int x = 0;
+	int y = 0;
 
 	while (shell_op->_environ[x] != NULL)
 	{
-		int x = 0;
-
 		while (shell_op->_environ[x][y] != '\0')
 		{
 			x++;
@@ -42,7 +41,7 @@ int env_call_cmp(const char *env_list, const char *input)
 {
 	int x;
 
-	while (env_list[x] != '=' &&  env_list != '\0' && input[x] != '\0')
+	while (env_list[x] != '=' &&  env_list[x] != '\0' && input[x] != '\0')
 	{
 		if (env_list[x] != input[x])
 		{
