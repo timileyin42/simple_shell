@@ -183,9 +183,19 @@ void buf_store_free(buf_store **head);
 list_div *add_sep_node_end(list_div **head, char div);
 void list_div_free(list_div **head);
 
-/* realoc function handler */
+/* pointer function handler */
 void *_realloc(void *ptr, unsigned int a size, unsigned int val_byte);
 void _memcpy(void *newptr, const void *ptr, unsigned int bytes_size);
 char **_reallocptr(char **ptr, unsigned int size, unsigned int value_byte);
+
+/* shell_cd handler function */
+int shell_cd(bash_shell *shell_op);
+
+/* sign_call handler function */
+void sign_call(int__attribute__((unused)) cut);
+
+/* variable node function handler */
+v_shell *node_va(va_shell **head, int var_len, char *buffer, int val_len);
+void node_va_free(v_shell **head);
 
 #endif
