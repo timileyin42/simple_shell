@@ -126,5 +126,9 @@ char *exit_error(bash_shell *shell_op);
 char *command_error(bash_shell *shell_op);
 char *env_error_fun(bash_shell *shell_op);
 char *error_path_fail(bash_shell *shell_op);
+int char_cmp(const char *command, int x);
+int error_finder(char *command, int x, char end);
+int set_char(char *command, int x);
+void han_error_print(bash_shell *shell_Op, char *cmd, int x, int check);
 
 #endif
