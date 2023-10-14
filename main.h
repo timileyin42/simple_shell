@@ -198,4 +198,10 @@ void sign_call(int__attribute__((unused)) cut);
 v_shell *node_va(va_shell **head, int var_len, char *buffer, int val_len);
 void node_va_free(v_shell **head);
 
+/* variable handler function */
+void env_call(v_shell **head, char *in, bash_shell *data);
+int var_call(v_shell **head, char *in, char md, shell_bash *data);
+char *dup_input(v_shell **head, char *input, char *input1, int length);
+char *han_var_rep(char *input, bash_shell *shell_op);
+
 #endif
