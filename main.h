@@ -148,4 +148,8 @@ void cd_input(bash_shell *shell_op);
 void cd_home(bash_shell *shell_Op);
 void cd_prev_dir(bash_shell *shell_op);
 
+/*funcion that handles the shell data check */
+void memory_free(bash_shell *shell_op);
+void check_data(bash_shell *shell_op, char **av);
+
 #endif
