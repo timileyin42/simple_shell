@@ -24,10 +24,10 @@ char *cmd_error_get(bash_shell *shell_op, char *msg, char *error, char *size)
 	{
 		wrongInput = malloc(3);
 		wrongInput[0] = '-';
-		wrongInput = shell_op->args[1][1];
+		wrongInput = &shell_op->args[1][1];
 		wrongInput[2] = '\0';
 		_strcat(error, wrongInput);
-		free(wrongInput;
+		free(wrongInput);
 	}
 	else
 	{
@@ -60,7 +60,7 @@ char *no_error_detect(bash_shell *shell_op)
 		free(check);
 		return (NULL);
 	}
-	_strcpy(error, shell_op->[0]);
+	_strcpy(error, shell_op->av[0]);
 	_strcat(error, ": ");
 	_strcat(error, check);
 	_strcat(error, ": ");
@@ -81,13 +81,13 @@ char *no_error_detect(bash_shell *shell_op)
 char *exit_error(bash_shell *shell_op)
 {
 	int size;
-	char *error, char *check;
+	char *error, *check;
 
 	check = han_itoa(shell_op->count);
 	size = _strlen(shell_op->av[0]) + _strlen(check);
 	size = size + _strlen(shell_op->args[0]) + _strlen(shell_op->args[1]) +
 		 23;
-	error = malloc(sizeof(char) * (length + 1));
+	error = malloc(sizeof(char) * (size + 1));
 	if (error == 0)
 	{
 		free(check);
@@ -114,7 +114,7 @@ char *exit_error(bash_shell *shell_op)
 char *command_error(bash_shell *shell_op)
 {
 	int size, len;
-	char *error, check, *msg;
+	char *error, *check, *msg;
 
 	check = han_itoa(shell_op->count);
 	if (shell_op->args[1][0] == '-')
@@ -125,11 +125,11 @@ char *command_error(bash_shell *shell_op)
 	else
 	{
 		msg = ": not recgnize by external or internal command ";
-		len = _strlen(shell_op->args[x]);
+		len = _strlen(shell_op->args[1]);
 	}
 	size = _strlen(shell_op->av[0]) + _strlen(shell_op->args[0]);
 	size = size + _strlen(check) + _strlen(msg) + len + 5;
-	error = malloc(sizeof(char) = (size + 1));
+	error = malloc(sizeof(char) * (size + 1));
 
 	if (error == 0)
 	{

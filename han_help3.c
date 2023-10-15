@@ -2,7 +2,7 @@
 
 /**
  *help_alias_fun - helper Function that get info from the buitin alias.
- * Return: Always (void)
+ * Return: Alway (void)
  */
 
 void help_alias_fun(void)
@@ -29,7 +29,7 @@ void help_cd_fun(void)
 
 /**
  * help_buitin_help - helper function that give info about the inbuilt help
- * Return: Always (void)
+ * Return: Always  (void)
  */
 void help_buitin_help(void)
 {

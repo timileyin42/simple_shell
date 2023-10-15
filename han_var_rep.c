@@ -16,7 +16,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
 
 	_envar = data->_environ;
 	num = 0; /* initializing num outside loop */
-	while (_envar[row])
+	while (_envar[num])
 	{
 		x = 1;
 		ch = 0;
@@ -54,31 +54,33 @@ void env_call(v_shell **head, char *in, bash_shell *data)
  * @data: The data structure which the function belong to
  * Return: void
  */
-int var_call(v_shell **head, char *in, char md, bash_shell *data)
+int var_call(v_shell **head, char *input, char *md, bash_shell *data)
 {
-	int x, l_pid, mode;
+	int x, mode, l_pid;
 
-	mode = _strlen(md);
-	l_pid = _strlen(data->pid);
+	l_pid = _strlen(md);
+	mode = _strlen(data->pid);
 
-	while (in[x])
+	x = 0;
+
+	while (input[x])
 	{
-		if (in[x] == '$')
+		if (input[x] == '$')
 		{
-			if (in[x + 1] == '?')
-				node_va(head, 2, mode, l_pid), x++;
-			else if (in[x + 1] == '$')
+			if (input[x + 1] == '?')
+				node_va(head, 2, md, mode), x++;
+			else if (input[x + 1] == '$')
 				node_va(head, 2, data->pid, l_pid), x++;
-			else if (in[x + 1] == '\n')
+			else if (input[x + 1] == '\n')
 				node_va(head, 0, NULL, 0);
-			else if (in[x + 1] == '\0')
+			else if (input[x + 1] == '\0')
 				node_va(head, 0, NULL, 0);
-			else if (in[x + 1] == '\t')
+			else if (input[x + 1] == '\t')
 				node_va(head, 0, NULL, 0);
-			else if (in[x + 1] == ';')
+			else if (input[x + 1] == ';')
 				node_va(head, 0, NULL, 0);
 			else
-				envar_check(head, in + x, data);
+				env_call(head, input + x, data);
 		}
 	}
 	return (x);
@@ -96,7 +98,7 @@ int var_call(v_shell **head, char *in, char md, bash_shell *data)
 char *dup_input(v_shell **head, char *input, char *input1, int length)
 {
 	v_shell *buf;
-	int x = 0, y = 0, k;
+	int x = 0, y = 0, z;
 
 	buf = *head;
 	while (x < length)
@@ -116,7 +118,7 @@ char *dup_input(v_shell **head, char *input, char *input1, int length)
 			}
 			else
 			{
-				for (; z < buf->value_len; Z++)
+				for (; z < buf->value_len; z++)
 				{
 					input1[x] = buf->value[z];
 					x++;
@@ -150,7 +152,7 @@ char *han_var_rep(char *input, bash_shell *shell_op)
 	char *mood, *input1;
 	int len1, len2;
 
-	mood = han_itoa(shell_op->mood);
+	mood = han_itoa(shell_op->mode);
 	head = NULL;
 
 	len1 = var_call(&head, input, mood, shell_op);

@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * node_var - Functions that helps add variables at the end of a v_shell list
+ * node_va - Functions that helps add variables at the end of a v_shell list
  * @head: A double pointer pointing to the head of linked list.
  * @var_len: Length of the variable
  * @buffer: the valuse of the variable.
@@ -11,10 +11,10 @@
 
 v_shell *node_va(v_shell **head, int var_len, char *buffer, int val_len)
 {
-	v_shell *hold, temp;
+	v_shell *hold, *temp;
 
 	hold = malloc(sizeof(v_shell));
-	if (hold == NULL)
+	if (*head == NULL)
 		return (NULL);
 
 	hold->var_size = var_len;
@@ -49,7 +49,7 @@ void node_va_free(v_shell **head)
 {
 	v_shell *temp, *current;
 
-	if (hhead != NULL)
+	if (head != NULL)
 	{
 		current = *head;
 		for (; current != NULL; current = temp)

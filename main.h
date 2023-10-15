@@ -97,7 +97,7 @@ typedef struct buffer_store
 
 typedef struct help_get {
 	char *name;
-	int (*func) (void);
+	void (*func) (void);
 } get_t;
 
 
@@ -170,7 +170,7 @@ void help_unsetenv_fun(void);
 void help_alias_fun(void);
 void help_cd_fun(void);
 void help_buitin_help(void);
-int help_fun(bash_shell *shell_op);
+void help_fun(bash_shell *shell_op);
 
 /* library_fun handler */
 char *han_itoa(int d);
@@ -200,7 +200,7 @@ void node_va_free(v_shell **head);
 
 /* variable handler function */
 void env_call(v_shell **head, char *in, bash_shell *data);
-int var_call(v_shell **head, char *in, char md, bash_shell *data);
+int var_call(v_shell **head, char *input, char *md, bash_shell *data);
 char *dup_input(v_shell **head, char *input, char *input1, int length);
 char *han_var_rep(char *input, bash_shell *shell_op);
 

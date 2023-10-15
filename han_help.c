@@ -2,7 +2,7 @@
 
 /**
  * help_exit_fun - Function that help exit from the builtin exit
- * Return: Always (void)
+ * Return: always (void)
  */
 
 void help_exit_fun(void)
@@ -43,7 +43,7 @@ void help_gen_fun(void)
 
 /**
  * help_env_fun - fun that helps get info about the env fun
- * Return: Alwats (void)
+ * Return: Always (void)
  */
 
 void help_env_fun(void)

@@ -5,13 +5,13 @@
  * @shell_op: A pointer to the data struture of (args and code)
  * Return: Always (void)
  */
-int help_fun(bash_shell *shell_op)
+void help_fun(bash_shell *shell_op)
 {
 	get_t help_gets[] = {
 		{"setenv", help_setenv_fun},
 		{"env", help_env_fun},
 		{"unsetenv", help_unsetenv_fun},
-		{"help", help_buitin_fun},
+		{"help", help_buitin_help},
 		{"exit", help_exit_fun},
 		{"cd", help_cd_fun},
 		{"alias", help_alias_fun},
@@ -22,7 +22,7 @@ int help_fun(bash_shell *shell_op)
 
 	if (shell_op->args[1] == 0)
 	{
-		han_gen_fun();
+		help_gen_fun();
 	} else
 	{
 		for (; help_gets[x].name != NULL; x++)
