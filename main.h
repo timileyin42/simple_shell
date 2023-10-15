@@ -220,7 +220,7 @@ void shell_terminal(bash_shell *shell_op);
 
 /* shell exec function handler */
 int directory_check(char *path, int *x);
-char *checking(char *command, char **_environ);
+char *check(char *command, char **_environ);
 int execute_fun(bash_shell *shell_op);
 int error_command(char *direct, bash_shell *shell_op);
 int shell_exec(bash_shell *shell_op);

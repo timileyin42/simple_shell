@@ -24,13 +24,13 @@ int directory_check(char *path, int *x)
 }
 
 /**
- * checking - Functions pointer that locate a command need by the terminal
+ * check - Functions pointer that locate a command need by the terminal
  * @command: Command line name
  * @_environ: Environmnet variable
  * Return: Location of the command.
  */
 
-char *checking(char *command, char **_environ)
+char *check(char *command, char **_environ)
 {
 	char *path, *pathptr, *tokenPath, *direct;
 	int dir_len, cmd_len, x;
@@ -40,7 +40,7 @@ char *checking(char *command, char **_environ)
 	if (path)
 	{
 		pathptr = _strdup(path);
-		cmd_len = _strlen(cmd);
+		cmd_len = _strlen(command);
 		tokenPath = _strtok(pathptr, ":");
 		x = 0;
 		for (; tokenPath != NULL; tokenPath = _strtok(NULL, ":"))
@@ -55,7 +55,7 @@ char *checking(char *command, char **_environ)
 			_strcpy(direct, tokenPath);
 			_strcat(direct, "/");
 			_strcat(direct, command);
-			_strcat(dir, "\0");
+			_strcat(direct, "\0");
 			if (stat(direct, &fd) == 0)
 			{
 				free(pathptr);
@@ -83,7 +83,7 @@ char *checking(char *command, char **_environ)
 int execute_fun(bash_shell *shell_op)
 {
 	struct stat fd;
-	int x;
+	int x = 0;
 	char *input;
 
 	input = shell_op->args[0];
@@ -105,7 +105,7 @@ int execute_fun(bash_shell *shell_op)
 	}
 	if (x == 0)
 		return (0);
-	if (stat(input + x, &st) == 0)
+	if (stat(input + x, &fd) == 0)
 	{
 		return (x);
 	}
@@ -136,13 +136,13 @@ int error_command(char *direct, bash_shell *shell_op)
 			free(direct);
 			return (1);
 		}
-		free(dir);
+		free(direct);
 	}
 	else
 	{
 		if (access(shell_op->args[0], X_OK) == -1)
 		{
-			erro_fun(shell_op, 126);
+			error_fun(shell_op, 126);
 			return (1);
 		}
 	}
@@ -168,17 +168,17 @@ int shell_exec(bash_shell *shell_op)
 		return (1);
 	if (exec == 0)
 	{
-		direct = checking(shell_op->args[0], shell_op->_environ);
+		direct = check(shell_op->args[0], shell_op->_environ);
 		return (1);
 	}
 	is_pid = fork();
 	if (is_pid == 0)
 	{
 		if (exec == 0)
-			direct = checking(is_pid->args[0], shell_op->_environ);
+			direct = check(shell_op->args[0], shell_op->_environ);
 		else
 			direct = shell_op->args[0];
-		execve(direct + exec, shell_op->, shell_op->_environ);
+		execve(direct + exec, shell_op->args, shell_op->_environ);
 	}
 	else if (is_pid < 0)
 	{
@@ -188,8 +188,8 @@ int shell_exec(bash_shell *shell_op)
 	else
 	{
 		do {
-			w_pid = waitpid(shell_pid, &mode, WUNTRACED);
-		} while (!WIFEXITED(mode) && !WIFSIGNALED(node));
+			w_pid = waitpid(is_pid, &mode, WUNTRACED);
+		} while (!WIFEXITED(mode) && !WIFSIGNALED(mode));
 	}
 	shell_op->mode = mode / 256;
 	return (1);
