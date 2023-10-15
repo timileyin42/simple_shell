@@ -59,7 +59,7 @@ char *_strcat(char *dest, const char *src)
 	int x;
 	int y;
 
-	while (dest[x] != '\0)
+	while (dest[x] != '\0')
 	{
 		x++;
 	}

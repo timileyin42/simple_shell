@@ -24,7 +24,7 @@ int _strlen(const char *s)
  * Return: 1 if string is number, 0, if otherwise.
  */
 
-int _isdigit(cons char *s)
+int _isdigit(const char *s)
 {
 	unsigned int x = 0;
 
@@ -72,7 +72,8 @@ char *_strdup(const char *s)
 
 int str_char(char str[], const char *delim)
 {
-	unsined int x, y, z;
+	unsigned int x = 0;
+	unsigned int z = 0;
 
 	while (str[x])
 	{
@@ -87,7 +88,7 @@ int str_char(char str[], const char *delim)
 			}
 			y++;
 		}
-		x++
+		x++;
 	}
 	if (x == z)
 		return (1);
@@ -104,7 +105,7 @@ int str_char(char str[], const char *delim)
 
 char *_strtok(char str[], const char *delim)
 {
-	static chr *seprated, *tokenize_end;
+	static char *seprated, *tokenize_end;
 	unsigned int x, check;
 	char *tokenize_start;
 
@@ -112,9 +113,9 @@ char *_strtok(char str[], const char *delim)
 	{
 		if (str_char(str, delim))
 			return (NULL);
-		seprated = str; /* stroing address */
+		seprated = str; /* storing address */
 		x = _strlen(str);
-		tokenize_end = *str[x]; /* stroing last address */
+		tokenize_end = &str[x - 1]; /* storing last address */
 	}
 	tokenize_start = seprated;
 	if (tokenize_start == tokenize_end)
