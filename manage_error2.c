@@ -11,11 +11,11 @@ char *env_error_fun(bash_shell *shell_op)
 	char *error, *check, *msg;
 	int len;
 
-	chevk = han_itoa(shell_op->count);
+	check = han_itoa(shell_op->count);
 	msg = ": can't add/remove from environment\n";
 	len = _strlen(shell_op->av[0]) + _strlen(check);
 	len = len + _strlen(shell_op->args[0]) + _strlen(msg) + 4;
-	error = malloc(sizeof(char) * (length + 1));
+	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(error);
