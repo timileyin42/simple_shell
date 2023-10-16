@@ -11,24 +11,24 @@
 #define BUILT 1
 
 /**
- * struct command_s - singly linked list
- * @args: argument
+ * struct bash - structure that contains all relevant data on runtime
+ * @args: argument vector
  * @id: id token (0- intern or 1 - extern)
- * @cont: cont
+ * @cont: status of the shell
  * @name: name
  * @next: points to the next node
  *
  * Description: singly linked list node structure
  * for shell_project
  */
-typedef struct command_s
+typedef struct bash
 {
 	char **args;
 	int id;
 	int cont;
 	char *name;
 	struct command_s *next;
-} command_t;
+} bash_shell;
 
 /**
 * struct builtins - type of builtins
