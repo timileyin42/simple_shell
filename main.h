@@ -97,7 +97,7 @@ typedef struct buffer_store
 
 typedef struct help_get {
 	char *name;
-	void (*func) (void);
+	int (*func) (void);
 } get_t;
 
 
@@ -115,7 +115,7 @@ int _isdigit(const char *s);
 char *_strdup(const char *s);
 int str_char(char str[], const char *delim);
 char *_strtok(char str[], const char *delim);
-void rev_str(char *s);
+void rev_string(char *s);
 int _strcmp(char *s1, char *s2);
 int _strspn(char *s, char *allow);
 
@@ -162,15 +162,15 @@ int setenv_fun(bash_shell *shell_op);
 int unsetenv_fun(bash_shell *shell_op);
 
 /* help handler function */
-void help_exit_fun(void);
-void help_gen_fun(void);
-void help_env_fun(void);
-void help_setenv_fun(void);
-void help_unsetenv_fun(void);
-void help_alias_fun(void);
-void help_cd_fun(void);
-void help_buitin_help(void);
-void help_fun(bash_shell *shell_op);
+int help_exit_fun(void);
+int help_gen_fun(void);
+int help_env_fun(void);
+int help_setenv_fun(void);
+int help_unsetenv_fun(void);
+int help_alias_fun(void);
+int help_cd_fun(void);
+int help_buitin_help(void);
+int help_fun(bash_shell *shell_op);
 
 /* library_fun handler */
 char *han_itoa(int d);

@@ -58,7 +58,7 @@ char *info_set(char *name, char *data)
 }
 
 /**
- * setenv_fun - Function that helps compare environment var names with name 
+ * setenv_fun - Function that helps compare environment var names with name
  * @shell_op: A pointer to the data relevant struture(env name and data)
  * Return: 1 on success.
  */

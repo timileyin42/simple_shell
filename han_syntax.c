@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * syntax - function that helps check for the function to print error message
+ * han_syntax - function that helps check for the function to print error message
  * @shell_op: A pointer to the data structure
  * @command:  A pointer to the input string
  * Return: 98 if there is an error. 0 if otherwise
  */
 
-int syntax(bash_shell *shell_op, char *command)
+int han_syntax(bash_shell *shell_op, char *command)
 {
 	int check, input, x;
 

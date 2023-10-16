@@ -2,10 +2,10 @@
 
 /**
  * help_exit_fun - Function that help exit from the builtin exit
- * Return: always (void)
+ * Return: 0 on (success)
  */
 
-void help_exit_fun(void)
+int help_exit_fun(void)
 {
 	char *help = "exit: exit [C]\n Exit shell. \n";
 
@@ -14,14 +14,15 @@ void help_exit_fun(void)
 	write(1, help, _strlen(help));
 	help = "mode of that last executed command\n";
 	write(1, help, _strlen(help));
+	return (0);
 }
 
 /**
  * help_gen_fun - Entry point for help info, for the help builtin
- * Return: Always (void)
+ * Return: 0 on (success)
  */
 
-void help_gen_fun(void)
+int help_gen_fun(void)
 {
 	char *help = "^-^ bash-5.0-released\n";
 
@@ -39,27 +40,29 @@ void help_gen_fun(void)
 	help = "[args]]\n setenv: setenv [variable] [input]\n";
 
 	write(1, help, _strlen(help));
+	return (0);
 }
 
 /**
  * help_env_fun - fun that helps get info about the env fun
- * Return: Always (void)
+ * Return: 0 on (success)
  */
 
-void help_env_fun(void)
+int help_env_fun(void)
 {
 	char *help = "env: env [option] [name=input] [command [args]]\n\t"
 		"print out the environment var of the shell.\n";
 
 	write(1, help, _strlen(help));
+	return (0);
 }
 
 /**
  * help_setenv_fun - Help function that get info for buit * in setenv.
- * Return: Always (void)
+ * Return: 0 on success (success)
  */
 
-void help_setenv_fun(void)
+int help_setenv_fun(void)
 {
 	char *help = "setenv: setenv (const char *name, const char *input,";
 
@@ -68,4 +71,5 @@ void help_setenv_fun(void)
 	write(1, help, _strlen(help));
 	help = "Add a new define to the environment\n";
 	write(1, help, _strlen(help));
+	return (0);
 }

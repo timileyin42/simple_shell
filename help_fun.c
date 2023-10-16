@@ -3,9 +3,9 @@
 /**
  * help_fun - Function that helps print help messages according buitin fun
  * @shell_op: A pointer to the data struture of (args and code)
- * Return: Always (void)
+ * Return: 0 on (success)
  */
-void help_fun(bash_shell *shell_op)
+int help_fun(bash_shell *shell_op)
 {
 	get_t help_gets[] = {
 		{"setenv", help_setenv_fun},
@@ -36,4 +36,5 @@ void help_fun(bash_shell *shell_op)
 	}
 
 	shell_op->mode = 0;
+	return (0);
 }

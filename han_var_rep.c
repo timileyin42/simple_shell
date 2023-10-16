@@ -49,7 +49,7 @@ void env_call(v_shell **head, char *in, bash_shell *data)
  * var_call - checking if the typed variable is $$ or $ ?
  *
  * @head: head of the linked list
- * @in: A pointer to the inputed string
+ * @input: A pointer to the inputed string
  * @md: the mode/status of the shell
  * @data: The data structure which the function belong to
  * Return: void

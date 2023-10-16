@@ -13,7 +13,7 @@ int main(__attribute__((unused)) int ac, char **av)
 
 	signal(SIGINT, sign_call);
 	check_data(&shell_op, av);
-	shell_operate(&shell_op);
+	shell_terminal(&shell_op);
 	memory_free(&shell_op);
 
 	if (shell_op.mode < 0)
