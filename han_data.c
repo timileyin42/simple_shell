@@ -46,6 +46,6 @@ void check_data(bash_shell *shell_op, char **av)
 		shell_op->_environ[x] = _strdup(environ[x]);
 		x++;
 	}
-	shell_op->_environ[x] = NULL;
+	shell_op->_environ[x + 1] = NULL;
 	shell_op->pid = han_itoa(getpid());
 }

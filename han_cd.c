@@ -24,11 +24,11 @@ void cd_parent(bash_shell *shell_op)
 		return;
 	}
 	cd_tokenize = cd_wd;
-	rev_str(cd_tokenize);
+	rev_string(cd_tokenize);
 	cd_tokenize = _strtok(cd_tokenize, "/");
 	cd_tokenize = (cd_tokenize != NULL) ? _strtok(NULL, "\0") : NULL;
 	if (cd_tokenize != NULL)
-		rev_str(cd_tokenize);
+		rev_string(cd_tokenize);
 	if (cd_tokenize != NULL)
 	{
 		directory_check(cd_tokenize, &x);
