@@ -17,7 +17,7 @@ char *not_print_comment(char *input)
 		{
 			if (x == 0)
 			{
-				free(input)
+				free(input);
 					return (NULL);
 			}
 
@@ -49,10 +49,10 @@ void shell_terminal(bash_shell *shell_op)
 	int operate, end_file;
 	char *block;
 
-	for (int operate = 1; operate == 1;)
+	for (operate = 1; operate == 1;)
 	{
 		write(STDIN_FILENO, "^-^", 4);
-		block = read_line(&end_file);
+		block = han_read_line(&end_file);
 
 		if (end_file != -1)
 		{
@@ -60,14 +60,14 @@ void shell_terminal(bash_shell *shell_op)
 			if (block == NULL)
 				continue;
 
-			if (han_error(shell_op, block) == 1)
+			if (han_syntax(shell_op, block) == 1)
 			{
 				shell_op->mode = 2;
 				free(block);
 				continue;
 			}
 			block = han_var_rep(block, shell_op);
-			operate = han_split(shell_op, block);
+			operate = command_splitted(shell_op, block);
 			shell_op->count = shell_op->count + 1;
 			free(block);
 		}
