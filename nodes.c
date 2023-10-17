@@ -32,7 +32,7 @@ char *crear_name(char  *name)
 	char *newname;
 
 	x = _strlen(name);
-	newname = _calloc(l, sizeof(char));
+	newname = _calloc(x, sizeof(char));
 	for (; name[x]; x++)
 		newname[x] = name[x];
 	return (newname);
@@ -49,7 +49,7 @@ bash_shell *_getargs(char *buf, ssize_t *pos, char *name)
 	ssize_t p = 0;
 	unsigned int flag = 0;
 	int sp = 0, id = 0, aux = 0;
-	command_t *head = NULL;
+	bash_shell *head = NULL;
 	char **args = NULL;
 	char *n = NULL;
 	int *paux = &aux;

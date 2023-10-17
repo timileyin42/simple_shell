@@ -27,7 +27,7 @@ char  *getvaderdir(void)
 			x = y;
 	newpwd = _calloc(x + 2, sizeof(char));
 	for (y = 0; pwd[y] && y < x; y++)
-		newpwd[l] = pwd[l];
+		newpwd[y] = pwd[y];
 	free(pwd);
 	return (newpwd);
 }
@@ -106,15 +106,15 @@ int darthVader(void)
 	char *newpwd = NULL;
 	char *pwd = NULL;
 	DIR *dir = NULL;
+	char error_msg[] = "Error : 'v \n";
 
 	pwd = _getenvvar("PWD");
 	newpwd = getvaderdir();
 	dir = opendir(newpwd);
-	char error_msg[] = "Error : 'v \n";
 
 	if (dir == NULL)
 	{
-		write(STDOUT_FILENO, sizeof(error_msg) - 1);
+		write(STDOUT_FILENO, error_msg, _strlen(error_msg));
 		free(pwd);
 		free(newpwd);
 		return (-1);
@@ -141,6 +141,6 @@ int nextdir(char *filter, int buf)
 	buf++;
 	for (; filter[buf]; buf++)
 		if (filter[buf] == '/')
-			return (i);
+			return (buf);
 	return (-1);
 }

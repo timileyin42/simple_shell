@@ -118,10 +118,10 @@ void buffer_filter(char **buffer, ssize_t *p)
 			{
 				_replacealias(ali, newbuf, &pos);
 				continue; }
-			 = cpy; }
-		 = cpy;
-		newbuf[pos] = buf[i];
-		i++, pos++; }
+			x = cpy; }
+		x = cpy;
+		newbuf[pos] = buf[x];
+		x++, pos++; }
 	free(buf);
 	*p = pos;
 	*buffer = newbuf;

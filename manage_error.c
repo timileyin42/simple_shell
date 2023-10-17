@@ -27,7 +27,7 @@ void imprimir_errores_history(bash_shell *h)
 	write(STDOUT_FILENO, n, x);
 	write(STDOUT_FILENO, sp, 2);
 	x = _strlen(cont);
-	write(STDOUT_FILENO, cont, X);
+	write(STDOUT_FILENO, cont, x);
 	write(STDOUT_FILENO, sp, 2);
 	x = _strlen(com);
 	write(STDOUT_FILENO, com, x);

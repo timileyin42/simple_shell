@@ -37,7 +37,7 @@ void funexc(bash_shell *h)
  *
  * Return: no return
  */
-void _extern(command_t *h)
+void _extern(bash_shell *h)
 {
 
 	int status = 0, pid = 0;
@@ -46,7 +46,7 @@ void _extern(command_t *h)
 
 	if (!h->args)
 	{
-		const char *error_message = "not working\n";
+		char *error_message = "not working\n";
 
 		write(STDOUT_FILENO, error_message, _strlen(error_message));
 	}
@@ -71,7 +71,7 @@ void _extern(command_t *h)
 *
 * Return: no return
 */
-void _built(command_t *h)
+void _built(bash_shell *h)
 {
 	int y = 0, entero = 0, x = 0;
 	char **argseach = NULL;
@@ -85,7 +85,7 @@ void _built(command_t *h)
 	x = 0;
 	argseach = h->args;
 
-	while (commandsbuilt[i].built != NULL)
+	while (commandsbuilt[x].built != NULL)
 	{
 		entero = 0;
 		for (y = 0; argseach[0][y] != '\0'; y++)
@@ -115,7 +115,7 @@ void _built(command_t *h)
  *
  * Return: no return
  */
-void print_err_exit(command_t *h)
+void print_err_exit(bash_shell *h)
 {
 	char *err = h->name;
 	char *sp = ": ";
@@ -138,9 +138,9 @@ void print_err_exit(command_t *h)
 *
  * Return: no return
 */
-int salir(command_t *h)
+int salir(bash_shell *h)
 {
-	command_t *cpy = NULL;
+	bash_shell *cpy = NULL;
 	char **env = NULL;
 	alias *al = NULL, *ali = NULL;
 	int x = 0;/*, res = 0;*/
