@@ -63,8 +63,8 @@ ssize_t _env_cmd(hshpack *shpack)
 	{
 		for (; str && *str; str++)
 		{
-			write(1, *str, _strlen(*str));
-			write(1, "\n", 1);
+			write(STDOUT_FILENO, *str, _strlen(*str));
+			write(STDOUT_FILENO, "\n", 1);
 		}
 	}
 	else
@@ -93,7 +93,7 @@ ssize_t _setenv_cmd(hshpack *shpack)
 		variable = shpack->options[1];
 		if (!shpack->options[2])
 		{
-			write(2, "Invalid VALUE\n", 14);
+			write(STDERR_FILENO, "Invalid VALUE\n", 14);
 			shpack->exitnum[0] = 2;
 			free(shpack->options);
 			return (-1);
@@ -104,7 +104,7 @@ ssize_t _setenv_cmd(hshpack *shpack)
 	}
 	if (variable == 0)
 	{
-		write(2, "Invalid VARIABLE\n", 17);
+		write(STDERR_FILENO, "Invalid VARIABLE\n", 17);
 		shpack->exitnum[0] = 2;
 		free(shpack->options);
 		return (-1);
@@ -138,7 +138,7 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
 	else
 	{
 		shpack->exitnum[0] = 2;
-		write(2, "Please provide an argument\n", 27);
+		write(STDERR_FILENO, "Please provide an argument\n", 27);
 		return (free(shpack->options), -1);
 	}
 
@@ -179,17 +179,19 @@ ssize_t built_ints(hshpack *shpack)
 		{"help", _help_cmd}
 	};
 
-	int i = 6, builtcheck; /* lenght of ops array */
+	int x, builtcheck; /* lenght of ops array */
 
-	while (i--)
-		if (!_strcmp(shpack->cmd, ops[i].cmd))
+	for (x = 0; x < 6; x++)
+	{
+		if (!_strcmp(shpack->cmd, ops[x].cmd))
 		{
-			shpack->errnum[0] += 1;
-			builtcheck = ops[i].f(shpack);
+			shpack->errnum[0] = shpack->errnum[0] + 1;
+			builtcheck = ops[x].f(shpack);
 			if (builtcheck == 1)
 				shpack->exitnum[0] = 0;
 			return (builtcheck);
 		}
+	}
 
 	return (0);
 }

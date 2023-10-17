@@ -101,7 +101,7 @@ int _error(int errn, hshpack *shpack, int exnum)
 
 	conc1 = str_concat(shelln, colspace);
 	if (!conc1) /*hsh: */
-		return (write(2, "Memory Error", 22), -1);
+		return (write(STDERR_FILENO, "Memory Error", 22), -1);
 
 	if (errn == 7) /* Alloc Error */
 	{
@@ -111,7 +111,7 @@ int _error(int errn, hshpack *shpack, int exnum)
 		free(conc1);
 		while (conc2[l] != 0)
 			l++;
-		write(2, conc2, l), write(2, "\n", 1);
+		write(STDERR_FILENO, conc2, l), write(2, "\n", 1);
 		free(conc2);
 		return (0);
 
@@ -124,7 +124,7 @@ int _error(int errn, hshpack *shpack, int exnum)
 	conc2 = str_concat(conc1, nstring);
 	if (!conc2) /*hsh: count*/
 	{
-		write(2, "Memory Error", 22);
+		write(STDERR_FILENO, "Memory Error", 22);
 		return (free(conc1), free(nstring),  -1);
 	}
 	free(conc1), free(nstring);
@@ -153,13 +153,13 @@ int _error(int errn, hshpack *shpack, int exnum)
 		conc2 = _error2(errn, conc2, option[1]);
 	if (conc2 == NULL)
 	{
-		write(2, "Memory Error", 22);
+		write(STDERR_FILENO, "Memory Error", 22);
 		return (-1);
 	}
 
 	while (conc2[l] != 0)
 		l++;
-	write(2, conc2, l), write(2, "\n", 1);
+	write(STDERR_FILENO, conc2, l), write(2, "\n", 1);
 	free(conc2);
 	shpack->exitnum[0] = exnum;
 	return (0);
@@ -188,7 +188,7 @@ char *_error2(int errn, char *conc2, char *option)
 		conc1 = str_concat(conc2, colspace);
 		if (!conc1) /*hsh: count: cmd: error: */
 		{
-			write(2, "Memory Error", 22);
+			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);
 		}
 		free(conc2);
@@ -197,7 +197,7 @@ char *_error2(int errn, char *conc2, char *option)
 
 		if (!conc2) /*hsh: count: cmd: error: option*/
 		{
-			write(2, "Memory Error", 22);
+			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc1), NULL);
 		}
 		free(conc1);
@@ -207,7 +207,7 @@ char *_error2(int errn, char *conc2, char *option)
 		conc1 = str_concat(conc2, option);
 		if (!conc1) /*hsh: count: cmd: error option*/
 		{
-			write(2, "Memory Error", 22);
+			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);
 		}
 		free(conc2);

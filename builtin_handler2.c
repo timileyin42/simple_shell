@@ -14,11 +14,14 @@
  */
 long _pow(long base, long pot)
 {
-	long i = 0;
+	long x = 0;
 	long res = 1;
 
-	for (i = 0; i < pot; i++)
-		res *= base;
+	while (x < pot)
+	{
+		res = res * base;
+		x++;
+	}
 
 	return (res);
 }
@@ -34,8 +37,8 @@ long _pow(long base, long pot)
 
 long _atoi(char *s)
 {
-	long i = 0;
-	long k = 0;
+	long x = 0;
+	long y = 0;
 	long len = 0;
 	unsigned long result = 0;
 	long toReturn = 0;
@@ -45,19 +48,19 @@ long _atoi(char *s)
 	if (!s)
 		return (0);
 
-	for (i = 0; *(s + i) != '\0'; i++)
+	for (x = 0; *(s + x) != '\0'; x++)
 	{
-		if (*(s + i) >= 48 && *(s + i) <= 57)
+		if (*(s + x) >= 48 && *(s + x) <= 57)
 			len++;
 		else if (len != 0)
 			break;
 
-		if (*(s + i) == '-')
+		if (*(s + x) == '-')
 			minus++;
 	}
 
-	for (i--; len > 0; i--, k++, len--)
-		result +=  (*(s + i) - offset) * _pow(10, k);
+	for (x--; len > 0; x--, y++, len--)
+		result = result * (*(s + x) - offset) * _pow(10, y);
 
 	toReturn = (minus % 2 != 0) ? result * (-1) : result;
 
@@ -73,12 +76,17 @@ long _atoi(char *s)
  */
 int _strcmp(char *s1, char *s2)
 {
-	int i = 0;
+	int x = 0;
 	int equal = 0;
 
-	for (i = 0; (*(s1 + i) || *(s2 + i)) && !equal; i++)
-		if (*(s1 + i) != *(s2 + i))
-			equal = *(s1 + i) - *(s2 + i);
+	while ((*(s1 + x) || *(s2 + x)) && !equal)
+	{
+		if (*(s1 + x) != *(s2 + x))
+		{
+			equal = *(s1 + x) - *(s2 + x);
+		}
+		x++;
+	}
 
 	return (equal);
 }
@@ -101,8 +109,13 @@ int _isdigit(int c)
  */
 int _isnumber(char *s)
 {
-	for (; *s; s++)
+	while (*s)
+	{
 		if (!_isdigit(*s))
+		{
 			return (0);
+		}
+		s++;
+	}
 	return (1);
 }

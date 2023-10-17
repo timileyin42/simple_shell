@@ -12,11 +12,10 @@
  *
  * Return: pointer to HOME or NULL if fail
  */
-char *auxcd2(hshpack *shpack, char *currdir)
+char *auxcd2(hshpack *shpack, char __attribute__((unused)) *currdir)
 {
 	char *home, *dir = NULL;
 
-	(void) currdir;
 	home = _getenv("HOME", *(shpack->envCpy));
 	if (home)
 		dir = home + 5;
@@ -37,7 +36,7 @@ char *auxcd(hshpack *shpack, char *currdir)
 
 	if (shpack->options[1] && shpack->options[2])
 	{
-		write(2, "cd: too many arguments\n", 23);
+		write(STDERR_FILENO, "cd: too many arguments\n", 23);
 		shpack->exitnum[0] = 2;
 		free(shpack->options);
 		free(currdir);
@@ -93,7 +92,7 @@ ssize_t _cd_cmd(hshpack *shpack)
 	if (dir)
 		check = chdir(dir);
 	if (check == 0 && checkminus == 1)
-		write(1, dir, _strlen(dir)), write(1, "\n", 1);
+		write(STDOUT_FILENO, dir, _strlen(dir)), write(1, "\n", 1);
 	if (check != 0)
 		_error(4, shpack, 2), exit = -1;
 	else
