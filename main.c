@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "shell.h"
+#include "main.h"
 /**
  * main - Shell Program
  * @ac: count of input parameters to program
@@ -18,7 +18,7 @@ int main(int ac, char **av, char **env)
 {
 	size_t bufsize = 0;
 	char **command, *pathCmd, *buffer = NULL;
-	hshpack *shpack;
+	bash *shpack;
 	int errn = 0, exnum = 0, relation = 0, run_able = 0, sizeEnv, enul = 0;
 	ssize_t isBuiltIn;
 
@@ -70,14 +70,14 @@ int main(int ac, char **av, char **env)
  * Return: Pointer to struct
  *
  */
-hshpack *set_struct(char *argv0, int *errn, int *exnum,
+bash *set_struct(char *argv0, int *errn, int *exnum,
 		    int *relation, int *run_able, char ***env, int *unsetnull)
 {
-	hshpack *shellpack;
+	bash *shellpack;
 
-	shellpack = malloc(sizeof(struct Hshpack));
+	shellpack = malloc(sizeof(struct bash));
 	if (shellpack == 0)
-		return (write(2, "Memory Error", 22), NULL);
+		return (write(STDERR_FILENO, "Memory Error", 22), NULL);
 	shellpack->hshname = argv0;
 	shellpack->buffer = NULL;
 	shellpack->cmd = NULL;
@@ -101,7 +101,7 @@ hshpack *set_struct(char *argv0, int *errn, int *exnum,
  *
  * Return: No return
  */
-void addCmd(hshpack *shpack, char *buffer, char *command, char **parameters)
+void addCmd(bash *shpack, char *buffer, char *command, char **parameters)
 {
 	shpack->buffer = buffer;
 	shpack->cmd = command;
@@ -115,7 +115,7 @@ void addCmd(hshpack *shpack, char *buffer, char *command, char **parameters)
  *
  * Return: No Return
  */
-void addPathToCmd(hshpack *shpack, char *pathCmd)
+void addPathToCmd(bash *shpack, char *pathCmd)
 {
 	shpack->path = pathCmd;
 }

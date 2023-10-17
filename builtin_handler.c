@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * _exit_cmd - built in command exit
@@ -11,7 +11,7 @@
  *
  * Return: -1 if error
  */
-ssize_t _exit_cmd(hshpack *shpack)
+ssize_t _exit_cmd(bash *shpack)
 {
 	long valueToExit;
 
@@ -44,7 +44,7 @@ ssize_t _exit_cmd(hshpack *shpack)
  *
  * Return: 1 if succesful
  */
-ssize_t _env_cmd(hshpack *shpack)
+ssize_t _env_cmd(bash *shpack)
 {
 	char **str;
 	int check = 1;
@@ -82,7 +82,7 @@ ssize_t _env_cmd(hshpack *shpack)
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _setenv_cmd(hshpack *shpack)
+ssize_t _setenv_cmd(bash *shpack)
 {
 	char **newenv;
 	char *variable = NULL;
@@ -128,7 +128,7 @@ ssize_t _setenv_cmd(hshpack *shpack)
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _unsetenv_cmd(hshpack *shpack)
+ssize_t _unsetenv_cmd(bash *shpack)
 {
 	char **newenv;
 	char *variable = NULL;
@@ -168,7 +168,7 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
  *
  * Return: On fail 0
  */
-ssize_t built_ints(hshpack *shpack)
+ssize_t built_ints(bash *shpack)
 {
 	b_ins ops[] = {
 		{"exit", _exit_cmd},

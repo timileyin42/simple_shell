@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * printsHelp - prints help of help built in

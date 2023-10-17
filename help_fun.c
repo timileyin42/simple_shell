@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * _puts - prints string to std output
@@ -10,7 +10,7 @@
  */
 void _puts(char *s)
 {
-	write(1, s, _strlen(s));
+	write(STDOUT_FILENO, s, _strlen(s));
 }
 /**
  * help_exit - prints help of exit built in
@@ -58,7 +58,7 @@ void help_setenv(void)
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _help_cmd(hshpack *shpack)
+ssize_t _help_cmd(bash *shpack)
 {
 	int check = 1, bcheck = 0;
 	helps help[] = {
@@ -71,14 +71,14 @@ ssize_t _help_cmd(hshpack *shpack)
 		{"alias", help_alias}
 	};
 
-	int i = 7;
+	int x = 7;
 	int p = 1;
 
-	for (; shpack->options[p]; p++, i = 7)
+	for (; shpack->options[p]; p++, x = 7)
 	{
-		while (i--)
-			if (!_strcmp(shpack->options[p], help[i].built))
-				help[i].h(), bcheck = 1;
+		while (x--)
+			if (!_strcmp(shpack->options[p], help[x].built))
+				help[x].h(), bcheck = 1;
 	}
 	if (shpack->options[1] == NULL)
 	{

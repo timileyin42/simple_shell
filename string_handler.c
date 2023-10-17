@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * str_concat - concatenates two strings
@@ -10,7 +10,7 @@
  */
 char *str_concat(char *s1, char *s2)
 {
-	int l1, l2, i, j;
+	int l1, l2, x, y;
 	char *s;
 	char *nul = "";
 
@@ -30,11 +30,11 @@ char *str_concat(char *s1, char *s2)
 	if (s == 0)
 		return (0);
 
-	for (i = 0; i < l1; i++)
-		*(s + i) = *(s1 + i);
+	for (x = 0; x < l1; x++)
+		*(s + x) = *(s1 + x);
 
-	for (i = 0, j = l1; i <= l2; j++, i++)
-		*(s + j) = *(s2 + i);
+	for (x = 0, y = l1; x <= l2; y++, x++)
+		*(s + y) = *(s2 + x);
 
 	return (s);
 }

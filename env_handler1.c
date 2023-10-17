@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * free_doubpoint - frees a double pointer array of strings
@@ -12,14 +12,14 @@
  */
 void free_doubpoint(char **p)
 {
-	int i, l = 0;
+	int x, y = 0;
 
-	while (p[l] != 0)
-		l++;
+	while (p[y] != 0)
+		y++;
 
-	for (i = 0; i < l; i++)
+	for (x = 0; x < y; x++)
 	{
-		free(p[i]);
+		free(p[x]);
 	}
 	free(p);
 }
@@ -35,7 +35,7 @@ void free_doubpoint(char **p)
 char **_copydoublep(char **p, int old_size, int new_size)
 {
 	char **copy;
-	int i, csize;
+	int x, csize;
 
 	if (!p && (old_size == new_size))
 		return (NULL);
@@ -54,14 +54,14 @@ char **_copydoublep(char **p, int old_size, int new_size)
 		return (0);
 
 	if (p)
-		for (i = 0; i < csize; i++)
+		for (x = 0; x < csize; x++)
 		{
-			copy[i] = _strdup(p[i]);
-			if (copy[i] == 0)
+			copy[x] = _strdup(p[x]);
+			if (copy[x] == 0)
 			{
-				i--;
-				for (; i >= 0; i--)
-					free(copy[i]);
+				x--;
+				for (; x >= 0; x--)
+					free(copy[x]);
 				free(copy);
 				return (0);
 			}
@@ -81,14 +81,14 @@ char **_copydoublep(char **p, int old_size, int new_size)
  */
 int _strlendp(char **s)
 {
-	int i = 0;
+	int x = 0;
 
 	if (!s)
 		return (0);
 
-	while (s[i] != NULL)
-		i++;
-	return (i);
+	while (s[x] != NULL)
+		x++;
+	return (x);
 }
 /**
  * _setenv - overwrite an env variable or creates it
@@ -100,7 +100,7 @@ int _strlendp(char **s)
  *
  * Return: 0 on success, -1 on error
  */
-char **_setenv(char **env, char *variable, char *value, hshpack *shpack)
+char **_setenv(char **env, char *variable, char *value, bash *shpack)
 {
 	int i, j, check, l = 0, lenv = 0;
 	char *envjoin, *envjoin2, *copydup, **copy;

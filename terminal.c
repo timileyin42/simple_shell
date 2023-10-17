@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * checkInput - checks for input in after shell prompt
@@ -19,7 +19,7 @@
  * On error, -1 is returned, and errno is set appropriately.
  */
 char **checkInput(int ac, char **av, size_t *bufsize,
-		   char **buffer, hshpack *shpack)
+		   char **buffer, bash *shpack)
 {
 	ssize_t characters;
 	char **command;
@@ -28,7 +28,7 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 	if (ac == 1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(1, "$ ", 2);
+			write(STDOUT_FILENO, "$ ", 2);
 		characters = getline(buffer, bufsize, stdin);
 
 		if (characters == -1)
@@ -39,7 +39,7 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 				free_doubpoint(*(shpack->envCpy));
 			free(shpack);
 			if (isatty(STDIN_FILENO))
-				write(1, "\n", 1);
+				write(STDOUT_FILENO, "\n", 1);
 			exit(exitnum);
 		}
 		if (**buffer == '#' || !characters || **buffer == '\n')

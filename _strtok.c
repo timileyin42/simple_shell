@@ -5,10 +5,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "shell.h"
+#include "main.h"
 
 /**
- * _strtok - tokenizes a string based on a delimiter
+ * _strtok - Function that stokenizes a string based on a delimiter
  *
  * @str: string to operate
  * @delim: delimiter

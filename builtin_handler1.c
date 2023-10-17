@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * auxcd2 - auxiliary function of cd built in
@@ -12,7 +12,7 @@
  *
  * Return: pointer to HOME or NULL if fail
  */
-char *auxcd2(hshpack *shpack, char __attribute__((unused)) *currdir)
+char *auxcd2(bash *shpack, char __attribute__((unused)) *currdir)
 {
 	char *home, *dir = NULL;
 
@@ -30,7 +30,7 @@ char *auxcd2(hshpack *shpack, char __attribute__((unused)) *currdir)
  *
  * Return: Pointer to dir or NULL if fail
  */
-char *auxcd(hshpack *shpack, char *currdir)
+char *auxcd(bash *shpack, char *currdir)
 {
 	char *oldpwd2 = NULL, *oldpwd = NULL, *dir = NULL;
 
@@ -64,7 +64,7 @@ char *auxcd(hshpack *shpack, char *currdir)
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _cd_cmd(hshpack *shpack)
+ssize_t _cd_cmd(bash *shpack)
 {
 	char *currdir = NULL, *dir = NULL, **newenv, *oldpwd = NULL;
 	int exit = 1, check = 1, checkminus = 0;

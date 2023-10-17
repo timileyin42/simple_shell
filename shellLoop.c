@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "shell.h"
+#include "main.h"
 /**
  * getParameters - obtains parameters from buffer of prompt
  * @raw_buffer: raw_buffer
@@ -14,13 +14,13 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-char **getParameters(char *raw_buffer, hshpack *shpack)
+char **getParameters(char *raw_buffer, bash *shpack)
 {
 	char **buffer, *cp_raw_buffer;
-	ssize_t cnt = 0, i = 0;
+	ssize_t cnt = 0, x = 0;
 
 	cp_raw_buffer = _strdup(raw_buffer);
-	if (!cp_raw_buffer)
+	if (cp_raw_buffer == NULL)
 	{
 		_error(7, shpack, 1);
 		exit(-1);
@@ -38,21 +38,21 @@ char **getParameters(char *raw_buffer, hshpack *shpack)
 
 	free(cp_raw_buffer);
 	buffer = malloc(sizeof(char *) * (cnt + 1));
-	if (!buffer)
+	if (buffer == NULL)
 	{
 		_error(7, shpack, 1);
 		exit(-1);
 	}
 	buffer[0] = _strtok(raw_buffer, " \n");
-	for (i = 1; i < cnt && buffer[i - 1]; i++)
-		buffer[i] = _strtok(NULL, " \n");
+	for (x = 1; x < cnt && buffer[x - 1]; x++)
+		buffer[x] = _strtok(NULL, " \n");
 
-	if (!buffer[i - 1])
+	if (!buffer[x - 1])
 	{
 		free_doubpoint(buffer);
 		return (NULL);
 	}
 
-	buffer[i] = NULL;
+	buffer[x] = NULL;
 	return (buffer);
 }

@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * _getenv - gets an environment variable
@@ -13,21 +13,21 @@
  */
 char *_getenv(const char *name, char **env)
 {
-	int i, j, check, l = 0;
+	int x, y, check, z = 0;
 
-	if (!env)
+	if (env == NULL)
 		return (NULL);
 
-	while (name[l] != 0)
-		l++;
+	while (name[z] != 0)
+		z++;
 
-	for (i = 0; env[i] != 0; i++)
+	for (x = 0; env[x] != 0; x++)
 	{
-		for (check = 0, j = 0; j < l && env[i][j] != 0; j++)
-			if (env[i][j] == name[j])
+		for (check = 0, y = 0; y < z && env[x][y] != 0; y++)
+			if (env[x][y] == name[y])
 				check++;
-		if (check == l && env[i][check] == '=')
-			return (env[i]);
+		if (check == z && env[x][check] == '=')
+			return (env[x]);
 	}
 
 	return (NULL);

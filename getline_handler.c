@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "main.h"
 
 #define BSIZE 4
+
 /**
  * _memset - fills memory with constant byte
  * @s: memory area

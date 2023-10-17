@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * _strcpy - copy a source input ont destinated input

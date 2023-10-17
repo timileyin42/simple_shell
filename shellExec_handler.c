@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * executeCmd - creates a child process to execute a cmd
@@ -20,7 +20,7 @@
  * or NULL if there is no match
  *
  */
-int executeCmd(char *program, char *command[], char **env, hshpack *shpack)
+int executeCmd(char *program, char *command[], char **env, bash *shpack)
 {
 	pid_t process, status;
 	int execveSts = 0, waitSts = 0;

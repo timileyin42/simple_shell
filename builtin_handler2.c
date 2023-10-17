@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * _pow - gets the result of base to ower

@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,16 +17,16 @@
 char *_pathcheck(char *path)
 {
 	char *npath;
-	int i, j, nsize, count = 0;
+	int x, y, nsize, count = 0;
 
-	for (i = 0; path[i]; i++)
+	for (x = 0; path[x]; x++)
 	{
 
-		if (path[i] == '=' && path[i + 1] == ':')
+		if (path[x] == '=' && path[x + 1] == ':')
 			count++;
-		if (path[i] == ':' && path[i + 1] == ':')
+		if (path[x] == ':' && path[x + 1] == ':')
 			count++;
-		if (path[i] == ':' && path[i + 1] == '\0')
+		if (path[x] == ':' && path[x + 1] == '\0')
 			count++;
 	}
 	if (count == 0)
@@ -34,24 +34,24 @@ char *_pathcheck(char *path)
 	nsize = _strlen(path) + 1 + count;
 	npath = malloc(sizeof(char) * nsize);
 
-	for (i = 0, j = 0; i < nsize; i++, j++)
+	for (x = 0, y = 0; x < nsize; x++, y++)
 	{
-		if (path[j] == '=' && path[j + 1] == ':')
+		if (path[y] == '=' && path[y + 1] == ':')
 		{
-			npath[i] = path[j], npath[i + 1] = '.', i++;
+			npath[x] = path[y], npath[x + 1] = '.', x++;
 			continue;
 		}
-		if (path[j] == ':' && path[j + 1] == ':')
+		if (path[y] == ':' && path[y + 1] == ':')
 		{
-			npath[i] = path[j], npath[i + 1] = '.', i++;
+			npath[x] = path[y], npath[x + 1] = '.', x++;
 			continue;
 		}
-		if (path[j] == ':' && path[j + 1] == '\0')
+		if (path[y] == ':' && path[y + 1] == '\0')
 		{
-			npath[i] = path[j], npath[i + 1] = '.', i++;
+			npath[x] = path[y], npath[x + 1] = '.', x++;
 			continue;
 		}
-		npath[i] = path[j];
+		npath[x] = path[y];
 	}
 	free(path);
 	return (npath);
@@ -66,7 +66,7 @@ char *_pathcheck(char *path)
  *
  */
 
-char *_path(char *cmd, char **env, hshpack *shpack)
+char *_path(char *cmd, char **env, bash *shpack)
 {
 	char *path, *path2;
 	struct stat st;
