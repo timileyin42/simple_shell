@@ -1,3 +1,7 @@
+#include "holberton.h"
+#include <stdio.h>
+#define MAX 500
+
 /**
  * getdir - Entry point
  *
@@ -19,7 +23,7 @@ char **getdir(void)
 		return (dir);
 	dir = _calloc((sp + 1), sizeof(void *));
 	dir[sp] = NULL;
-	for (; x < sp; x++)
+	for (z = 0; x < sp; x++)
 	{
 		if (path[0] == ':' && flag)
 		{
@@ -59,7 +63,7 @@ int current_dir(char **arg)
 	int pos = 0, x = 0, fd = 0;
 
 	py = currentpath();
-	pos = aux_strlen(py);
+	pos = _strlen2(py);
 	for (; arg[0][x]; x++)
 		py[pos + x] = arg[0][x];
 	fd = open(py, O_RDONLY);
@@ -137,7 +141,7 @@ int  clfun(char **arg)
 	dir = getdir();
 	if (dir == NULL)
 		return (-1);
-	la = aux_strlen(com);
+	la = _strlen2(com);
 	la++;
 	while (dir[x])
 	{

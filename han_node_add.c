@@ -14,8 +14,8 @@ bash_shell *add_node(bash_shell **head, char **args, int id,
 		    int cont, char *name)
 {
 	int flag = 1;
-	command_t *p = *head;
-	command_t *new = malloc(sizeof(bash_shell));
+	bash_shell *p = *head;
+	bash_shell *new = malloc(sizeof(bash_shell));
 
 	do {
 		if (!p || !(p->next))

@@ -15,7 +15,7 @@
  *
  * Return: direction of the new node
  */
-void imprimir_error_env(command_t *h)
+void imprimir_error_env(bash_shell *h)
 {
 	int x = 0;
 	char *sp = ": ";
@@ -29,47 +29,13 @@ void imprimir_error_env(command_t *h)
 	filename = h->args[1];
 	x = _strlen(com);
 	write(STDOUT_FILENO, com, x);
-	write(1STDOUT_FILENO, sp, 2);
+	write(STDOUT_FILENO, sp, 2);
 	x = _strlen(filename);
 	write(STDOUT_FILENO, filename, x);
 	x = _strlen(msg);
 	write(STDOUT_FILENO, msg, x);
 	write(STDOUT_FILENO, &sl, 1);
 	setstatus(&a);
-}
-
-/**
- * _atoi - Functon that helps convert a string t integer.
- * @c: A pointer to the buffer holding the string to convert
- * Return: integer.
- */
-
-int _atoi(char *c)
-{
-	unsigned int length = 0, value = 0, dec = 0, x = 1, y = 1, z;
-
-	while (*(c + length) != '\0')
-	{
-		if (value > 0 && (*(c + length) < '0' || *(c + value) > '9'))
-			break;
-		if (*(c + length) == '-')
-			x = x * -1;
-		if ((*(c + length) >= '0') && (*(c + length) <= '9'))
-		{
-			if (value > 0)
-				y = y * 10;
-			value++;
-		}
-		length++;
-	}
-	z = length - value;
-	while (z < length)
-	{
-		dec += ((*(c + z) - 48) * y);
-		y = y / 10;
-		z++;
-	}
-	return (dec * x);
 }
 
 /**
@@ -84,19 +50,14 @@ int search_file_env(bash_shell *h)
 	char **filename = NULL;
 	int n = 0;
 	struct stat buf;
+	char str[50];
 
 	filename = h->args;
 	n = stat(filename[1], &buf);
-	char *n_str = itoai(n);
-	int n_str_len = _strlen(n_str);
-
-	write(STDOUT_FILENO, n_str, n_strlen);
-
+	sprintf(str,"%d", n);
+	write(STDOUT_FILENO, str, _strlen(str));
 	if (n == -1)
-	{
 		imprimir_error_env(h);
-	}
-	free(n_str);
 	return (0);
 }
 

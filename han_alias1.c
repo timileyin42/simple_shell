@@ -55,7 +55,7 @@ char **token_alias(char *alias)
 	{
 		return (NULL);
 	}
-	l = _strlen(alias);
+	y = _strlen(alias);
 	lv = y - 2 - pos;
 	tokens[0] =  _calloc(pos + 1, sizeof(char));
 	tokens[1] = _calloc(lv + 1, sizeof(char));

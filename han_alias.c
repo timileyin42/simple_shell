@@ -16,7 +16,7 @@ alias *add_alias(alias **head, char *name, char *value)
 	alias *new = malloc(sizeof(alias));
 	alias *cpy = NULL;
 
-	cpy = *buscar_alias(p, name);
+	cpy = buscar_alias(p, name);
 	if (cpy)
 	{
 		free(cpy->value);

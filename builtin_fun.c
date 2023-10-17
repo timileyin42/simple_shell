@@ -27,25 +27,25 @@ int _help(bash_shell *h)
 	int *posi = &x;
 	char *pathandfile = NULL, *buffer = NULL, *filejusthelp = "justhelp.txt";
 
-	argseach = h->args;
+	argsearch = h->args;
 	pathandfile = _calloc(500, 1);
 	buffer = getpath();
 	for (; buffer[l]; l++)
 		pathandfile[l] = buffer[l];
-	if (argseach[1] == NULL)
+	if (argsearch[1] == NULL)
 	{
 		justhelp(pathandfile, l, filejusthelp);
 		return (0); }
-	if (argseach[1][0] == 0)
+	if (argsearch[1][0] == 0)
 		return (0);
 	while (args[x] != NULL)
 	{
 		entero = 0;
 		for (; args[x][y] != '\0'; y++)
 		{
-			if (argseach[1][y] - args[x][y] != 0)
+			if (argsearch[1][y] - args[x][y] != 0)
 			{
-				entero = argsearch[1][y] - args[x[y];
+				entero = argsearch[1][y] - args[x][y];
 				break; }}
 		if (entero == 0)
 			printhelp_text(filenames, posi, pathandfile);

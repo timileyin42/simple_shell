@@ -43,9 +43,9 @@ error99:
 	y = close(t);
 	if (x == -1 || y == -1)
 	{
-		if (a == -1)
+		if (x == -1)
 			dprintf(2, "Error: Can't close fd %d\n", f);
-		if (b == -1)
+		if (y == -1)
 			dprintf(2, "Error: Can't close fd %d\n", t);
 		exit(100);
 	}
