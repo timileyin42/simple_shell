@@ -19,7 +19,7 @@ int main(int ac, char **av, char **env)
 		write(2, "Please run with no arguments\n", 29), exit(127);
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
-	env = _copydoublep(env, sizeEnv, sizeEnv);
+	env = array_cpy(env, sizeEnv, sizeEnv);
 	shpack = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
 	while (1)
 	{

@@ -104,7 +104,7 @@ ssize_t _exit_cmd(bash *shpack);
 int _strcmp(char *s1, char *s2);
 long _atoi(char *s);
 long _pow(long base, long pot);
-char **_copydoublep(char **p, int old_size, int new_size);
+char **array_cpy(char **p, int old_size, int new_size);
 int _strlendp(char **s);
 char **_setenv(char **env, char *variable, char *value, bash *shpack);
 char **_unsetenv(char **env, char *variable, bash *shpack);

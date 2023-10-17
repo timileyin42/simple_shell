@@ -22,7 +22,7 @@ void free_doubpoint(char **p)
 	free(p);
 }
 /**
- * _copydoublep - copies an array of strings (double pointer)
+ * array_cpy - copies an array of strings (double pointer)
  *
  * @p: double pointer to copy
  * @old_size: original size of P
@@ -30,7 +30,7 @@ void free_doubpoint(char **p)
  *
  * Return: Pointer malloec
  */
-char **_copydoublep(char **p, int old_size, int new_size)
+char **array_cpy(char **p, int old_size, int new_size)
 {
 	char **copy;
 	int x, csize;
@@ -129,7 +129,7 @@ char **_setenv(char **env, char *variable, char *value, bash *shpack)
 			return (env[i] = copydup, env);
 		}
 	}
-	copy = _copydoublep(env, lenv, lenv + 1);
+	copy = array_cpy(env, lenv, lenv + 1);
 	if (env)
 		free_doubpoint(env);
 	if (copy == 0)
