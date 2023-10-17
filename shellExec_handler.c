@@ -1,15 +1,7 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <signal.h>
 #include "main.h"
 
 /**
- * executeCmd - creates a child process to execute a cmd
+ * executeCmd - Function that creates a child process to execute a cmd
  *
  * @program: command that will be executed
  * @command: arguments of command
@@ -29,7 +21,7 @@ int executeCmd(char *program, char *command[], char **env, bash *shpack)
 	signal(SIGINT, signal_handler2);
 	if (process == -1)
 	{
-		write(2, "Fork Error", 10);
+		write(STDERR_FILENO, "Fork Error", 10);
 		exit(-1);
 	}
 	if (process == 0)

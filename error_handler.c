@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
  * rev_str - Reverses a string
@@ -80,7 +77,7 @@ char *_error2(int errn, char *conc2, char *option);
  *
  * Return: 0 success, -1 fail
  */
-int _error(int errn, hshpack *shpack, int exnum)
+int _error(int errn, bash *shpack, int exnum)
 {
 	/**
 	 * 0 - file or cmd not found , 1 - permission denied, 2 - illegal exit number
@@ -100,7 +97,7 @@ int _error(int errn, hshpack *shpack, int exnum)
 	};
 
 	conc1 = str_concat(shelln, colspace);
-	if (!conc1) /*hsh: */
+	if (conc1 == NULL) /*hsh: */
 		return (write(STDERR_FILENO, "Memory Error", 22), -1);
 
 	if (errn == 7) /* Alloc Error */

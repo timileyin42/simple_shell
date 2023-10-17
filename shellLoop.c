@@ -1,13 +1,7 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h>
 #include "main.h"
+
 /**
- * getParameters - obtains parameters from buffer of prompt
+ * getParameters - Function that helps obtains parameters from buffer of prompt
  * @raw_buffer: raw_buffer
  * @shpack: struct containing shell info
  *

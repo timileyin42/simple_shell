@@ -1,14 +1,12 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include "main.h"
 
 /**
- * _puts - prints string to std output
+ * write_buf - prints string to std output
  * @s: string (must be NULL terminated)
  *
  * Return: No Return
  */
-void _puts(char *s)
+void write_buf(char *s)
 {
 	write(STDOUT_FILENO, s, _strlen(s));
 }
@@ -19,11 +17,11 @@ void _puts(char *s)
  */
 void help_exit(void)
 {
-	_puts("exit: exit [n]\n");
-	_puts("    Exit the shell.\n\n");
-	_puts("    Exits the shell with a status of N.  ");
-	_puts("    If N is omitted, the exit status\n");
-	_puts("    is that of the last command executed.\n");
+	write_buf("exit: exit [n]\n");
+	write_buf("    Exit the shell.\n\n");
+	write_buf("    Exits the shell with a status of N.  ");
+	write_buf("    If N is omitted, the exit status\n");
+	write_buf("    is that of the last command executed.\n");
 }
 /**
  * help_env - prints help of env built in
@@ -32,9 +30,9 @@ void help_exit(void)
  */
 void help_env(void)
 {
-	_puts("env: env\n");
-	_puts("    prints the current environment.\n\n");
-	_puts("    Has no options\n");
+	write_buf("env: env\n");
+	write_buf("    prints the current environment.\n\n");
+	write_buf("    Has no options\n");
 }
 /**
  * help_setenv - prints help of setenv built in
@@ -43,12 +41,12 @@ void help_env(void)
  */
 void help_setenv(void)
 {
-	_puts("setenv: setenv [VARIABLE] [VALUE]\n");
-	_puts("    Initializes a new environment variable, ");
-	_puts("    or modifies an existing one.\n\n");
-	_puts("    VARIABLE must not have the character '='.\n");
-	_puts("    If no arguments are given, setenv prints ");
-	_puts("    the current environment.\n");
+	write_buf("setenv: setenv [VARIABLE] [VALUE]\n");
+	write_buf("    Initializes a new environment variable, ");
+	write_buf("    or modifies an existing one.\n\n");
+	write_buf("    VARIABLE must not have the character '='.\n");
+	write_buf("    If no arguments are given, setenv prints ");
+	write_buf("    the current environment.\n");
 }
 
 

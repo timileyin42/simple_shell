@@ -1,16 +1,14 @@
-#include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
- * signal_handler - handles ctrl + c in runtime
+ * signal_handler - Function that handles ctrl + c in runtime
  * @x: unused value, just for betty
  *
  * Return: No return
  */
-void signal_handler(int x)
+void signal_handler(int __attribute__((unused)) x)
 {
-	(void) x;
-	write(1, "\n$ ", 3);
+	write(STDOUT_FILENO, "\n$ ", 3);
 }
 /**
  * signal_handler2 - handles ctrl + c during cmd exec
@@ -18,8 +16,7 @@ void signal_handler(int x)
  *
  * Return: No return
  */
-void signal_handler2(int x)
+void signal_handler2(int __attribute__((unused)) x)
 {
-	(void) x;
-	write(1, "\n", 1);
+	write(STDOUT_FILENO, "\n", 1);
 }

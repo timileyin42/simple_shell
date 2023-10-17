@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "shell.h"
+#include "main.h"
 
 /**
- * _copydoublepDel - copies an array of strings (double pointer)
+ * _copydoublepDel - Function copies an array of strings (double pointer)
  *
  * @p: double pointer to copy
  * @new_size: size of copy
@@ -51,7 +48,7 @@ char **_copydoublepDel(char **p, int new_size, int jump)
  *
  * Return: 0 on success, -1 on error
  */
-char **_unsetenv(char **env, char *variable, hshpack *shpack)
+char **_unsetenv(char **env, char *variable, bash *shpack)
 {
 	int i, j, check, l = 0, lenv = 0, found = 0;
 	char **copy;

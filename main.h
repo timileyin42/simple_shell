@@ -2,6 +2,15 @@
 #define MAIN_H
 
 #include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <signal.h>
+#include <limits.h>
+#include <stddef.h>
+#include <sys/wait.h>
 
 /**
  * struct Hshpack - struct containing important shell info
@@ -106,7 +115,7 @@ char *deleteComment(char *str);
 
 
 ssize_t _help_cmd(bash *shpack);
-void _puts(char *s);
+void write_buf(char *s);
 void help_unsetenv(void);
 void help_cd(void);
 void help_help(void);

@@ -1,10 +1,4 @@
 #include "main.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 /**
  * _pathcheck - check if current dir must be added
