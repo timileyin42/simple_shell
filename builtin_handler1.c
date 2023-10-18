@@ -9,13 +9,13 @@
  */
 char *auxcd2(bash *bash_s, char __attribute__((unused)) *currdir)
 {
-	char *home, *dir = NULL;
+	char *home, *direct = NULL;
 
 	home = _getenv("HOME", *(bash_s->envCpy));
 	if (home)
-		dir = home + 5;
+		direct = home + 5;
 
-	return (dir);
+	return (direct);
 }
 
 /**
@@ -27,7 +27,7 @@ char *auxcd2(bash *bash_s, char __attribute__((unused)) *currdir)
  */
 char *auxcd(bash *bash_s, char *currdir)
 {
-	char *oldpwd2 = NULL, *oldpwd = NULL, *dir = NULL;
+	char *oldpwd2 = NULL, *oldpwd = NULL, *direct = NULL;
 
 	if (bash_s->options[1] && bash_s->options[2])
 	{
@@ -35,7 +35,7 @@ char *auxcd(bash *bash_s, char *currdir)
 		bash_s->exitnum[0] = 2;
 		free(bash_s->options);
 		free(currdir);
-		return (dir);
+		return (direct);
 	}
 
 	oldpwd2 = _strdup(_getenv("OLDPWD", *(bash_s->envCpy)));
@@ -48,9 +48,9 @@ char *auxcd(bash *bash_s, char *currdir)
 		/* return (bash_s->exitnum[0] = 2, NULL); */
 	}
 
-	dir = oldpwd;
+	direct = oldpwd;
 
-	return (dir);
+	return (direct);
 }
 
 /**
@@ -65,7 +65,7 @@ ssize_t _cd_cmd(bash *bash_s)
 	int exit = 1, check = 1, checkminus = 0;
 
 	currdir = getcwd(NULL, 4096);
-	if (!currdir)
+	if (currdir == NULL)
 		return (_error(4, bash_s, 2), free(bash_s->options), -1);
 	if (!bash_s->options[1] ||
 			(bash_s->options[1] && (!_strcmp(bash_s->options[1], "~"))))

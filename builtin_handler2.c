@@ -40,7 +40,7 @@ long _atoi(char *s)
 	long minus = 0;
 	long offset = 48;
 
-	if (!s)
+	if (s == NULL)
 		return (0);
 
 	for (x = 0; *(s + x) != '\0'; x++)
