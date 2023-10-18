@@ -56,6 +56,7 @@ void help_setenv(void)
  *
  * Return: 1 if succesful, -1 if fail
  */
+
 ssize_t help_cmd(bash *bash_s)
 {
 	int check = 1, bcheck = 0;
@@ -66,7 +67,7 @@ ssize_t help_cmd(bash *bash_s)
 		{"unsetenv", help_unsetenv},
 		{"cd", help_cd},
 		{"help", help_help},
-		{"alias", help_alias}
+		{NULL, NULL},
 	};
 
 	int x = 7;
