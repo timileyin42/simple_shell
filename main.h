@@ -103,7 +103,7 @@ bash *loop_struct(char *argv0, int *errn, int *exnum, int *relation,
 		    int *run_able, char ***env, int *unsetnull);
 int error_fun(int errn, bash *bash_s, int exnum);
 char *error_add(int errn, char *conc2, char *option);
-void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters);
+void write_cmd(bash *bash_s, char *buffer, char *command, char **arg);
 void shellPath_cmd(bash *bash_s, char *pathCmd);
 ssize_t built_ints(bash *bash_s);
 ssize_t shell_exit(bash *bash_s);

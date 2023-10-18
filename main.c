@@ -90,15 +90,15 @@ bash *loop_struct(char *argv0, int *errn, int *exnum,
  * @bash_s: shell struct
  * @buffer: string written after prompt
  * @command: command written after prompt
- * @parameters: parameters of command
+ * @arg: parameters of command
  *
  * Return: No return
  */
-void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters)
+void write_cmd(bash *bash_s, char *buffer, char *command, char **arg)
 {
 	bash_s->buffer = buffer;
 	bash_s->cmd = command;
-	bash_s->options = parameters;
+	bash_s->options = arg;
 }
 
 /**
