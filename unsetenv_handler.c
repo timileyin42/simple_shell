@@ -79,7 +79,7 @@ char **unsetenv_fun(char **env, char *variable, bash *bash_s)
 			}
 			else
 				bash_s->unsetnull[0] = 1, copy = NULL;
-			free_doubpoint(env), env = copy;
+			free_pointer(env), env = copy;
 			return (env);
 		}
 	}

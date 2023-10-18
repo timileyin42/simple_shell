@@ -43,7 +43,7 @@ char **parameter_fun(char *raw_buffer, bash *bash_s)
 
 	if (!buffer[x - 1])
 	{
-		free_doubpoint(buffer);
+		free_pointer(buffer);
 		return (NULL);
 	}
 

@@ -90,11 +90,11 @@ char **parameter_fun(char *buffer, bash *bash_s);
 int exec_cmd(char *program, char *command[], char **env, bash *bash_s);
 void signal_handler(int __attribute__((unused)) x);
 void signal_handler2(int __attribute__((unused)) x);
-char *_memset(char *s, char b, unsigned int n);
-char *_memcpy(char *dest, char *src, unsigned int n);
+char *_memset(char *s, char c, unsigned int d);
+char *_memcpy(char *dest, char *src, unsigned int d);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int _getline(char **buffer, size_t *bufsize, int fd);
-void free_doubpoint(char **p);
+int _getline(char **buffer, size_t *bufsize, int file_d);
+void free_pointer(char **ptr);
 char **array_cpy(char **p, int old_size, int new_size);
 int _strlendp(char **s);
 char **shell_cmd(int ac, char **av, size_t *bufsize,

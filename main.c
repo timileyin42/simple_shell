@@ -47,7 +47,7 @@ int main(int ac, char **av, char **env)
 		free(pathCmd);
 
 	}
-	free_doubpoint(*(bash_s->envCpy)), free(bash_s);
+	free_pointer(*(bash_s->envCpy)), free(bash_s);
 	return (0);
 }
 /**

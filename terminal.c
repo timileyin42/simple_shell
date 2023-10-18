@@ -29,7 +29,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 			exitnum = bash_s->exitnum[0];
 			free(*buffer);
 			if (*(bash_s->envCpy))
-				free_doubpoint(*(bash_s->envCpy));
+				free_pointer(*(bash_s->envCpy));
 			free(bash_s);
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);

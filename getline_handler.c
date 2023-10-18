@@ -5,33 +5,36 @@
 /**
  * _memset - fills memory with constant byte
  * @s: memory area
- * @b: constant byte b
- * @n: first n bytes of memory area pointed by s
+ * @c: constant byte b
+ * @d: first n bytes of memory area pointed by s
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-char *_memset(char *s, char b, unsigned int n)
+char *_memset(char *s, char c, unsigned int d)
 {
 	unsigned int x;
 
-	for (x = 0; x < n; x++)
-		s[x] = b;
+	while (x < d)
+	{
+		s[x] = c;
+		x++;
+	}
 	return (s);
 }
 /**
  * _memcpy - Function that helps copies memory
  * @dest: destination
  * @src: source
- * @n: size of memory to copy
+ * @d: size of memory to copy
  *
  * Return: Returns memory copied
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+char *_memcpy(char *dest, char *src, unsigned int d)
 {
 	unsigned int x = 0;
 
-	while (x < n)
+	while (x < d)
 	{
 		dest[x] = src[x];
 		x++;
@@ -85,46 +88,46 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
  * @buffer: pointer to a space where the stdin read will be saved
  * as a string
  * @bufsize: current size of buffer (must be given as 0 initially)
- * @fd: stream to read
+ * @file_d: stream to read
  *
  * Return: Number of Characters Read
  */
-int _getline(char **buffer, size_t *bufsize, int fd)
+int _getline(char **buffer, size_t *bufsize, int file_d)
 {
-	static char *buff;
+	static char *buf;
 	static size_t size;
-	unsigned int len = 0, x = 0, sizeold;
+	unsigned int len = 0, x = 0, size_of;
 	int y;
 
 	if (*bufsize == 0)
 		size = BSIZE;
 	if (*buffer == 0)
 	{
-		buff = malloc(sizeof(char) * size);
-		if (buff == NULL)
+		buf = malloc(sizeof(char) * size);
+		if (buf == NULL)
 			return (write(STDERR_FILENO, "Memory Error", 22), 0);
-		*buffer = buff;
+		*buffer = buf;
 	}
-	buff = _memset(buff, '\0', size);
+	buf = _memset(buf, '\0', size);
 	do {
 
-		y = read(fd, buff + len, BSIZE);
+		y = read(file_d, buf + len, BSIZE);
 		if (y >= 0)
 			x = len, len = len + y;
 		if (y == -1 || y == 0)
 			return (-1);
 		if  (len >= size)
 		{
-			sizeold = size, size = size + BSIZE;
-			buff = _realloc(buff, sizeold, size);
-			if (buff == NULL)
+			size_of = size, size = size + BSIZE;
+			buf = _realloc(buf, size_of, size);
+			if (buf == NULL)
 				return (write(2, "Memory Error", 22), 0);
 		}
-		for (; x < len; x++)
+		for (x = 0; x < len; x++)
 		{
-			if (buff[x] == '\n')
+			if (buf[x] == '\n')
 			{
-				*buffer = buff, *bufsize = size;
+				*buffer = buf, *bufsize = size;
 				return (len);
 			}
 		}

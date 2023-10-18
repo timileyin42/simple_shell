@@ -23,7 +23,7 @@ ssize_t shell_exit(bash *bash_s)
 			free(*(bash_s->options));
 			free(bash_s->options);
 			if (*(bash_s->envCpy))
-				free_doubpoint(*(bash_s->envCpy));
+				free_pointer(*(bash_s->envCpy));
 			free(bash_s);
 			exit(valueToExit);
 		}

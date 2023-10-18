@@ -1,28 +1,29 @@
 #include "main.h"
 
 /**
- * free_doubpoint - frees a double pointer array of strings
+ * free_pointer - Function frees a double pointer array of strings
  * (must end in NULL)
  *
- * @p: double pointer to free
+ * @ptr: double pointer to free the buffer
  *
  * Return: no return
  */
-void free_doubpoint(char **p)
+void free_pointer(char **ptr)
 {
 	int x, y = 0;
 
-	while (p[y] != 0)
+	while (ptr[y] != 0)
 		y++;
 
 	for (; x < y; x++)
 	{
-		free(p[x]);
+		free(ptr[x]);
 	}
-	free(p);
+	free(ptr);
 }
+
 /**
- * array_cpy - copies an array of strings (double pointer)
+ * array_cpy - Function copies an array of strings (double pointer)
  *
  * @p: double pointer to copy
  * @old_size: original size of P
@@ -111,7 +112,7 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	if (is_env == 0)
 		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
-	for (x = 0; env && env[x] != 0; x++)
+	for (; env && env[x] != 0; x++)
 	{
 		for (check = 0, y = 0; y < z && env[x][y] != 0; y++)
 		{
@@ -130,7 +131,7 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	}
 	copy = array_cpy(env, lenv, lenv + 1);
 	if (env)
-		free_doubpoint(env);
+		free_pointer(env);
 	if (copy == 0)
 		return (free(is_env), error_fun(3, bash_s, 1), NULL);
 	env = copy, copydup = _strdup(is_env), free(is_env);
