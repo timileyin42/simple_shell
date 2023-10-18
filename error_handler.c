@@ -8,18 +8,18 @@
  */
 void rev_str(char *s)
 {
-	int i = 0, j = 0, l;
+	int x = 0, y = 0, z;
 	char tmp;
 
-	while (s[i])
-		i++;
-	l = i / 2, i = i - 1;
-	while (i >= l)
+	while (s[x])
+		x++;
+	z = x / 2, x = x - 1;
+	while (x >= z)
 	{
-		tmp  = s[j];
-		s[j] = s[i];
-		s[i] = tmp;
-		i--, j++;
+		tmp  = s[y];
+		s[y] = s[x];
+		s[x] = tmp;
+		x--, y++;
 	}
 }
 /**
@@ -32,11 +32,11 @@ void rev_str(char *s)
  */
 int blen(unsigned long int n, unsigned long int base)
 {
-	unsigned long int i, neg = 0;
+	unsigned long int x, is_neg = 0;
 
-	for (i = 0; n > 0; i++)
+	for (x = 0; n > 0; x++)
 		n = n / base;
-	return (i + neg);
+	return (x + is_neg);
 }
 /**
  * _itoa - converts an integer to string
@@ -47,23 +47,23 @@ int blen(unsigned long int n, unsigned long int base)
  */
 char *_itoa(int n)
 {
-	unsigned long int i = 0, base = 10;
+	unsigned long int x = 0, base = 10;
 	char *str;
 
 	if (n != 0)
 		str = malloc(blen(n, base) + 1);
 	else
-		str = malloc(2), str[i] = '0', i++;
+		str = malloc(2), str[x] = '0', x++;
 
 	if (str == 0)
 		return (0);
 
-	for (; n > 0; i++)
+	for (; n > 0; x++)
 	{
-		str[i] = (n % base) + '0';
+		str[x] = (n % base) + '0';
 		n = n / base;
 	}
-	str[i] = '\0';
+	str[x] = '\0';
 	rev_str(str);
 	return (str);
 }
@@ -119,7 +119,7 @@ int _error(int errn, bash *bash_s, int exnum)
 		return (free(conc1), write(2, "Memory Error", 22), -1);
 
 	conc2 = str_concat(conc1, nstring);
-	if (!conc2) /*hsh: count*/
+	if (conc2 == NULL) /*hsh: count*/
 	{
 		write(STDERR_FILENO, "Memory Error", 22);
 		return (free(conc1), free(nstring),  -1);
@@ -127,22 +127,22 @@ int _error(int errn, bash *bash_s, int exnum)
 	free(conc1), free(nstring);
 
 	conc1 = str_concat(conc2, colspace);
-	if (!conc1) /*hsh: count: */
+	if (conc1 == NULL) /*hsh: count: */
 		return (free(conc2), write(2, "Memory Error", 22), -1);
 
 	free(conc2);
 	conc2 = str_concat(conc1, cmd);
-	if (!conc2) /*hsh: count: cmd*/
+	if (conc2 == NULL) /*hsh: count: cmd*/
 		return (free(conc1), write(2, "Memory Error", 22), -1);
 	free(conc1);
 
 	conc1 = str_concat(conc2, colspace);
-	if (!conc1) /*hsh: count: cmd: */
+	if (conc1 == NULL) /*hsh: count: cmd: */
 		return (free(conc2), write(2, "Memory Error", 22), -1);
 	free(conc2);
 
 	conc2 = str_concat(conc1, err[errn]);
-	if (!conc2) /*hsh: count: cmd: error*/
+	if (conc2 == NULL) /*hsh: count: cmd: error*/
 		return (free(conc1), write(2, "Memory Error", 22), -1);
 	free(conc1);
 
@@ -183,7 +183,7 @@ char *_error2(int errn, char *conc2, char *option)
 	{
 
 		conc1 = str_concat(conc2, colspace);
-		if (!conc1) /*hsh: count: cmd: error: */
+		if (conc1 == NULL) /*hsh: count: cmd: error: */
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);
@@ -192,7 +192,7 @@ char *_error2(int errn, char *conc2, char *option)
 
 		conc2 = str_concat(conc1, option);
 
-		if (!conc2) /*hsh: count: cmd: error: option*/
+		if (conc2 == NULL) /*hsh: count: cmd: error: option*/
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc1), NULL);
@@ -202,7 +202,7 @@ char *_error2(int errn, char *conc2, char *option)
 	if (errn > 3) /* Errors with options at end */
 	{
 		conc1 = str_concat(conc2, option);
-		if (!conc1) /*hsh: count: cmd: error option*/
+		if (conc1 == NULL) /*hsh: count: cmd: error option*/
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);

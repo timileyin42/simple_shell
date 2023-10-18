@@ -13,14 +13,14 @@
  */
 char *_memset(char *s, char b, unsigned int n)
 {
-	unsigned int i;
+	unsigned int x;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
+	for (x = 0; x < n; x++)
+		s[x] = b;
 	return (s);
 }
 /**
- * _memcpy - copies memory
+ * _memcpy - Function that helps copies memory
  * @dest: destination
  * @src: source
  * @n: size of memory to copy
@@ -29,14 +29,18 @@ char *_memset(char *s, char b, unsigned int n)
  */
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
-	unsigned int i;
+	unsigned int x = 0;
 
-	for (i = 0; i < n; i++)
-		dest[i] = src[i];
+	while (x < n)
+	{
+		dest[x] = src[x];
+		x++;
+	}
 	return (dest);
 }
+
 /**
- * _realloc - reallocates a memory block using malloc and free
+ * _realloc - Function that reallocates a memory block using malloc and free
  * @ptr: pointer to modify
  * @old_size: current size of memory
  * @new_size: size memory will now have
@@ -77,7 +81,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	return (ptr2);
 }
 /**
- * _getline - read a string or a line from an input stream
+ * _getline - Function that read a string or a line from an input stream
  * @buffer: pointer to a space where the stdin read will be saved
  * as a string
  * @bufsize: current size of buffer (must be given as 0 initially)
@@ -89,36 +93,36 @@ int _getline(char **buffer, size_t *bufsize, int fd)
 {
 	static char *buff;
 	static size_t size;
-	unsigned int len = 0, i = 0, sizeold;
-	int r;
+	unsigned int len = 0, x = 0, sizeold;
+	int y;
 
 	if (*bufsize == 0)
 		size = BSIZE;
 	if (*buffer == 0)
 	{
 		buff = malloc(sizeof(char) * size);
-		if (!buff)
-			return (write(2, "Memory Error", 22), 0);
+		if (buff == NULL)
+			return (write(STDERR_FILENO, "Memory Error", 22), 0);
 		*buffer = buff;
 	}
 	buff = _memset(buff, '\0', size);
 	do {
 
-		r = read(fd, buff + len, BSIZE);
-		if (r >= 0)
-			i = len, len += r;
-		if (r == -1 || r == 0)
+		y = read(fd, buff + len, BSIZE);
+		if (y >= 0)
+			x = len, len = len + y;
+		if (y == -1 || y == 0)
 			return (-1);
 		if  (len >= size)
 		{
 			sizeold = size, size = size + BSIZE;
 			buff = _realloc(buff, sizeold, size);
-			if (!buff)
+			if (buff == NULL)
 				return (write(2, "Memory Error", 22), 0);
 		}
-		for (; i < len; i++)
+		for (; x < len; x++)
 		{
-			if (buff[i] == '\n')
+			if (buff[x] == '\n')
 			{
 				*buffer = buff, *bufsize = size;
 				return (len);
