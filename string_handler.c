@@ -39,7 +39,7 @@ char *str_concat(char *s1, char *s2)
 }
 
 /**
- * _strcpy - copy a source input ont destinated input
+ * _strcpy - Function that copy a source input ont destinated input
  * @dest: target where will be stored the input
  * @src: source to copy from
  *
@@ -88,7 +88,7 @@ char *_strdup(char *str)
 {
 	char *arr;
 
-	if (!str)
+	if (str == NULL)
 		return (NULL);
 
 	arr = malloc((_strlen(str) * sizeof(*arr)) + 1);

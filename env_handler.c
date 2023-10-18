@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _getenv - gets an environment variable
+ * _getenv - Function that get environment variable
  *
  * @name: name of environmental variable
  * @env: current environment

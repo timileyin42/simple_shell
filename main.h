@@ -75,7 +75,7 @@ typedef struct Helps
 	void (*h)(void);
 } helps;
 
-
+int _getlen(unsigned long int n, unsigned long int base);
 char *han_cd(bash *bash_s, char *currdir);
 char *cd_home(bash *bash_s, char __attribute__((unused)) *currdir);
 char *_getenv(const char *name, char **env);
@@ -86,7 +86,7 @@ char *str_concat(char *s1, char *s2);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strtok(char *str, const char *delim);
-char **getParameters(char *buffer, bash *bash_s);
+char **parameter_fun(char *buffer, bash *bash_s);
 int exec_cmd(char *program, char *command[], char **env, bash *bash_s);
 void signal_handler(int __attribute__((unused)) x);
 void signal_handler2(int __attribute__((unused)) x);
@@ -101,7 +101,8 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 		  char **buffer, bash *bash_s);
 bash *loop_struct(char *argv0, int *errn, int *exnum, int *relation,
 		    int *run_able, char ***env, int *unsetnull);
-int _error(int errn, bash *bash_s, int exnum);
+int error_fun(int errn, bash *bash_s, int exnum);
+char *error_add(int errn, char *conc2, char *option);
 void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters);
 void shellPath_cmd(bash *bash_s, char *pathCmd);
 ssize_t built_ints(bash *bash_s);

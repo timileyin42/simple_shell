@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * checkInput - Function that checks for input in after shell prompt
+ * shell_cmd - Function that checks for input in after shell prompt
  * @ac: count of main arguments
  * @av: main arguments
  * @bufsize: size of buffer in prompt
@@ -38,14 +38,14 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 		if (**buffer == '#' || !characters || **buffer == '\n')
 			return (NULL);
 		*buffer = deleteComment(*buffer);
-		command = getParameters(*buffer, bash_s);
+		command = parameter_fun(*buffer, bash_s);
 	}
 	else
 	{
 		command = malloc(sizeof(char *) * (ac - 1));
 		if (!command)
 		{
-			_error(7, bash_s, 1);
+			error_fun(7, bash_s, 1);
 			return (NULL);
 		}
 

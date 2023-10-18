@@ -54,29 +54,28 @@ char **unsetenv_fun(char **env, char *variable, bash *bash_s)
 	char **copy;
 
 	bash_s->unsetnull[0] = 0;
-	if (!env)
+	if (env == NULL)
 		return (write(2, "Environment is NULL\n", 20), NULL);
 	if (_strlen(variable) == 0 || variable == 0)
-		return (_error(3, bash_s, 1), NULL);
+		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
 	for (x = 0; env[x] != 0; x++)
 	{
 		for (check = 0, y = 0; y < z && env[z][y] != 0; y++)
 		{
 			if (variable[y] == '=')
-				return (_error(3, bash_s, 2), NULL);
+				return (error_fun(3, bash_s, 2), NULL);
 			if (env[x][y] == variable[y])
 				check++;
 		}
 		if (check == z && env[x][check] == '=')
 		{
-			/* Found env to erase */
 			found = 1;
 			if ((lenv - 1) != 0)
 			{
 				copy = double_cp(env, lenv - 1, x);
 				if (copy == 0)
-					return (_error(7, bash_s, 1), NULL);
+					return (error_fun(7, bash_s, 1), NULL);
 			}
 			else
 				bash_s->unsetnull[0] = 1, copy = NULL;

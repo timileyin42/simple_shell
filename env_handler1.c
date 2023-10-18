@@ -81,7 +81,7 @@ int _strlendp(char **s)
 {
 	int x = 0;
 
-	if (!s)
+	if (s == NULL)
 		return (0);
 
 	while (s[x] != NULL)
@@ -104,20 +104,20 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	char *envjoin, *envjoin2, *copydup, **copy;
 
 	if (_strlen(variable) == 0 || variable == 0)
-		return (_error(3, bash_s, 1), NULL);
+		return (error_fun(3, bash_s, 1), NULL);
 	envjoin2 = str_concat(variable, "=");
 	if (envjoin2 == 0)
-		return (_error(3, bash_s, 1), NULL);
+		return (error_fun(3, bash_s, 1), NULL);
 	envjoin = str_concat(envjoin2, value), free(envjoin2);
 	if (envjoin == 0)
-		return (_error(3, bash_s, 1), NULL);
+		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
 	for (x = 0; env && env[x] != 0; x++)
 	{
 		for (check = 0, y = 0; y < z && env[x][y] != 0; y++)
 		{
 			if (variable[y] == '=')
-				return (free(envjoin), _error(3, bash_s, 2), NULL);
+				return (free(envjoin), error_fun(3, bash_s, 2), NULL);
 			if (env[x][y] == variable[y])
 				check++;
 		}
@@ -125,7 +125,7 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 		{
 			free(env[x]), copydup = _strdup(envjoin), free(envjoin);
 			if (copydup == 0)
-				return (_error(3, bash_s, 1), NULL);
+				return (error_fun(3, bash_s, 1), NULL);
 			return (env[x] = copydup, env);
 		}
 	}
@@ -133,9 +133,9 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	if (env)
 		free_doubpoint(env);
 	if (copy == 0)
-		return (free(envjoin), _error(3, bash_s, 1), NULL);
+		return (free(envjoin), error_fun(3, bash_s, 1), NULL);
 	env = copy, copydup = _strdup(envjoin), free(envjoin);
 	if (copydup == 0)
-		return (_error(3, bash_s, 1), NULL);
+		return (error_fun(3, bash_s, 1), NULL);
 	return (env[lenv] = copydup, env);
 }

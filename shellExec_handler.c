@@ -14,8 +14,8 @@
  */
 int exec_cmd(char *program, char *command[], char **env, bash *bash_s)
 {
-	pid_t process, status;
-	int execveSts = 0, waitSts = 0;
+	pid_t process, mode;
+	int execve_id = 0, wait_id = 0;
 
 	process = fork();
 	signal(SIGINT, signal_handler2);
@@ -27,19 +27,19 @@ int exec_cmd(char *program, char *command[], char **env, bash *bash_s)
 	if (process == 0)
 	{
 
-		execveSts = execve(program, command, env);
-		if (execveSts == -1)
+		execve_id = execve(program, command, env);
+		if (execve_id == -1)
 		{
 			_exit(-1);
 		}
 	}
 	else
 	{
-		waitSts = wait(&status);
+		wait_id = wait(&mode);
 		signal(SIGINT, signal_handler);
-		if (waitSts == -1)
+		if (wait_id == -1)
 			exit(-1);
-		if (WEXITSTATUS(status) == 0)
+		if (WEXITSTATUS(mode) == 0)
 			bash_s->exitnum[0] = 0;
 		else
 			bash_s->exitnum[0] = 2;

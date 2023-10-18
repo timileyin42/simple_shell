@@ -23,14 +23,14 @@ void rev_str(char *s)
 	}
 }
 /**
- * blen - obtains length of number in base
+ * _getlen - obtains length of number in base
  *
  * @n: number
  * @base: base of number
  *
  * Return: length of number
  */
-int blen(unsigned long int n, unsigned long int base)
+int _getlen(unsigned long int n, unsigned long int base)
 {
 	unsigned long int x, is_neg = 0;
 
@@ -51,7 +51,7 @@ char *_itoa(int n)
 	char *str;
 
 	if (n != 0)
-		str = malloc(blen(n, base) + 1);
+		str = malloc(_getlen(n, base) + 1);
 	else
 		str = malloc(2), str[x] = '0', x++;
 
@@ -68,16 +68,16 @@ char *_itoa(int n)
 	return (str);
 }
 
-char *_error2(int errn, char *conc2, char *option);
+char *error_add(int errn, char *conc2, char *option);
 /**
- * _error - creates a string with error line
+ * error_fun - creates a string with error line
  * @errn: number corresponding to type of error
  * @bash_s: struct containing shell information
  * @exnum: value of exit the shell should have
  *
  * Return: 0 success, -1 fail
  */
-int _error(int errn, bash *bash_s, int exnum)
+int error_fun(int errn, bash *bash_s, int exnum)
 {
 	/**
 	 * 0 - file or cmd not found , 1 - permission denied, 2 - illegal exit number
@@ -97,10 +97,10 @@ int _error(int errn, bash *bash_s, int exnum)
 	};
 
 	conc1 = str_concat(shelln, colspace);
-	if (conc1 == NULL) /*hsh: */
+	if (conc1 == NULL)
 		return (write(STDERR_FILENO, "Memory Error", 22), -1);
 
-	if (errn == 7) /* Alloc Error */
+	if (errn == 7)
 	{
 		conc2 = str_concat(conc1, err[errn]); /*hsh: count: error*/
 		if (!conc2)
@@ -147,7 +147,7 @@ int _error(int errn, bash *bash_s, int exnum)
 	free(conc1);
 
 	if (errn > 1 && errn < 6 && errn != 3)
-		conc2 = _error2(errn, conc2, option[1]);
+		conc2 = error_add(errn, conc2, option[1]);
 	if (conc2 == NULL)
 	{
 		write(STDERR_FILENO, "Memory Error", 22);
@@ -163,14 +163,14 @@ int _error(int errn, bash *bash_s, int exnum)
 
 }
 /**
- * _error2 - extra modes for error generation
+ * error_add - extra modes for error generation
  * @errn: number corresponding to type of error
  * @conc2: error part from _error
  * @option: cmd option thaat
  *
  * Return: pointer to string
  */
-char *_error2(int errn, char *conc2, char *option)
+char *error_add(int errn, char *conc2, char *option)
 {
 	/**
 	 * 0 - file or cmd not found , 1 - permission denied, 2 - illegal exit number
@@ -183,7 +183,7 @@ char *_error2(int errn, char *conc2, char *option)
 	{
 
 		conc1 = str_concat(conc2, colspace);
-		if (conc1 == NULL) /*hsh: count: cmd: error: */
+		if (conc1 == NULL)
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);
@@ -192,17 +192,17 @@ char *_error2(int errn, char *conc2, char *option)
 
 		conc2 = str_concat(conc1, option);
 
-		if (conc2 == NULL) /*hsh: count: cmd: error: option*/
+		if (conc2 == NULL)
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc1), NULL);
 		}
 		free(conc1);
 	}
-	if (errn > 3) /* Errors with options at end */
+	if (errn > 3)
 	{
 		conc1 = str_concat(conc2, option);
-		if (conc1 == NULL) /*hsh: count: cmd: error option*/
+		if (conc1 == NULL)
 		{
 			write(STDERR_FILENO, "Memory Error", 22);
 			return (free(conc2), NULL);

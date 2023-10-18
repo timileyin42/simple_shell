@@ -29,7 +29,7 @@ ssize_t shell_exit(bash *bash_s)
 		}
 	}
 
-	_error(STDERR_FILENO, bash_s, 2);
+	error_fun(STDERR_FILENO, bash_s, 2);
 	free(bash_s->options);
 	return (-1);
 }
@@ -64,7 +64,7 @@ ssize_t shell_env(bash *bash_s)
 	}
 	else
 	{
-		_error(STDIN_FILENO, bash_s, 2);
+		error_fun(STDIN_FILENO, bash_s, 2);
 		check = -1;
 	}
 

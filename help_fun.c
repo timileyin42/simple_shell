@@ -86,7 +86,7 @@ ssize_t help_cmd(bash *bash_s)
 	if (bcheck == 0)
 	{
 		check = -1;
-		_error(6, bash_s, 2);
+		error_fun(6, bash_s, 2);
 	}
 
 	free(bash_s->options);

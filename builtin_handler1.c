@@ -66,7 +66,7 @@ ssize_t cd_cmd(bash *bash_s)
 
 	currdir = getcwd(NULL, 4096);
 	if (currdir == NULL)
-		return (_error(4, bash_s, 2), free(bash_s->options), -1);
+		return (error_fun(4, bash_s, 2), free(bash_s->options), -1);
 	if (!bash_s->options[1] ||
 			(bash_s->options[1] && (!_strcmp(bash_s->options[1], "~"))))
 	{
@@ -89,7 +89,7 @@ ssize_t cd_cmd(bash *bash_s)
 	if (check == 0 && checkminus == 1)
 		write(STDOUT_FILENO, dir, _strlen(dir)), write(1, "\n", 1);
 	if (check != 0)
-		_error(4, bash_s, 2), exit = -1;
+		error_fun(4, bash_s, 2), exit = -1;
 	else
 	{
 		newenv = _setenv(*(bash_s->envCpy), "PWD", dir, bash_s);

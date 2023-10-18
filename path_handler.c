@@ -92,7 +92,6 @@ char *path_fun(char *cmd, char **env, bash *bash_s)
 		free(concat);
 		if (stat(concat2, &st) == 0)
 		{
-			/*Found the command in PATH*/
 			free(path);
 			return (concat2);
 		}
