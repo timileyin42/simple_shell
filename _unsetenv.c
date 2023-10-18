@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _copydoublepDel - Function copies an array of strings (double pointer)
+ * doublep_cp - Function copies an array of strings (double pointer)
  *
  * @p: double pointer to copy
  * @new_size: size of copy
@@ -40,7 +40,7 @@ char **double_cp(char **p, int new_size, int jump)
 }
 
 /**
- * _unsetenv - unsets an enviromental variable
+ * unsetenv_fun - unsets an enviromental variable
  *
  * @env: array of env variables
  * @variable: env variable to unset
@@ -48,7 +48,7 @@ char **double_cp(char **p, int new_size, int jump)
  *
  * Return: 0 on success, -1 on error
  */
-char **_unsetenv(char **env, char *variable, bash *bash_s)
+char **unsetenv_fun(char **env, char *variable, bash *bash_s)
 {
 	int x, y, check, z = 0, lenv = 0, found = 0;
 	char **copy;

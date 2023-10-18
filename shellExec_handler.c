@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * executeCmd - Function that creates a child process to execute a cmd
+ * exec_cmd - Function that creates a child process to execute a cmd
  *
  * @program: command that will be executed
  * @command: arguments of command

@@ -51,12 +51,12 @@ void help_setenv(void)
 
 
 /**
- * _help_cmd - help of built in commands
+ * help_cmd - help of built in commands
  * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _help_cmd(bash *bash_s)
+ssize_t help_cmd(bash *bash_s)
 {
 	int check = 1, bcheck = 0;
 	helps help[] = {

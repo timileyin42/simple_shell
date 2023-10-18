@@ -99,11 +99,11 @@ char **array_cpy(char **p, int old_size, int new_size);
 int _strlendp(char **s);
 char **shell_cmd(int ac, char **av, size_t *bufsize,
 		  char **buffer, bash *bash_s);
-bash *set_struct(char *argv0, int *errn, int *exnum, int *relation,
+bash *loop_struct(char *argv0, int *errn, int *exnum, int *relation,
 		    int *run_able, char ***env, int *unsetnull);
 int _error(int errn, bash *bash_s, int exnum);
-void addCmd(bash *bash_s, char *buffer, char *command, char **parameters);
-void addPathToCmd(bash *bash_s, char *pathCmd);
+void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters);
+void shellPath_cmd(bash *bash_s, char *pathCmd);
 ssize_t built_ints(bash *bash_s);
 ssize_t shell_exit(bash *bash_s);
 ssize_t shell_env(bash *bash_s);
@@ -115,14 +115,14 @@ long _pow(long base, long pos);
 char **double_cp(char **p, int old_size, int new_size);
 int _strlendp(char **s);
 char **_setenv(char **env, char *variable, char *value, bash *bash_s);
-char **_unsetenv(char **env, char *variable, bash *bash_s);
+char **unsetenv_fun(char **env, char *variable, bash *bash_s);
 int _isdigit(int c);
 int _isnumber(char *s);
 ssize_t cd_cmd(bash *bash_s);
 char *deleteComment(char *str);
 
 
-ssize_t _help_cmd(bash *bash_s);
+ssize_t help_cmd(bash *bash_s);
 void write_buf(char *s);
 void help_unsetenv(void);
 void help_cd(void);

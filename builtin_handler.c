@@ -118,7 +118,7 @@ ssize_t shell_setenv(bash *bash_s)
 	return (1);
 }
 /**
- * _unsetenv_cmd - built in command unsetenv
+ * shell_unsetenv - built in command unsetenv
  * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
@@ -143,7 +143,7 @@ ssize_t shell_unsetenv(bash *bash_s)
 		return (1);
 	}
 
-	newenv = _unsetenv(*(bash_s->envCpy), variable, bash_s);
+	newenv = unsetenv_fun(*(bash_s->envCpy), variable, bash_s);
 
 	if (newenv == 0 && bash_s->unsetnull[0] == 0)
 	{
@@ -171,7 +171,7 @@ ssize_t built_ints(bash *bash_s)
 		{"setenv", shell_setenv},
 		{"unsetenv", shell_unsetenv},
 		{"cd", cd_cmd},
-		{"help", _help_cmd}
+		{"help", help_cmd}
 	};
 
 	int x, builtcheck; /* lenght of ops array */

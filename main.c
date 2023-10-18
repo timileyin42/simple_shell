@@ -20,19 +20,19 @@ int main(int ac, char **av, char **env)
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
 	env = double_cp(env, sizeEnv, sizeEnv);
-	bash_s = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
+	bash_s = loop_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
 	while (1)
 	{
 		command = NULL;
 		command = shell_cmd(ac, av, &bufsize, &buffer, bash_s);
-		if (!command)
+		if (command == NULL)
 			continue;
-		addCmd(bash_s, buffer, command[0], command);
+		write_cmd(bash_s, buffer, command[0], command);
 		isBuiltIn = built_ints(bash_s);
 		if (isBuiltIn == -1 || isBuiltIn == 1)
 			continue;
 		pathCmd = path_fun(command[0], env, bash_s);
-		addPathToCmd(bash_s, pathCmd);
+		shellPath_cmd(bash_s, pathCmd);
 		if (pathCmd == NULL)
 		{
 			free(command);
@@ -51,7 +51,7 @@ int main(int ac, char **av, char **env)
 	return (0);
 }
 /**
- * set_struct - initializes shell struct
+ * loop_struct - initializes shell struct
  * @argv0: name of executable
  * @errn: number of error message
  * @exnum: exit number of shell
@@ -63,30 +63,30 @@ int main(int ac, char **av, char **env)
  * Return: Pointer to struct
  *
  */
-bash *set_struct(char *argv0, int *errn, int *exnum,
+bash *loop_struct(char *argv0, int *errn, int *exnum,
 		    int *relation, int *run_able, char ***env, int *unsetnull)
 {
-	bash *shellpack;
+	bash *shell_run;
 
-	shellpack = malloc(sizeof(struct bash));
-	if (shellpack == 0)
+	shell_run = malloc(sizeof(struct bash));
+	if (shell_run == 0)
 		return (write(STDERR_FILENO, "Memory Error", 22), NULL);
-	shellpack->hshname = argv0;
-	shellpack->buffer = NULL;
-	shellpack->cmd = NULL;
-	shellpack->options = NULL;
-	shellpack->path = NULL;
-	shellpack->errnum = errn;
-	shellpack->exitnum = exnum;
-	shellpack->relation = relation;
-	shellpack->run_able = run_able;
-	shellpack->envCpy = env;
-	shellpack->unsetnull = unsetnull;
+	shell_run->hshname = argv0;
+	shell_run->buffer = NULL;
+	shell_run->cmd = NULL;
+	shell_run->options = NULL;
+	shell_run->path = NULL;
+	shell_run->errnum = errn;
+	shell_run->exitnum = exnum;
+	shell_run->relation = relation;
+	shell_run->run_able = run_able;
+	shell_run->envCpy = env;
+	shell_run->unsetnull = unsetnull;
 
-	return (shellpack);
+	return (shell_run);
 }
 /**
- * addCmd - adds values to shell struct
+ * write_cmd - adds values to shell struct
  * @bash_s: shell struct
  * @buffer: string written after prompt
  * @command: command written after prompt
@@ -94,7 +94,7 @@ bash *set_struct(char *argv0, int *errn, int *exnum,
  *
  * Return: No return
  */
-void addCmd(bash *bash_s, char *buffer, char *command, char **parameters)
+void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters)
 {
 	bash_s->buffer = buffer;
 	bash_s->cmd = command;
@@ -102,13 +102,13 @@ void addCmd(bash *bash_s, char *buffer, char *command, char **parameters)
 }
 
 /**
- * addPathToCmd - initializes path value of struct
+ * shellPathcmd - initializes path value of struct
  * @bash_s: shell struct
  * @pathCmd: path of cmd written after propmpt
  *
  * Return: No Return
  */
-void addPathToCmd(bash *bash_s, char *pathCmd)
+void shellPath_cmd(bash *bash_s, char *pathCmd)
 {
 	bash_s->path = pathCmd;
 }

@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _pathcheck - check if current dir must be added
+ * path_han - check if current dir must be added
  * @path: path env variable
  *
  * Return: Pointer to adress of new PATH
@@ -51,7 +51,7 @@ char *path_han(char *path)
 	return (npath);
 }
 /**
- * _path - Searches for a cmd in PATH
+ * path_fun - Searches for a cmd in PATH
  * @cmd: string contating env variable PATH
  * @env: current environment
  * @bash_s: struct containing shell info
