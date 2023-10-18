@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * _exit_cmd - built in command exit
+ * shell_exit - built in command exit
  * @bash_s: struct containing shell info
  *
  * Return: -1 if error
  */
-ssize_t _exit_cmd(bash *bash_s)
+ssize_t shell_exit(bash *bash_s)
 {
 	long valueToExit;
 
@@ -17,7 +17,7 @@ ssize_t _exit_cmd(bash *bash_s)
 		if (valueToExit >= 0 && valueToExit < INT_MAX)
 		{
 			if (valueToExit > 255)
-				valueToExit %= 256;
+				valueToExit = valueToExit % 256;
 			if (bash_s->options[1] == NULL)
 				valueToExit = bash_s->exitnum[0];
 			free(*(bash_s->options));
@@ -34,12 +34,12 @@ ssize_t _exit_cmd(bash *bash_s)
 	return (-1);
 }
 /**
- * _env_cmd - built in command env
+ * shell_env - built in command env
  * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful
  */
-ssize_t _env_cmd(bash *bash_s)
+ssize_t shell_env(bash *bash_s)
 {
 	char **str;
 	int check = 1;
@@ -72,12 +72,12 @@ ssize_t _env_cmd(bash *bash_s)
 	return (check);
 }
 /**
- * _setenv_cmd - built in command setenv
+ * shell_setenv - built in command setenv
  * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _setenv_cmd(bash *bash_s)
+ssize_t shell_setenv(bash *bash_s)
 {
 	char **newenv;
 	char *variable = NULL;
@@ -123,7 +123,7 @@ ssize_t _setenv_cmd(bash *bash_s)
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _unsetenv_cmd(bash *bash_s)
+ssize_t shell_unsetenv(bash *bash_s)
 {
 	char **newenv;
 	char *variable = NULL;
@@ -166,10 +166,10 @@ ssize_t _unsetenv_cmd(bash *bash_s)
 ssize_t built_ints(bash *bash_s)
 {
 	b_ins ops[] = {
-		{"exit", _exit_cmd},
-		{"env", _env_cmd},
-		{"setenv", _setenv_cmd},
-		{"unsetenv", _unsetenv_cmd},
+		{"exit", shell_exit},
+		{"env", shell_env},
+		{"setenv", shell_setenv},
+		{"unsetenv", shell_unsetenv},
 		{"cd", cd_cmd},
 		{"help", _help_cmd}
 	};
