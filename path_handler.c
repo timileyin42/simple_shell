@@ -10,8 +10,8 @@
 
 char *path_han(char *path)
 {
-	char *npath;
-	int x, y, nsize, count = 0;
+	char *n_path;
+	int x, y, p_size, count = 0;
 
 	for (x = 0; path[x]; x++)
 	{
@@ -25,30 +25,30 @@ char *path_han(char *path)
 	}
 	if (count == 0)
 		return (0);
-	nsize = _strlen(path) + 1 + count;
-	npath = malloc(sizeof(char) * nsize);
+	p_size = _strlen(path) + 1 + count;
+	n_path = malloc(sizeof(char) * p_size);
 
-	for (x = 0, y = 0; x < nsize; x++, y++)
+	for (x = 0, y = 0; x < p_size; x++, y++)
 	{
 		if (path[y] == '=' && path[y + 1] == ':')
 		{
-			npath[x] = path[y], npath[x + 1] = '.', x++;
+			n_path[x] = path[y], n_path[x + 1] = '.', x++;
 			continue;
 		}
 		if (path[y] == ':' && path[y + 1] == ':')
 		{
-			npath[x] = path[y], npath[x + 1] = '.', x++;
+			n_path[x] = path[y], n_path[x + 1] = '.', x++;
 			continue;
 		}
 		if (path[y] == ':' && path[y + 1] == '\0')
 		{
-			npath[x] = path[y], npath[x + 1] = '.', x++;
+			n_path[x] = path[y], n_path[x + 1] = '.', x++;
 			continue;
 		}
-		npath[x] = path[y];
+		n_path[x] = path[y];
 	}
 	free(path);
-	return (npath);
+	return (n_path);
 }
 /**
  * path_fun - Searches for a cmd in PATH
@@ -62,40 +62,40 @@ char *path_han(char *path)
 
 char *path_fun(char *cmd, char **env, bash *bash_s)
 {
-	char *path, *path2;
+	char *path, *to_path;
 	struct stat st;
-	char *token, *concat, *concat2, *pathcheck, *delim = ":=";
+	char *token, *is_concat, *to_concat, *pathcheck, *delim = ":=";
 	int x = 0;
 
 	for (; cmd[x]; x++)
 		if (cmd[x] == '/' || cmd[x] == '|')
 		{
 			if (stat(cmd, &st) == 0)
-				return (concat = str_concat(cmd, '\0'));
+				return (is_concat = str_concat(cmd, '\0'));
 			else
 				return (0);
 		}
 
-	path2 = _getenv("PATH", env);
+	to_path = _getenv("PATH", env);
 	(void) bash_s;
-	if (path2 == NULL)
+	if (to_path == NULL)
 		return (0);
-	path = _strdup(path2);
+	path = _strdup(to_path);
 	pathcheck = path_han(path);
 	if (pathcheck)
 		path = pathcheck;
 	token = _strtok(path, delim);
 	for (token = _strtok(0, delim); token; token = _strtok(0, delim))
 	{
-		concat = str_concat(token, "/");
-		concat2 = str_concat(concat, cmd);
-		free(concat);
-		if (stat(concat2, &st) == 0)
+		is_concat = str_concat(token, "/");
+		to_concat = str_concat(is_concat, cmd);
+		free(is_concat);
+		if (stat(to_concat, &st) == 0)
 		{
 			free(path);
-			return (concat2);
+			return (to_concat);
 		}
-		free(concat2);
+		free(to_concat);
 	}
 
 	free(path);
