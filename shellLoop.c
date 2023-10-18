@@ -11,7 +11,7 @@
 char **getParameters(char *raw_buffer, bash *bash_s)
 {
 	char **buffer, *cp_raw_buffer;
-	ssize_t cnt = 0, x = 0;
+	ssize_t len = 0, x = 0;
 
 	cp_raw_buffer = _strdup(raw_buffer);
 	if (cp_raw_buffer == NULL)
@@ -21,24 +21,24 @@ char **getParameters(char *raw_buffer, bash *bash_s)
 	}
 
 	if (_strtok(cp_raw_buffer, " \n"))
-		cnt++;
+		len++;
 	else
 	{
 		free(cp_raw_buffer);
 		return (NULL);
 	}
 	while (_strtok(NULL, " \n"))
-		cnt++;
+		len++;
 
 	free(cp_raw_buffer);
-	buffer = malloc(sizeof(char *) * (cnt + 1));
+	buffer = malloc(sizeof(char *) * (len + 1));
 	if (buffer == NULL)
 	{
 		_error(7, bash_s, 1);
 		exit(-1);
 	}
 	buffer[0] = _strtok(raw_buffer, " \n");
-	for (x = 1; x < cnt && buffer[x - 1]; x++)
+	for (x = 1; x < len && buffer[x - 1]; x++)
 		buffer[x] = _strtok(NULL, " \n");
 
 	if (!buffer[x - 1])

@@ -19,21 +19,21 @@ int main(int ac, char **av, char **env)
 		write(2, "Please run with no arguments\n", 29), exit(127);
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
-	env = array_cpy(env, sizeEnv, sizeEnv);
+	env = double_cp(env, sizeEnv, sizeEnv);
 	bash_s = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
 	while (1)
 	{
 		command = NULL;
-		command = checkInput(ac, av, &bufsize, &buffer, bash_s);
+		command = shell_cmd(ac, av, &bufsize, &buffer, bash_s);
 		if (!command)
 			continue;
 		addCmd(bash_s, buffer, command[0], command);
 		isBuiltIn = built_ints(bash_s);
 		if (isBuiltIn == -1 || isBuiltIn == 1)
 			continue;
-		pathCmd = _path(command[0], env, bash_s);
+		pathCmd = path_fun(command[0], env, bash_s);
 		addPathToCmd(bash_s, pathCmd);
-		if (!pathCmd)
+		if (pathCmd == NULL)
 		{
 			free(command);
 			bash_s->errnum[0] += 1, _error(0, bash_s, 127);
@@ -42,7 +42,7 @@ int main(int ac, char **av, char **env)
 		else if (access(pathCmd, X_OK) == -1)
 			_error(1, bash_s, 126);
 		else
-			executeCmd(pathCmd, command, env, bash_s);
+			exec_cmd(pathCmd, command, env, bash_s);
 		free(command);
 		free(pathCmd);
 

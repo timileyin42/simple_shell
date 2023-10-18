@@ -8,7 +8,7 @@
  *
  */
 
-char *_pathcheck(char *path)
+char *path_han(char *path)
 {
 	char *npath;
 	int x, y, nsize, count = 0;
@@ -60,15 +60,15 @@ char *_pathcheck(char *path)
  *
  */
 
-char *_path(char *cmd, char **env, bash *bash_s)
+char *path_fun(char *cmd, char **env, bash *bash_s)
 {
 	char *path, *path2;
 	struct stat st;
 	char *token, *concat, *concat2, *pathcheck, *delim = ":=";
-	int i;
+	int x;
 
-	for (i = 0; cmd[i]; i++)
-		if (cmd[i] == '/' || cmd[i] == '|')
+	for (x = 0; cmd[x]; x++)
+		if (cmd[x] == '/' || cmd[x] == '|')
 		{
 			if (stat(cmd, &st) == 0)
 				return (concat = str_concat(cmd, '\0'));
@@ -78,10 +78,10 @@ char *_path(char *cmd, char **env, bash *bash_s)
 
 	path2 = _getenv("PATH", env);
 	(void) bash_s;
-	if (!path2)
+	if (path2 == NULL)
 		return (0);
 	path = _strdup(path2);
-	pathcheck = _pathcheck(path);
+	pathcheck = path_han(path);
 	if (pathcheck)
 		path = pathcheck;
 	token = _strtok(path, delim);

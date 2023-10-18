@@ -9,7 +9,7 @@
  *
  * Return: Pointer malloec
  */
-char **_copydoublepDel(char **p, int new_size, int jump)
+char **double_cp(char **p, int new_size, int jump)
 {
 	char **copy;
 	int x, y, csize;
@@ -74,7 +74,7 @@ char **_unsetenv(char **env, char *variable, bash *bash_s)
 			found = 1;
 			if ((lenv - 1) != 0)
 			{
-				copy = _copydoublepDel(env, lenv - 1, x);
+				copy = double_cp(env, lenv - 1, x);
 				if (copy == 0)
 					return (_error(7, bash_s, 1), NULL);
 			}

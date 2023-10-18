@@ -170,7 +170,7 @@ ssize_t built_ints(bash *bash_s)
 		{"env", _env_cmd},
 		{"setenv", _setenv_cmd},
 		{"unsetenv", _unsetenv_cmd},
-		{"cd", _cd_cmd},
+		{"cd", cd_cmd},
 		{"help", _help_cmd}
 	};
 

@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * checkInput - checks for input in after shell prompt
+ * checkInput - Function that checks for input in after shell prompt
  * @ac: count of main arguments
  * @av: main arguments
  * @bufsize: size of buffer in prompt
@@ -11,7 +11,7 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-char **checkInput(int ac, char **av, size_t *bufsize,
+char **shell_cmd(int ac, char **av, size_t *bufsize,
 		   char **buffer, bash *bash_s)
 {
 	ssize_t characters;
@@ -57,7 +57,7 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 }
 
 /**
- * deleteComment - deletes a commnet inside a command line
+ * deleteComment - function that helps delete comment inside a command line
  *
  * @str: string to operate
  *

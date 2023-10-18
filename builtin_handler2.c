@@ -3,16 +3,16 @@
 /**
  * _pow - gets the result of base to ower
  * @base: base decimal
- * @pot: power
+ * @pos: power
  *
  * Return: result
  */
-long _pow(long base, long pot)
+long _pow(long base, long pos)
 {
 	long x = 0;
 	long res = 1;
 
-	while (x < pot)
+	while (x < pos)
 	{
 		res = res * base;
 		x++;

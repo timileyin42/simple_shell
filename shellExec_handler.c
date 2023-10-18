@@ -12,7 +12,7 @@
  * or NULL if there is no match
  *
  */
-int executeCmd(char *program, char *command[], char **env, bash *bash_s)
+int exec_cmd(char *program, char *command[], char **env, bash *bash_s)
 {
 	pid_t process, status;
 	int execveSts = 0, waitSts = 0;
