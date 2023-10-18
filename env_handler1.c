@@ -15,7 +15,7 @@ void free_doubpoint(char **p)
 	while (p[y] != 0)
 		y++;
 
-	for (x = 0; x < y; x++)
+	for (; x < y; x++)
 	{
 		free(p[x]);
 	}
@@ -33,7 +33,7 @@ void free_doubpoint(char **p)
 char **array_cpy(char **p, int old_size, int new_size)
 {
 	char **copy;
-	int x, csize;
+	int x = 0, csize;
 
 	if (!p && (old_size == new_size))
 		return (NULL);
@@ -52,7 +52,7 @@ char **array_cpy(char **p, int old_size, int new_size)
 		return (0);
 
 	if (p)
-		for (x = 0; x < csize; x++)
+		for (; x < csize; x++)
 		{
 			copy[x] = _strdup(p[x]);
 			if (copy[x] == 0)
@@ -65,7 +65,6 @@ char **array_cpy(char **p, int old_size, int new_size)
 			}
 		}
 
-	/* Add Null in the end */
 	copy[new_size] = '\0';
 
 	return (copy);
@@ -89,7 +88,7 @@ int _strlendp(char **s)
 	return (x);
 }
 /**
- * _setenv - overwrite an env variable or creates it
+ * _setenv - Function that overwrite an env variable or creates it
  *
  * @env: array of env variables
  * @variable: env variable to set
@@ -101,15 +100,15 @@ int _strlendp(char **s)
 char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 {
 	int x, y, check, z = 0, lenv = 0;
-	char *envjoin, *envjoin2, *copydup, **copy;
+	char *is_env, *to_env, *copydup, **copy;
 
 	if (_strlen(variable) == 0 || variable == 0)
 		return (error_fun(3, bash_s, 1), NULL);
-	envjoin2 = str_concat(variable, "=");
-	if (envjoin2 == 0)
+	to_env = str_concat(variable, "=");
+	if (to_env == 0)
 		return (error_fun(3, bash_s, 1), NULL);
-	envjoin = str_concat(envjoin2, value), free(envjoin2);
-	if (envjoin == 0)
+	is_env = str_concat(to_env, value), free(to_env);
+	if (is_env == 0)
 		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
 	for (x = 0; env && env[x] != 0; x++)
@@ -117,13 +116,13 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 		for (check = 0, y = 0; y < z && env[x][y] != 0; y++)
 		{
 			if (variable[y] == '=')
-				return (free(envjoin), error_fun(3, bash_s, 2), NULL);
+				return (free(is_env), error_fun(3, bash_s, 2), NULL);
 			if (env[x][y] == variable[y])
 				check++;
 		}
 		if (check == z && env[x][check] == '=')
 		{
-			free(env[x]), copydup = _strdup(envjoin), free(envjoin);
+			free(env[x]), copydup = _strdup(is_env), free(is_env);
 			if (copydup == 0)
 				return (error_fun(3, bash_s, 1), NULL);
 			return (env[x] = copydup, env);
@@ -133,8 +132,8 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	if (env)
 		free_doubpoint(env);
 	if (copy == 0)
-		return (free(envjoin), error_fun(3, bash_s, 1), NULL);
-	env = copy, copydup = _strdup(envjoin), free(envjoin);
+		return (free(is_env), error_fun(3, bash_s, 1), NULL);
+	env = copy, copydup = _strdup(is_env), free(is_env);
 	if (copydup == 0)
 		return (error_fun(3, bash_s, 1), NULL);
 	return (env[lenv] = copydup, env);
