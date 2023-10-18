@@ -11,7 +11,7 @@ int main(int ac, char **av, char **env)
 {
 	size_t bufsize = 0;
 	char **command, *pathCmd, *buffer = NULL;
-	bash *shpack;
+	bash *bash_s;
 	int errn = 0, exnum = 0, relation = 0, run_able = 0, sizeEnv, enul = 0;
 	ssize_t isBuiltIn;
 
@@ -20,34 +20,34 @@ int main(int ac, char **av, char **env)
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
 	env = array_cpy(env, sizeEnv, sizeEnv);
-	shpack = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
+	bash_s = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
 	while (1)
 	{
 		command = NULL;
-		command = checkInput(ac, av, &bufsize, &buffer, shpack);
+		command = checkInput(ac, av, &bufsize, &buffer, bash_s);
 		if (!command)
 			continue;
-		addCmd(shpack, buffer, command[0], command);
-		isBuiltIn = built_ints(shpack);
+		addCmd(bash_s, buffer, command[0], command);
+		isBuiltIn = built_ints(bash_s);
 		if (isBuiltIn == -1 || isBuiltIn == 1)
 			continue;
-		pathCmd = _path(command[0], env, shpack);
-		addPathToCmd(shpack, pathCmd);
+		pathCmd = _path(command[0], env, bash_s);
+		addPathToCmd(bash_s, pathCmd);
 		if (!pathCmd)
 		{
 			free(command);
-			shpack->errnum[0] += 1, _error(0, shpack, 127);
+			bash_s->errnum[0] += 1, _error(0, bash_s, 127);
 			continue;
 		}
 		else if (access(pathCmd, X_OK) == -1)
-			_error(1, shpack, 126);
+			_error(1, bash_s, 126);
 		else
-			executeCmd(pathCmd, command, env, shpack);
+			executeCmd(pathCmd, command, env, bash_s);
 		free(command);
 		free(pathCmd);
 
 	}
-	free_doubpoint(*(shpack->envCpy)), free(shpack);
+	free_doubpoint(*(bash_s->envCpy)), free(bash_s);
 	return (0);
 }
 /**
@@ -87,28 +87,28 @@ bash *set_struct(char *argv0, int *errn, int *exnum,
 }
 /**
  * addCmd - adds values to shell struct
- * @shpack: shell struct
+ * @bash_s: shell struct
  * @buffer: string written after prompt
  * @command: command written after prompt
  * @parameters: parameters of command
  *
  * Return: No return
  */
-void addCmd(bash *shpack, char *buffer, char *command, char **parameters)
+void addCmd(bash *bash_s, char *buffer, char *command, char **parameters)
 {
-	shpack->buffer = buffer;
-	shpack->cmd = command;
-	shpack->options = parameters;
+	bash_s->buffer = buffer;
+	bash_s->cmd = command;
+	bash_s->options = parameters;
 }
 
 /**
  * addPathToCmd - initializes path value of struct
- * @shpack: shell struct
+ * @bash_s: shell struct
  * @pathCmd: path of cmd written after propmpt
  *
  * Return: No Return
  */
-void addPathToCmd(bash *shpack, char *pathCmd)
+void addPathToCmd(bash *bash_s, char *pathCmd)
 {
-	shpack->path = pathCmd;
+	bash_s->path = pathCmd;
 }

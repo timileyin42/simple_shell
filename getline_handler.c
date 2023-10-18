@@ -111,7 +111,7 @@ int _getline(char **buffer, size_t *bufsize, int fd)
 			return (-1);
 		if  (len >= size)
 		{
-			sizeold = size, size += BSIZE;
+			sizeold = size, size = size + BSIZE;
 			buff = _realloc(buff, sizeold, size);
 			if (!buff)
 				return (write(2, "Memory Error", 22), 0);

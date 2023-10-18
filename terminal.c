@@ -6,13 +6,13 @@
  * @av: main arguments
  * @bufsize: size of buffer in prompt
  * @buffer: buffer in prompt
- * @shpack: struct of shell info
+ * @bash_s: struct of shell info
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
 char **checkInput(int ac, char **av, size_t *bufsize,
-		   char **buffer, bash *shpack)
+		   char **buffer, bash *bash_s)
 {
 	ssize_t characters;
 	char **command;
@@ -26,11 +26,11 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 
 		if (characters == -1)
 		{
-			exitnum = shpack->exitnum[0];
+			exitnum = bash_s->exitnum[0];
 			free(*buffer);
-			if (*(shpack->envCpy))
-				free_doubpoint(*(shpack->envCpy));
-			free(shpack);
+			if (*(bash_s->envCpy))
+				free_doubpoint(*(bash_s->envCpy));
+			free(bash_s);
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
 			exit(exitnum);
@@ -38,14 +38,14 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 		if (**buffer == '#' || !characters || **buffer == '\n')
 			return (NULL);
 		*buffer = deleteComment(*buffer);
-		command = getParameters(*buffer, shpack);
+		command = getParameters(*buffer, bash_s);
 	}
 	else
 	{
 		command = malloc(sizeof(char *) * (ac - 1));
 		if (!command)
 		{
-			_error(7, shpack, 1);
+			_error(7, bash_s, 1);
 			return (NULL);
 		}
 

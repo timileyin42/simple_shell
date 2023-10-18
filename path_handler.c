@@ -54,13 +54,13 @@ char *_pathcheck(char *path)
  * _path - Searches for a cmd in PATH
  * @cmd: string contating env variable PATH
  * @env: current environment
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: Pointer to adress of cmd in PATH or by itself
  *
  */
 
-char *_path(char *cmd, char **env, bash *shpack)
+char *_path(char *cmd, char **env, bash *bash_s)
 {
 	char *path, *path2;
 	struct stat st;
@@ -68,7 +68,7 @@ char *_path(char *cmd, char **env, bash *shpack)
 	int i;
 
 	for (i = 0; cmd[i]; i++)
-		if (cmd[i] == '/')
+		if (cmd[i] == '/' || cmd[i] == '|')
 		{
 			if (stat(cmd, &st) == 0)
 				return (concat = str_concat(cmd, '\0'));
@@ -77,7 +77,7 @@ char *_path(char *cmd, char **env, bash *shpack)
 		}
 
 	path2 = _getenv("PATH", env);
-	(void) shpack;
+	(void) bash_s;
 	if (!path2)
 		return (0);
 	path = _strdup(path2);

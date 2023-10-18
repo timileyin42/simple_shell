@@ -72,21 +72,21 @@ char *_error2(int errn, char *conc2, char *option);
 /**
  * _error - creates a string with error line
  * @errn: number corresponding to type of error
- * @shpack: struct containing shell information
+ * @bash_s: struct containing shell information
  * @exnum: value of exit the shell should have
  *
  * Return: 0 success, -1 fail
  */
-int _error(int errn, bash *shpack, int exnum)
+int _error(int errn, bash *bash_s, int exnum)
 {
 	/**
 	 * 0 - file or cmd not found , 1 - permission denied, 2 - illegal exit number
 	 * 3 - setenv error,         , 4 - can´t cd         , 5 - invalid option cd
 	 * 6 - help _error           , 7 - memory allocation, 8 - Alias Error
 	 **/
-	int count = shpack->errnum[0], l = 0;
-	char *cmd = shpack->cmd, **option = shpack->options;
-	char *shelln = shpack->hshname;
+	int count = bash_s->errnum[0], l = 0;
+	char *cmd = bash_s->cmd, **option = bash_s->options;
+	char *shelln = bash_s->hshname;
 	char *nstring, *conc1, *conc2, *colspace = ": ";
 	char *err[] = {
 		"not found", "Permission denied", "Illegal number",
@@ -158,7 +158,7 @@ int _error(int errn, bash *shpack, int exnum)
 		l++;
 	write(STDERR_FILENO, conc2, l), write(2, "\n", 1);
 	free(conc2);
-	shpack->exitnum[0] = exnum;
+	bash_s->exitnum[0] = exnum;
 	return (0);
 
 }

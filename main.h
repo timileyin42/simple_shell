@@ -13,7 +13,7 @@
 #include <sys/wait.h>
 
 /**
- * struct Hshpack - struct containing important shell info
+ * struct bash - struct containing important shell info
  * @hshname: name of the shell (argv[0])
  * @buffer: full buffer written in prompt
  * @cmd: command written after prompt
@@ -58,7 +58,7 @@ typedef struct bash
 typedef struct b_ins
 {
 	char *cmd;
-	ssize_t (*f)(bash *shpack);
+	ssize_t (*f)(bash *bash_s);
 } b_ins;
 
 /**

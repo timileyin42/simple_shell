@@ -3,12 +3,12 @@
 /**
  * getParameters - Function that helps obtains parameters from buffer of prompt
  * @raw_buffer: raw_buffer
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-char **getParameters(char *raw_buffer, bash *shpack)
+char **getParameters(char *raw_buffer, bash *bash_s)
 {
 	char **buffer, *cp_raw_buffer;
 	ssize_t cnt = 0, x = 0;
@@ -16,7 +16,7 @@ char **getParameters(char *raw_buffer, bash *shpack)
 	cp_raw_buffer = _strdup(raw_buffer);
 	if (cp_raw_buffer == NULL)
 	{
-		_error(7, shpack, 1);
+		_error(7, bash_s, 1);
 		exit(-1);
 	}
 
@@ -34,7 +34,7 @@ char **getParameters(char *raw_buffer, bash *shpack)
 	buffer = malloc(sizeof(char *) * (cnt + 1));
 	if (buffer == NULL)
 	{
-		_error(7, shpack, 1);
+		_error(7, bash_s, 1);
 		exit(-1);
 	}
 	buffer[0] = _strtok(raw_buffer, " \n");

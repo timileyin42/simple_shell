@@ -94,30 +94,30 @@ int _strlendp(char **s)
  * @env: array of env variables
  * @variable: env variable to set
  * @value: value to set
- * @shpack: struct with shell info
+ * @bash_s: struct with shell info
  *
  * Return: 0 on success, -1 on error
  */
-char **_setenv(char **env, char *variable, char *value, bash *shpack)
+char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 {
 	int i, j, check, l = 0, lenv = 0;
 	char *envjoin, *envjoin2, *copydup, **copy;
 
 	if (_strlen(variable) == 0 || variable == 0)
-		return (_error(3, shpack, 1), NULL);
+		return (_error(3, bash_s, 1), NULL);
 	envjoin2 = str_concat(variable, "=");
 	if (envjoin2 == 0)
-		return (_error(3, shpack, 1), NULL);
+		return (_error(3, bash_s, 1), NULL);
 	envjoin = str_concat(envjoin2, value), free(envjoin2);
 	if (envjoin == 0)
-		return (_error(3, shpack, 1), NULL);
+		return (_error(3, bash_s, 1), NULL);
 	l = _strlen(variable), lenv = _strlendp(env);
 	for (i = 0; env && env[i] != 0; i++)
 	{
 		for (check = 0, j = 0; j < l && env[i][j] != 0; j++)
 		{
 			if (variable[j] == '=')
-				return (free(envjoin), _error(3, shpack, 2), NULL);
+				return (free(envjoin), _error(3, bash_s, 2), NULL);
 			if (env[i][j] == variable[j])
 				check++;
 		}
@@ -125,7 +125,7 @@ char **_setenv(char **env, char *variable, char *value, bash *shpack)
 		{
 			free(env[i]), copydup = _strdup(envjoin), free(envjoin);
 			if (copydup == 0)
-				return (_error(3, shpack, 1), NULL);
+				return (_error(3, bash_s, 1), NULL);
 			return (env[i] = copydup, env);
 		}
 	}
@@ -133,9 +133,9 @@ char **_setenv(char **env, char *variable, char *value, bash *shpack)
 	if (env)
 		free_doubpoint(env);
 	if (copy == 0)
-		return (free(envjoin), _error(3, shpack, 1), NULL);
+		return (free(envjoin), _error(3, bash_s, 1), NULL);
 	env = copy, copydup = _strdup(envjoin), free(envjoin);
 	if (copydup == 0)
-		return (_error(3, shpack, 1), NULL);
+		return (_error(3, bash_s, 1), NULL);
 	return (env[lenv] = copydup, env);
 }

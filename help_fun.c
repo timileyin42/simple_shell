@@ -52,11 +52,11 @@ void help_setenv(void)
 
 /**
  * _help_cmd - help of built in commands
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _help_cmd(bash *shpack)
+ssize_t _help_cmd(bash *bash_s)
 {
 	int check = 1, bcheck = 0;
 	helps help[] = {
@@ -72,13 +72,13 @@ ssize_t _help_cmd(bash *shpack)
 	int x = 7;
 	int p = 1;
 
-	for (; shpack->options[p]; p++, x = 7)
+	for (; bash_s->options[p]; p++, x = 7)
 	{
 		while (x--)
-			if (!_strcmp(shpack->options[p], help[x].built))
+			if (!_strcmp(bash_s->options[p], help[x].built))
 				help[x].h(), bcheck = 1;
 	}
-	if (shpack->options[1] == NULL)
+	if (bash_s->options[1] == NULL)
 	{
 		printsHelp();
 		bcheck = 1;
@@ -86,9 +86,9 @@ ssize_t _help_cmd(bash *shpack)
 	if (bcheck == 0)
 	{
 		check = -1;
-		_error(6, shpack, 2);
+		_error(6, bash_s, 2);
 	}
 
-	free(shpack->options);
+	free(bash_s->options);
 	return (check);
 }

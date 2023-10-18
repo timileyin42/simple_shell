@@ -2,59 +2,59 @@
 
 /**
  * _exit_cmd - built in command exit
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: -1 if error
  */
-ssize_t _exit_cmd(bash *shpack)
+ssize_t _exit_cmd(bash *bash_s)
 {
 	long valueToExit;
 
-	if (shpack->options[1] == NULL || _isnumber(shpack->options[1]))
+	if (bash_s->options[1] == NULL || _isnumber(bash_s->options[1]))
 	{
-		valueToExit = _atoi(shpack->options[1]);
+		valueToExit = _atoi(bash_s->options[1]);
 
 		if (valueToExit >= 0 && valueToExit < INT_MAX)
 		{
 			if (valueToExit > 255)
 				valueToExit %= 256;
-			if (shpack->options[1] == NULL)
-				valueToExit = shpack->exitnum[0];
-			free(*(shpack->options));
-			free(shpack->options);
-			if (*(shpack->envCpy))
-				free_doubpoint(*(shpack->envCpy));
-			free(shpack);
+			if (bash_s->options[1] == NULL)
+				valueToExit = bash_s->exitnum[0];
+			free(*(bash_s->options));
+			free(bash_s->options);
+			if (*(bash_s->envCpy))
+				free_doubpoint(*(bash_s->envCpy));
+			free(bash_s);
 			exit(valueToExit);
 		}
 	}
 
-	_error(2, shpack, 2);
-	free(shpack->options);
+	_error(STDERR_FILENO, bash_s, 2);
+	free(bash_s->options);
 	return (-1);
 }
 /**
  * _env_cmd - built in command env
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful
  */
-ssize_t _env_cmd(bash *shpack)
+ssize_t _env_cmd(bash *bash_s)
 {
 	char **str;
 	int check = 1;
 
-	if (*(shpack->envCpy) == NULL)
+	if (*(bash_s->envCpy) == NULL)
 	{
 		write(2, "Environment is Null, Can't Print it\n", 36);
-		shpack->exitnum[0] = 2;
-		free(shpack->options);
+		bash_s->exitnum[0] = 2;
+		free(bash_s->options);
 		return (-1);
 	}
 
-	str = *(shpack->envCpy);
+	str = *(bash_s->envCpy);
 
-	if (shpack->options[1] == NULL)
+	if (bash_s->options[1] == NULL)
 	{
 		for (; str && *str; str++)
 		{
@@ -64,106 +64,106 @@ ssize_t _env_cmd(bash *shpack)
 	}
 	else
 	{
-		_error(0, shpack, 2);
+		_error(STDIN_FILENO, bash_s, 2);
 		check = -1;
 	}
 
-	free(shpack->options);
+	free(bash_s->options);
 	return (check);
 }
 /**
  * _setenv_cmd - built in command setenv
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _setenv_cmd(bash *shpack)
+ssize_t _setenv_cmd(bash *bash_s)
 {
 	char **newenv;
 	char *variable = NULL;
 	char *value = NULL;
 
-	if (shpack->options[1])
+	if (bash_s->options[1])
 	{
-		variable = shpack->options[1];
-		if (!shpack->options[2])
+		variable = bash_s->options[1];
+		if (!bash_s->options[2])
 		{
 			write(STDERR_FILENO, "Invalid VALUE\n", 14);
-			shpack->exitnum[0] = 2;
-			free(shpack->options);
+			bash_s->exitnum[0] = 2;
+			free(bash_s->options);
 			return (-1);
 		}
 		else
-			value = shpack->options[2];
+			value = bash_s->options[2];
 
 	}
 	if (variable == 0)
 	{
 		write(STDERR_FILENO, "Invalid VARIABLE\n", 17);
-		shpack->exitnum[0] = 2;
-		free(shpack->options);
+		bash_s->exitnum[0] = 2;
+		free(bash_s->options);
 		return (-1);
 	}
 
-	newenv = _setenv(*(shpack->envCpy), variable, value, shpack);
+	newenv = _setenv(*(bash_s->envCpy), variable, value, bash_s);
 
 	if (newenv == 0)
 	{
-		free(shpack->options);
+		free(bash_s->options);
 		return (-1);
 	}
 
-	*(shpack->envCpy) = newenv;
-	free(shpack->options);
+	*(bash_s->envCpy) = newenv;
+	free(bash_s->options);
 	return (1);
 }
 /**
  * _unsetenv_cmd - built in command unsetenv
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: 1 if succesful, -1 if fail
  */
-ssize_t _unsetenv_cmd(bash *shpack)
+ssize_t _unsetenv_cmd(bash *bash_s)
 {
 	char **newenv;
 	char *variable = NULL;
 
-	if (shpack->options[1])
-		variable = shpack->options[1];
+	if (bash_s->options[1])
+		variable = bash_s->options[1];
 	else
 	{
-		shpack->exitnum[0] = 2;
+		bash_s->exitnum[0] = 2;
 		write(STDERR_FILENO, "Please provide an argument\n", 27);
-		return (free(shpack->options), -1);
+		return (free(bash_s->options), -1);
 	}
 
 	if (variable == 0)
 	{
-		free(shpack->options);
+		free(bash_s->options);
 		return (1);
 	}
 
-	newenv = _unsetenv(*(shpack->envCpy), variable, shpack);
+	newenv = _unsetenv(*(bash_s->envCpy), variable, bash_s);
 
-	if (newenv == 0 && shpack->unsetnull[0] == 0)
+	if (newenv == 0 && bash_s->unsetnull[0] == 0)
 	{
-		free(shpack->options);
-		shpack->exitnum[0] = 2;
+		free(bash_s->options);
+		bash_s->exitnum[0] = 2;
 		return (-1);
 	}
 
-	*(shpack->envCpy) = newenv;
-	free(shpack->options);
+	*(bash_s->envCpy) = newenv;
+	free(bash_s->options);
 	return (1);
 }
 
 /**
  * built_ints - checks if cmd is a built in
- * @shpack: struct containing shell info
+ * @bash_s: struct containing shell info
  *
  * Return: On fail 0
  */
-ssize_t built_ints(bash *shpack)
+ssize_t built_ints(bash *bash_s)
 {
 	b_ins ops[] = {
 		{"exit", _exit_cmd},
@@ -178,12 +178,12 @@ ssize_t built_ints(bash *shpack)
 
 	for (x = 0; x < 6; x++)
 	{
-		if (!_strcmp(shpack->cmd, ops[x].cmd))
+		if (!_strcmp(bash_s->cmd, ops[x].cmd))
 		{
-			shpack->errnum[0] = shpack->errnum[0] + 1;
-			builtcheck = ops[x].f(shpack);
+			bash_s->errnum[0] = bash_s->errnum[0] + 1;
+			builtcheck = ops[x].f(bash_s);
 			if (builtcheck == 1)
-				shpack->exitnum[0] = 0;
+				bash_s->exitnum[0] = 0;
 			return (builtcheck);
 		}
 	}

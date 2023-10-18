@@ -50,12 +50,12 @@ char *str_concat(char *s1, char *s2)
 
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int x = 0;
 
-	for (i = 0; *(src + i) != '\0'; i++)
-		*(dest + i) = *(src + i);
+	for (x = 0; *(src + x) != '\0'; x++)
+		*(dest + x) = *(src + x);
 
-	*(dest + i) = *(src + i); /* adding '\0' character */
+	*(dest + x) = *(src + x); /* adding '\0' character */
 
 	return (dest);
 }

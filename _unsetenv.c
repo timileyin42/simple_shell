@@ -12,23 +12,23 @@
 char **_copydoublepDel(char **p, int new_size, int jump)
 {
 	char **copy;
-	int i, j, csize;
+	int x, y, csize;
 
 	csize = new_size;
 	copy = malloc(sizeof(char *) * (csize + 1));
 	if (copy == 0)
 		return (0);
 
-	for (i = 0, j = 0; j < csize; i++, j++)
+	for (x = 0, y = 0; y < csize; x++, y++)
 	{
-		if (i == jump)
-			i++;
-		copy[j] = _strdup(p[i]);
-		if (copy[j] == 0)
+		if (x == jump)
+			x++;
+		copy[y] = _strdup(p[x]);
+		if (copy[y] == 0)
 		{
-			j--;
-			for (; j >= 0; j--)
-				free(copy[j]);
+			y--;
+			for (; y >= 0; y--)
+				free(copy[y]);
 			free(copy);
 			return (0);
 		}
@@ -44,42 +44,42 @@ char **_copydoublepDel(char **p, int new_size, int jump)
  *
  * @env: array of env variables
  * @variable: env variable to unset
- * @shpack: struct with shell info
+ * @bash_s: struct with shell info
  *
  * Return: 0 on success, -1 on error
  */
-char **_unsetenv(char **env, char *variable, bash *shpack)
+char **_unsetenv(char **env, char *variable, bash *bash_s)
 {
-	int i, j, check, l = 0, lenv = 0, found = 0;
+	int x, y, check, z = 0, lenv = 0, found = 0;
 	char **copy;
 
-	shpack->unsetnull[0] = 0;
+	bash_s->unsetnull[0] = 0;
 	if (!env)
 		return (write(2, "Environment is NULL\n", 20), NULL);
 	if (_strlen(variable) == 0 || variable == 0)
-		return (_error(3, shpack, 1), NULL);
-	l = _strlen(variable), lenv = _strlendp(env);
-	for (i = 0; env[i] != 0; i++)
+		return (_error(3, bash_s, 1), NULL);
+	z = _strlen(variable), lenv = _strlendp(env);
+	for (x = 0; env[x] != 0; x++)
 	{
-		for (check = 0, j = 0; j < l && env[i][j] != 0; j++)
+		for (check = 0, y = 0; y < z && env[z][y] != 0; y++)
 		{
-			if (variable[j] == '=')
-				return (_error(3, shpack, 2), NULL);
-			if (env[i][j] == variable[j])
+			if (variable[y] == '=')
+				return (_error(3, bash_s, 2), NULL);
+			if (env[x][y] == variable[y])
 				check++;
 		}
-		if (check == l && env[i][check] == '=')
+		if (check == z && env[x][check] == '=')
 		{
 			/* Found env to erase */
 			found = 1;
 			if ((lenv - 1) != 0)
 			{
-				copy = _copydoublepDel(env, lenv - 1, i);
+				copy = _copydoublepDel(env, lenv - 1, x);
 				if (copy == 0)
-					return (_error(7, shpack, 1), NULL);
+					return (_error(7, bash_s, 1), NULL);
 			}
 			else
-				shpack->unsetnull[0] = 1, copy = NULL;
+				bash_s->unsetnull[0] = 1, copy = NULL;
 			free_doubpoint(env), env = copy;
 			return (env);
 		}
