@@ -102,7 +102,7 @@ void write_cmd(bash *bash_s, char *buffer, char *command, char **parameters)
 }
 
 /**
- * shellPathcmd - initializes path value of struct
+ * shellPath_cmd - initializes path value of struct
  * @bash_s: shell struct
  * @pathCmd: path of cmd written after propmpt
  *

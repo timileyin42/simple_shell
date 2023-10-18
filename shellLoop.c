@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * Parameter_fun - Function that helps obtains parameters from buffer of prompt
+ * parameter_fun - Function that helps obtains parameters from buffer of prompt
  * @raw_buffer: raw_buffer
  * @bash_s: struct containing shell info
  *

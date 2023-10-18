@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * doublep_cp - Function copies an array of strings (double pointer)
+ * double_cp - Function copies an array of strings (double pointer)
  *
  * @p: double pointer to copy
  * @new_size: size of copy
