@@ -16,7 +16,7 @@ void signal_handler(int __attribute__((unused)) x)
  *
  * Return: No return
  */
-void signal_handler2(int __attribute__((unused)) x)
+void signal_handler1(int __attribute__((unused)) x)
 {
 	write(STDOUT_FILENO, "\n", 1);
 }

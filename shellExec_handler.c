@@ -18,7 +18,7 @@ int exec_cmd(char *program, char *command[], char **env, bash *bash_s)
 	int execve_id = 0, wait_id = 0;
 
 	process = fork();
-	signal(SIGINT, signal_handler2);
+	signal(SIGINT, signal_handler1);
 	if (process == -1)
 	{
 		write(STDERR_FILENO, "Fork Error", 10);

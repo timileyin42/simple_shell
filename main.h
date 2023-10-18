@@ -89,7 +89,7 @@ char *_strtok(char *str, const char *delim);
 char **parameter_fun(char *buffer, bash *bash_s);
 int exec_cmd(char *program, char *command[], char **env, bash *bash_s);
 void signal_handler(int __attribute__((unused)) x);
-void signal_handler2(int __attribute__((unused)) x);
+void signal_handler1(int __attribute__((unused)) x);
 char *_memset(char *s, char c, unsigned int d);
 char *_memcpy(char *dest, char *src, unsigned int d);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
