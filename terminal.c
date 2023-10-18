@@ -14,28 +14,28 @@
 char **shell_cmd(int ac, char **av, size_t *bufsize,
 		   char **buffer, bash *bash_s)
 {
-	ssize_t characters;
+	ssize_t ch;
 	char **command;
 	int exitnum;
 
 	if (ac == 1)
 	{
-		if (isatty(STDIN_FILENO))
+		if (isatty(0))
 			write(STDOUT_FILENO, "$ ", 2);
-		characters = getline(buffer, bufsize, stdin);
+		ch = getline(buffer, bufsize, stdin);
 
-		if (characters == -1)
+		if (ch == -1)
 		{
 			exitnum = bash_s->exitnum[0];
 			free(*buffer);
 			if (*(bash_s->envCpy))
 				free_pointer(*(bash_s->envCpy));
 			free(bash_s);
-			if (isatty(STDIN_FILENO))
+			if (isatty(0))
 				write(STDOUT_FILENO, "\n", 1);
 			exit(exitnum);
 		}
-		if (**buffer == '#' || !characters || **buffer == '\n')
+		if (**buffer == '#' || !ch || **buffer == '\n')
 			return (NULL);
 		*buffer = deleteComment(*buffer);
 		command = parameter_fun(*buffer, bash_s);
@@ -43,7 +43,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 	else
 	{
 		command = malloc(sizeof(char *) * (ac - 1));
-		if (!command)
+		if (command == NULL)
 		{
 			error_fun(7, bash_s, 1);
 			return (NULL);
