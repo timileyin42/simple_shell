@@ -65,9 +65,9 @@ char *path_fun(char *cmd, char **env, bash *bash_s)
 	char *path, *path2;
 	struct stat st;
 	char *token, *concat, *concat2, *pathcheck, *delim = ":=";
-	int x;
+	int x = 0;
 
-	for (x = 0; cmd[x]; x++)
+	for (; cmd[x]; x++)
 		if (cmd[x] == '/' || cmd[x] == '|')
 		{
 			if (stat(cmd, &st) == 0)
