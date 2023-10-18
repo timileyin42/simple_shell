@@ -10,27 +10,27 @@
  */
 char **parameter_fun(char *raw_buffer, bash *bash_s)
 {
-	char **buffer, *cp_raw_buffer;
+	char **buffer, *cp_buffer;
 	ssize_t len = 0, x = 0;
 
-	cp_raw_buffer = _strdup(raw_buffer);
-	if (cp_raw_buffer == NULL)
+	cp_buffer = _strdup(raw_buffer);
+	if (cp_buffer == NULL)
 	{
 		error_fun(7, bash_s, 1);
 		exit(-1);
 	}
 
-	if (_strtok(cp_raw_buffer, " \n"))
+	if (_strtok(cp_buffer, " \n"))
 		len++;
 	else
 	{
-		free(cp_raw_buffer);
+		free(cp_buffer);
 		return (NULL);
 	}
 	while (_strtok(NULL, " \n"))
 		len++;
 
-	free(cp_raw_buffer);
+	free(cp_buffer);
 	buffer = malloc(sizeof(char *) * (len + 1));
 	if (buffer == NULL)
 	{
