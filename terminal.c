@@ -20,7 +20,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 
 	if (ac == 1)
 	{
-		if (isatty(STDIN_FILENO))
+		if (isatty(0))
 			write(STDOUT_FILENO, "$ ", 2);
 		ch = getline(buffer, bufsize, stdin);
 
@@ -31,7 +31,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 			if (*(bash_s->envCpy))
 				free_pointer(*(bash_s->envCpy));
 			free(bash_s);
-			if (isatty(STDIN_FILENO))
+			if (isatty(0))
 				write(STDOUT_FILENO, "\n", 1);
 			exit(exitnum);
 		}
