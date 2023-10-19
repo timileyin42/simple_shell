@@ -112,7 +112,7 @@ char **_setenv(char **env, char *variable, char *value, bash *bash_s)
 	if (is_env == 0)
 		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
-	for (; env && env[x] != 0; x++)
+	for (x = 0; env && env[x] != 0; x++)
 	{
 		for (check = 0, y = 0; y < z && env[x][y] != 0; y++)
 		{
