@@ -51,7 +51,7 @@ int main(int ac, char **av, char **env)
 	return (0);
 }
 /**
- * loop_struct - initializes shell struct
+ * loop_struct - Function that helps initializes shell struct
  * @argv0: name of executable
  * @errn: number of error message
  * @exnum: exit number of shell

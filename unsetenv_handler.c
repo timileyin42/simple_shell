@@ -55,7 +55,7 @@ char **unsetenv_fun(char **env, char *variable, bash *bash_s)
 
 	bash_s->unsetnull[0] = 0;
 	if (env == NULL)
-		return (write(2, "Environment is NULL\n", 20), NULL);
+		return (write(STDERR_FILENO, "Environment is NULL\n", 20), NULL);
 	if (_strlen(variable) == 0 || variable == 0)
 		return (error_fun(3, bash_s, 1), NULL);
 	z = _strlen(variable), lenv = _strlendp(env);
@@ -84,6 +84,6 @@ char **unsetenv_fun(char **env, char *variable, bash *bash_s)
 		}
 	}
 	if (found == 0)
-		return (write(2, "VARIABLE not found\n", 19), NULL);
+		return (write(STDERR_FILENO, "VARIABLE not found\n", 19), NULL);
 	return (env);
 }

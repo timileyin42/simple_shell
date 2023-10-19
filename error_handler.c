@@ -84,7 +84,7 @@ int error_fun(int errn, bash *bash_s, int exnum)
 	 * 3 - setenv error,         , 4 - can´t cd         , 5 - invalid option cd
 	 * 6 - help _error           , 7 - memory allocation, 8 - Alias Error
 	 **/
-	int count = bash_s->errnum[0], l = 0;
+	int count = bash_s->errnum[0], x = 0;
 	char *cmd = bash_s->cmd, **option = bash_s->options;
 	char *shelln = bash_s->hshname;
 	char *nstring, *conc1, *conc2, *colspace = ": ";
@@ -103,20 +103,20 @@ int error_fun(int errn, bash *bash_s, int exnum)
 	if (errn == 7)
 	{
 		conc2 = str_concat(conc1, err[errn]); /*hsh: count: error*/
-		if (!conc2)
-			return (free(conc1), write(2, "Memory Error", 22), -1);
+		if (conc2 == NULL)
+			return (free(conc1), write(STDERR_FILENO, "Memory Error", 22), -1);
 		free(conc1);
-		while (conc2[l] != 0)
-			l++;
-		write(STDERR_FILENO, conc2, l), write(2, "\n", 1);
+		while (conc2[x] != 0)
+			x++;
+		write(STDERR_FILENO, conc2, x), write(STDERR_FILENO, "\n", 1);
 		free(conc2);
 		return (0);
 
 	}
 
 	nstring = _itoa(count);
-	if (!nstring)  /* number to string */
-		return (free(conc1), write(2, "Memory Error", 22), -1);
+	if (nstring == NULL)  /* number to string */
+		return (free(conc1), write(STDERR_FILENO, "Memory Error", 22), -1);
 
 	conc2 = str_concat(conc1, nstring);
 	if (conc2 == NULL) /*hsh: count*/
@@ -128,22 +128,22 @@ int error_fun(int errn, bash *bash_s, int exnum)
 
 	conc1 = str_concat(conc2, colspace);
 	if (conc1 == NULL) /*hsh: count: */
-		return (free(conc2), write(2, "Memory Error", 22), -1);
+		return (free(conc2), write(STDERR_FILENO, "Memory Error", 22), -1);
 
 	free(conc2);
 	conc2 = str_concat(conc1, cmd);
 	if (conc2 == NULL) /*hsh: count: cmd*/
-		return (free(conc1), write(2, "Memory Error", 22), -1);
+		return (free(conc1), write(STDERR_FILENO, "Memory Error", 22), -1);
 	free(conc1);
 
 	conc1 = str_concat(conc2, colspace);
 	if (conc1 == NULL) /*hsh: count: cmd: */
-		return (free(conc2), write(2, "Memory Error", 22), -1);
+		return (free(conc2), write(STDERR_FILENO, "Memory Error", 22), -1);
 	free(conc2);
 
 	conc2 = str_concat(conc1, err[errn]);
 	if (conc2 == NULL) /*hsh: count: cmd: error*/
-		return (free(conc1), write(2, "Memory Error", 22), -1);
+		return (free(conc1), write(STDERR_FILENO, "Memory Error", 22), -1);
 	free(conc1);
 
 	if (errn > 1 && errn < 6 && errn != 3)
@@ -154,9 +154,9 @@ int error_fun(int errn, bash *bash_s, int exnum)
 		return (-1);
 	}
 
-	while (conc2[l] != 0)
-		l++;
-	write(STDERR_FILENO, conc2, l), write(2, "\n", 1);
+	while (conc2[x] != 0)
+		x++;
+	write(STDERR_FILENO, conc2, x), write(STDERR_FILENO, "\n", 1);
 	free(conc2);
 	bash_s->exitnum[0] = exnum;
 	return (0);

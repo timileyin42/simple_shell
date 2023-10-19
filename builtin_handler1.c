@@ -44,8 +44,6 @@ char *han_cd(bash *bash_s, char *currdir)
 	if (oldpwd2 == NULL)
 	{
 		oldpwd = _strdup(currdir);
-		/* free(oldpwd), free(bash_s->options), free(currdir); */
-		/* return (bash_s->exitnum[0] = 2, NULL); */
 	}
 
 	direct = oldpwd;

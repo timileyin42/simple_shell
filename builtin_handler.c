@@ -171,7 +171,8 @@ ssize_t built_ints(bash *bash_s)
 		{"setenv", shell_setenv},
 		{"unsetenv", shell_unsetenv},
 		{"cd", cd_cmd},
-		{"help", help_cmd}
+		{"help", help_cmd},
+		{NULL, NULL},
 	};
 
 	int x, builtcheck; /* lenght of ops array */
