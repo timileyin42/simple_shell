@@ -15,7 +15,7 @@ void free_pointer(char **ptr)
 	while (ptr[y] != 0)
 		y++;
 
-	for (; x < y; x++)
+	for (x = 0; x < y; x++)
 	{
 		free(ptr[x]);
 	}
