@@ -21,7 +21,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 	if (ac == 1)
 	{
 		if (isatty(0))
-			write(STDOUT_FILENO, "$ ", 2);
+			write(STDOUT_FILENO, "BASH$ ", 5);
 		ch = getline(buffer, bufsize, stdin);
 
 		if (ch == -1)
