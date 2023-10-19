@@ -120,7 +120,7 @@ char **unsetenv_fun(char **env, char *variable, bash *bash_s);
 int _isdigit(int c);
 int _isnumber(char *s);
 ssize_t cd_cmd(bash *bash_s);
-char *deleteComment(char *str);
+char *notPrint_Comment(char *str);
 
 
 ssize_t help_cmd(bash *bash_s);

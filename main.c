@@ -36,7 +36,7 @@ int main(int ac, char **av, char **env)
 		if (pathCmd == NULL)
 		{
 			free(command);
-			bash_s->errnum[0] += 1, error_fun(0, bash_s, 127);
+			bash_s->errnum[0] = bash_s->errnum[0] + 1, error_fun(0, bash_s, 127);
 			continue;
 		}
 		else if (access(pathCmd, X_OK) == -1)

@@ -37,7 +37,7 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 		}
 		if (**buffer == '#' || !ch || **buffer == '\n')
 			return (NULL);
-		*buffer = deleteComment(*buffer);
+		*buffer = notPrint_Comment(*buffer);
 		command = parameter_fun(*buffer, bash_s);
 	}
 	else
@@ -57,16 +57,16 @@ char **shell_cmd(int ac, char **av, size_t *bufsize,
 }
 
 /**
- * deleteComment - function that helps delete comment inside a command line
+ * notPrint_Comment - function that helps delete comment inside a command line
  *
  * @str: string to operate
  *
  * Return: pointer to string
  *
  */
-char *deleteComment(char *str)
+char *notPrint_Comment(char *str)
 {
-	char *org = str;
+	char *com = str;
 
 	for (; str && *str; str++)
 		if (*str == '#' && *(str - 1) == ' ')
@@ -75,5 +75,5 @@ char *deleteComment(char *str)
 			break;
 		}
 
-	return (org);
+	return (com);
 }
