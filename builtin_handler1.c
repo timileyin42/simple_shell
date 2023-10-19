@@ -61,44 +61,44 @@ char *han_cd(bash *bash_s, char *currdir)
  */
 ssize_t cd_cmd(bash *bash_s)
 {
-	char *currdir = NULL, *dir = NULL, **newenv, *oldpwd = NULL;
+	char *currdirect = NULL, *direct = NULL, **new_env, *oldpwd = NULL;
 	int exit = 1, check = 1, checkminus = 0;
 
-	currdir = getcwd(NULL, 4096);
-	if (currdir == NULL)
+	currdirect = getcwd(NULL, 4096);
+	if (currdirect == NULL)
 		return (error_fun(4, bash_s, 2), free(bash_s->options), -1);
 	if (!bash_s->options[1] ||
 			(bash_s->options[1] && (!_strcmp(bash_s->options[1], "~"))))
 	{
-		dir = cd_home(bash_s, currdir);
-		if (dir == NULL)
-			return (free(bash_s->options), free(currdir), 1);
+		direct = cd_home(bash_s, currdirect);
+		if (direct == NULL)
+			return (free(bash_s->options), free(currdirect), 1);
 	}
 	else
 		if (!_strcmp(bash_s->options[1], "-"))
 		{
-			dir = han_cd(bash_s, currdir);
-			if (!dir)
-				return (free(bash_s->options), free(currdir), 1);
+			direct = han_cd(bash_s, currdirect);
+			if (direct == NULL)
+				return (free(bash_s->options), free(currdirect), 1);
 			checkminus = 1;
 		}
 		else
-			dir = bash_s->options[1];
-	if (dir)
-		check = chdir(dir);
+			direct = bash_s->options[1];
+	if (direct)
+		check = chdir(direct);
 	if (check == 0 && checkminus == 1)
-		write(STDOUT_FILENO, dir, _strlen(dir)), write(1, "\n", 1);
+		write(STDOUT_FILENO, direct, _strlen(direct)), write(STDOUT_FILENO, "\n", 1);
 	if (check != 0)
 		error_fun(4, bash_s, 2), exit = -1;
 	else
 	{
-		newenv = _setenv(*(bash_s->envCpy), "PWD", dir, bash_s);
-		*(bash_s->envCpy) = newenv;
-		newenv = _setenv(*(bash_s->envCpy), "OLDPWD", currdir, bash_s);
-		*(bash_s->envCpy) = newenv;
+		new_env = _setenv(*(bash_s->envCpy), "PWD", direct, bash_s);
+		*(bash_s->envCpy) = new_env;
+		new_env = _setenv(*(bash_s->envCpy), "OLDPWD", currdirect, bash_s);
+		*(bash_s->envCpy) = new_env;
 	}
-	free(bash_s->options), free(currdir), free(oldpwd);
+	free(bash_s->options), free(currdirect), free(oldpwd);
 	if (checkminus == 1)
-		free(dir);
+		free(direct);
 	return (exit);
 }
