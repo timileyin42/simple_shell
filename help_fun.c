@@ -67,7 +67,7 @@ ssize_t help_cmd(bash *bash_s)
 		{"unsetenv", help_unsetenv},
 		{"cd", help_cd},
 		{"help", help_help},
-		{NULL, NULL},
+		{"alias", help_alias},
 	};
 
 	int x = 7;

@@ -11,7 +11,7 @@ void signal_handler(int __attribute__((unused)) x)
 	write(STDOUT_FILENO, "\n$ ", 3);
 }
 /**
- * signal_handler2 - handles ctrl + c during cmd exec
+ * signal_handler1 - handles ctrl + c during cmd exec
  * @x: unused value, just for betty
  *
  * Return: No return
